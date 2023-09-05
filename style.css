@@ -1,0 +1,275 @@
+body, head {
+    height: 100%;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    cursor: url("./src/u7.svg"), default;
+    background: #F8FFFF;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+header>div {
+    width: calc(100%/3);
+    min-width: calc(100%/3);
+}
+
+.previous-page, .close {
+    transform: rotate(-90deg) ;
+    height: 60%;
+    width: auto;
+    object-fit: cover;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.main-label {
+    display: flex;
+    font-size: 36px;
+    color: #0000AA;
+    font-style: normal;
+    justify-content: center;
+    width: calc(100%/3);
+    min-width: calc(100%/3);
+    max-width: calc(100%/3);
+}
+
+.main-label > div {
+    align-self: end;
+    margin-left: 20px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 90vh;
+    height: 90vh;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 283px;
+}
+
+.big-purple-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #0000AA;
+    color: #FFFFFF;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    height: 73px;
+    width: 257px;
+    transition: background-color 0.3s ease-in-out;
+    align-self: center;
+}
+
+.big-purple-button:hover {
+    background-color: #B1B1E5; /* измените цвет при наведении */
+}
+
+.login-field {
+    cursor: url("./src/u24.svg"), text;
+    border-radius: 10px;
+    border: 2px solid #483285;
+    padding-left: 5px;
+    color: #333333;
+    margin-right: 10px;
+    height: 25px;
+    width: 300px;
+}
+
+.login-field:focus{
+    outline: none;
+    border-color: #483285;
+}
+
+.status-field {
+    display: flex;
+    flex-direction: row;
+}
+
+.status-text {
+    color: red;
+    margin-bottom: 98px;
+    text-align: center;
+}
+
+.place-ships {
+    margin-bottom: 40px;
+    color: #0000aa;
+    text-align: left;
+    line-height: normal;
+    font-size: 18px;
+    margin-top: 47px;
+}
+
+.nickname {
+    margin-bottom: 41px;
+    font-size: 13px;
+    color: #0000aa;
+}
+
+.play-field {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.battle-field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 19px;
+}
+
+.cells {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 275px;
+    height: 275px;
+}
+
+.cell, .header {
+    min-width: 25px;
+    min-height: 25px;
+    height: 25px;
+    width: 25px;
+}
+
+.header {
+    text-align: center;
+    font-weight: bold;
+    flex: 1;
+    color: #0000aa;
+    font-size: 18px;
+}
+
+.header:last-child {
+    margin-right: 9px;
+}
+
+.header:first-child {
+    margin-bottom: 3px;
+}
+
+.cell {
+    text-align: center;
+    background-color: #E1FFFF;
+    border: 1px solid #016FA0;
+    flex: 1;
+    padding: 5px;
+}
+
+.prepare-field {
+    display: flex;
+    flex-direction: column;
+    margin-right: 47px;
+    margin-top: 25px;
+}
+
+.docks {
+    border: 1px solid black;
+    height: 200px;
+    width: 180px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.docks>img {
+    height: 25px;
+    margin-left: 6px;
+    margin-top: 5px;
+}
+
+.control-panel {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 11px;
+    width: 180px;
+    height: 20px;
+}
+
+.control-panel>img {
+    flex-grow: 1;
+}
+
+.ready {
+    background: #0000aa;
+    border: none;
+    color: #ffffff;
+    font-size: 13px;
+    width: 140px;
+    height: 40px;
+    opacity: 0.5;
+    padding: 2px 2px 2px 2px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 25px;
+}
+
+.rotate, .random {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    width: 60px;
+    height: 74px;
+}
+
+.rotate>span, .random>span {
+    margin-top: 5px;
+    font-size: 10px;
+    color: #6D70CF;
+}
+
+.rotate>img, .random>img {
+    border-radius: 5px;
+    object-fit: cover;
+    padding: 5px;
+    margin-bottom: 5px;
+    background-color: #6D70CF;
+    width: 60px;
+    height: 60px;
+}
+
+.clear-field {
+    margin-top: 12px;
+    padding: 2px;
+    width: 140px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #797979;
+    background-color: rgba(128, 128, 255, 0.48);
+    box-sizing: border-box;
+    color: #0000aa;
+    text-align: center;
+    line-height: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.clear-field>img {
+    margin-left: 5px;
+}
+
+.ship-1, .ship-2, .ship-3, .ship-4 {
+
+}
