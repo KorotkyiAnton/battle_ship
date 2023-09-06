@@ -16,7 +16,7 @@ function validateLogin(login) {
         isError = true;
     }
 
-    if (!/^[0-9А-Яа-яA-Za-zЁёЇїІіЄєҐґ\-'_]+$/.test(login)) {
+    if (!/^[0-9А-яA-Za-zЁёЇїІіЄєҐґ\-'_]+$/.test(login)) {
         showStatus("block", "none", "none");
         textStatus.innerHTML += "На жаль, помилка - нікнейм може містити літери (zZ-яЯ),цифри (0-9), спецсимволи (Word space, -, ', _);<br>";
         isError = true;
@@ -41,21 +41,21 @@ function validateLogin(login) {
     }
 }
 
-window.onload = function (ev) {
+window.onload = function () {
     const startButton = document.querySelector(".big-purple-button");
     startButton.setAttribute('disabled', '');
     const nicknameInput = document.querySelector(".login-field");
     let timeout;
     showStatus("none", "none", "none");
 
-    nicknameInput.oninput = (event) => {
+    nicknameInput.oninput = () => {
         clearTimeout(timeout);
         timeout = setTimeout(function () {
                 validateLogin(nicknameInput.value.trim());
             },
             1000);
     };
-    nicknameInput.onchange = (click) => {
+    nicknameInput.onchange = () => {
         showStatus("none", "block", "none");
         validateLogin(nicknameInput.value.trim());
     };
