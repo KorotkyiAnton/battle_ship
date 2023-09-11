@@ -131,6 +131,7 @@ main {
     flex-direction: column;
     align-items: center;
     margin-right: 19px;
+    position: relative;
 }
 
 .cells {
@@ -167,6 +168,7 @@ main {
 
 .cell {
     text-align: center;
+    position: relative;
     background-color: #E1FFFF;
     border: 1px solid #016FA0;
     flex: 1;
@@ -187,9 +189,11 @@ main {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    position: relative;
 }
 
 .docks>img {
+    position: absolute;
     height: 25px;
     margin-left: 6px;
     margin-top: 5px;
@@ -271,5 +275,21 @@ main {
 }
 
 .ship-1, .ship-2, .ship-3, .ship-4 {
+    height: 25px;
+    width: 25px;
+}
 
+.ship-5, .ship-6, .ship-7 {
+    height: 25px;
+    width: 50px;
+}
+
+.ship-8, .ship-9 {
+    height: 25px;
+    width: 75px;
+}
+
+.ship-10 {
+    height: 25px;
+    width: 100px;
 }
