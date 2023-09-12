@@ -272,7 +272,11 @@ main {
     height: 25px;
     position: relative;
     overflow: hidden;
-    margin-top: 5px;
+    margin-left: 11px;
+}
+
+.initial-ships li:not(:last-child) {
+    margin-bottom: 26px;
 }
 
 .initial-ships .ship {
