@@ -14,6 +14,30 @@ const getCoordinates = el => {
 
 const humanfield = getElement('ships');
 
+function sendSquadron(squadron) {
+    let outputObj = {};
+    outputObj.messageId = 10;
+    outputObj.messageType = "allShipCoordsToDB";
+    outputObj.createDate = new Date();
+
+    for (const key in squadron) {
+        const ship = squadron[key];
+        const coords = ship.arrDecks.map(deck => String.fromCharCode(97 + deck[1]) + (deck[0] + 1));
+        const shipStart = coords[0];
+        const orientation = ship.kx === 1 ? "vertical" : "horizontal";
+
+        outputObj[key] = {
+            coords,
+            hits: ship.hits,
+            shipStart,
+            orientation
+        };
+    }
+
+    console.log(outputObj);
+    localStorage.setItem("shipCoords", JSON.stringify(outputObj));
+}
+
 class Field {
     static FIELD_SIDE = 250;
     static SHIP_SIDE = 25;
@@ -145,7 +169,11 @@ class Ships {
         if (player === human) {
             Ships.showShip(human, shipname, x, y, kx);
             if (Object.keys(player.squadron).length === 10) {
-                console.log(player.squadron)
+                let readyButton = document.querySelector(".ready");
+                readyButton.removeAttribute('disabled');
+                readyButton.addEventListener("click", function() {
+                    sendSquadron(player.squadron);
+                });
             }
         }
     }
@@ -262,7 +290,6 @@ class Placement {
 
     rotationShip(e) {
         e.preventDefault();
-        if (e.which !== 3 || startGame) return;
 
         const el = e.target.closest('.ship');
         const name = Placement.getShipName(el);
