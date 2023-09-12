@@ -12,11 +12,10 @@ const getCoordinates = el => {
     };
 };
 
-// игровое поле игрока
-const field = getElement('ships');
+const humanfield = getElement('ships');
 
 class Field {
-    static FIELD_SIDE = 275;
+    static FIELD_SIDE = 250;
     static SHIP_SIDE = 25;
     static SHIP_DATA = {
         fourdeck: [1, 4],
@@ -37,9 +36,7 @@ class Field {
     }
 
     static createMatrix() {
-        let hitMatrix = [...Array(10)];
-        let emptyMatrix = hitMatrix.map(() => Array(10).fill(0));
-        return emptyMatrix;
+        return [...Array(10)].map(() => Array(10).fill(0));
     }
 
     static getRandom = n => Math.floor(Math.random() * (n + 1));
@@ -67,9 +64,8 @@ class Field {
     }
 
     getCoordsDecks(decks) {
-        let kx = Field.getRandom(1);
-        let ky = (kx === 0) ? 1 : 0;
-        let x, y;
+        let kx = Field.getRandom(1), ky = (kx === 0) ? 1 : 0,
+            x, y;
 
         if (kx === 0) {
             x = Field.getRandom(9);
@@ -80,12 +76,8 @@ class Field {
         }
 
         const obj = {x, y, kx, ky}
-        console.log(obj)
         const result = this.checkLocationShip(obj, decks);
-        if (!result) {
-            return this.getCoordsDecks(decks);
-        }
-
+        if (!result) return this.getCoordsDecks(decks);
         return obj;
     }
 
@@ -106,16 +98,16 @@ class Field {
 
         if (toX === undefined || toY === undefined) return false;
 
-        if (this.matrix.slice(fromX, toX)
+        return this.matrix.slice(fromX, toX)
             .filter(arr => arr.slice(fromY, toY).includes(1))
-            .length > 0) return false;
-        return true;
+            .length <= 0;
+
     }
 }
 
 class Ships {
     constructor(self, {x, y, kx, ky, decks, shipname}) {
-        this.player = prepareField;
+        this.player = human;
         this.field = self.field;
         this.shipname = shipname;
         this.decks = decks;
@@ -124,60 +116,43 @@ class Ships {
         this.kx = kx;
         this.ky = ky;
         this.hits = 0;
-        this.coords = [];
+        this.arrDecks = [];
     }
 
-    static showShip(self, shipName, x, y, kx) {
+    static showShip(self, shipname, x, y, kx) {
         const div = document.createElement('div');
-        const classname = shipName.slice(0, -1);
+        const classname = shipname.slice(0, -1);
         const dir = (kx === 1) ? ' vertical' : '';
 
-        div.setAttribute('id', shipName);
+        div.setAttribute('id', shipname);
         div.className = `ship ${classname}${dir}`;
         div.style.cssText = `left:${y * Field.SHIP_SIDE}px; top:${x * Field.SHIP_SIDE}px;`;
         self.field.appendChild(div);
     }
 
-    intToString(intValue) {
-        let dictionary = {
-            0: "a",
-            1: "b",
-            2: "c",
-            3: "d",
-            4: "e",
-            5: "f",
-            6: "g",
-            7: "h",
-            8: "i",
-            9: "j",
-        }
-
-        return dictionary[intValue];
-    }
-
     createShip() {
-        let {player, field, shipname, decks, x, y, kx, ky, hits, coords, k = 0} = this;
+        let {player, field, shipname, decks, x, y, kx, ky, hits, arrDecks, k = 0} = this;
 
         while (k < decks) {
             let i = x + k * kx, j = y + k * ky;
+
             player.matrix[i][j] = 1;
-            coords.push(this.intToString(j) + (i + 1));
+            arrDecks.push([i, j]);
             k++;
         }
 
-        let shipStart = this.intToString(y) + (x + 1);
-        let orientation = kx ? "vertical" : "horizontal";
-        player.squadron[shipname] = {coords: coords, hits, shipStart: shipStart, orientation: orientation};
-        Ships.showShip(prepareField, shipname, x, y, kx);
-
-        if (Object.keys(player.squadron).length === 10) {
-            console.log(player.squadron)
+        player.squadron[shipname] = {arrDecks, hits, x, y, kx, ky};
+        if (player === human) {
+            Ships.showShip(human, shipname, x, y, kx);
+            if (Object.keys(player.squadron).length === 10) {
+                console.log(player.squadron)
+            }
         }
     }
 }
 
 class Placement {
-    static FRAME_COORDS = getCoordinates(field);
+    static FRAME_COORDS = getCoordinates(humanfield);
 
     constructor() {
         this.dragObject = {};
@@ -195,7 +170,7 @@ class Placement {
         document.addEventListener('mousedown', this.onMouseDown.bind(this));
         document.addEventListener('mousemove', this.onMouseMove.bind(this));
         document.addEventListener('mouseup', this.onMouseUp.bind(this));
-        field.addEventListener('contextmenu', this.rotationShip.bind(this));
+        humanfield.addEventListener('contextmenu', this.rotationShip.bind(this));
         isHandlerPlacement = true;
     }
 
@@ -219,10 +194,10 @@ class Placement {
             ky: 1
         };
 
-        if (el.parentElement === field) {
+        if (el.parentElement === humanfield) {
             const name = Placement.getShipName(el);
-            this.dragObject.kx = prepareField.squadron[name].kx;
-            this.dragObject.ky = prepareField.squadron[name].ky;
+            this.dragObject.kx = human.squadron[name].kx;
+            this.dragObject.ky = human.squadron[name].ky;
         }
     }
 
@@ -240,6 +215,7 @@ class Placement {
             this.shiftY = this.dragObject.downY - top;
             this.clone.style.zIndex = '1000';
             document.body.appendChild(this.clone);
+
             this.removeShipFromSquadron(this.clone);
         }
 
@@ -260,7 +236,7 @@ class Placement {
                 ky: this.dragObject.ky
             };
 
-            const result = prepareField.checkLocationShip(obj, this.decks);
+            const result = human.checkLocationShip(obj, this.decks);
             if (!result) {
                 this.clone.classList.remove('success');
                 this.clone.classList.add('unsuccess');
@@ -281,7 +257,6 @@ class Placement {
         } else {
             this.createShipAfterMoving();
         }
-
         this.removeClone();
     }
 
@@ -292,19 +267,19 @@ class Placement {
         const el = e.target.closest('.ship');
         const name = Placement.getShipName(el);
 
-        if (prepareField.squadron[name].decks === 1) return;
+        if (human.squadron[name].decks === 1) return;
 
         const obj = {
-            kx: (prepareField.squadron[name].orientation === "vertical") ? 1 : 0,
-            ky: (prepareField.squadron[name].ky === 0) ? 1 : 0,
-            x: prepareField.squadron[name].x,
-            y: prepareField.squadron[name].y
+            kx: (human.squadron[name].kx === 0) ? 1 : 0,
+            ky: (human.squadron[name].ky === 0) ? 1 : 0,
+            x: human.squadron[name].x,
+            y: human.squadron[name].y
         };
-        const decks = prepareField.squadron[name].coords.length;
+        const decks = human.squadron[name].arrDecks.length;
         this.removeShipFromSquadron(el);
-        prepareField.field.removeChild(el);
+        human.field.removeChild(el);
 
-        const result = prepareField.checkLocationShip(obj, decks);
+        const result = human.checkLocationShip(obj, decks);
         if (!result) {
             obj.kx = (obj.kx === 0) ? 1 : 0;
             obj.ky = (obj.ky === 0) ? 1 : 0;
@@ -313,7 +288,7 @@ class Placement {
         obj.shipname = name;
         obj.decks = decks;
 
-        const ship = new Ships(prepareField, obj);
+        const ship = new Ships(human, obj);
         ship.createShip();
 
         if (!result) {
@@ -330,7 +305,7 @@ class Placement {
         const oldPosition = this.dragObject;
 
         clone.rollback = () => {
-            if (oldPosition.parent === field) {
+            if (oldPosition.parent === humanfield) {
                 clone.style.left = `${oldPosition.left}px`;
                 clone.style.top = `${oldPosition.top}px`;
                 clone.style.zIndex = '';
@@ -354,8 +329,7 @@ class Placement {
         let {left, top, x, y} = this.getCoordsCloneInMatrix(coords);
         this.clone.style.left = `${left}px`;
         this.clone.style.top = `${top}px`;
-        // переносим клон внутрь игрового поля
-        field.appendChild(this.clone);
+        humanfield.appendChild(this.clone);
         this.clone.classList.remove('success');
 
         const options = {
@@ -367,9 +341,9 @@ class Placement {
             decks: this.decks
         };
 
-        const ship = new Ships(prepareField, options);
+        const ship = new Ships(human, options);
         ship.createShip();
-        field.removeChild(this.clone);
+        humanfield.removeChild(this.clone);
     }
 
     getCoordsCloneInMatrix({left, right, top, bottom} = coords) {
@@ -393,24 +367,26 @@ class Placement {
 
     removeShipFromSquadron(el) {
         const name = Placement.getShipName(el);
-        if (!prepareField.squadron[name]) return;
+        if (!human.squadron[name]) return;
 
-        const arr = prepareField.squadron[name].coords;
+        const arr = human.squadron[name].arrDecks;
         for (let coords of arr) {
             const [x, y] = coords;
-            prepareField.matrix[x][y] = 0;
+            human.matrix[x][y] = 0;
         }
-        delete prepareField.squadron[name];
+        delete human.squadron[name];
     }
 }
 
-const shipsCollection = getElement("docks");
-const initialShips = getElement('initial-ships');
 
-const prepareField = new Field(field);
+const shipsCollection = getElement('docks');
+const initialShips = document.querySelector('.initial-ships');
+
+
+const human = new Field(humanfield);
 
 window.addEventListener("load", function () {
-    prepareField.cleanField();
+    human.cleanField();
     let initialShipsClone = '';
     initialShipsClone = initialShips.cloneNode(true);
     shipsCollection.appendChild(initialShipsClone);
@@ -420,17 +396,17 @@ window.addEventListener("load", function () {
 })
 
 document.querySelector(".random").addEventListener('click', function (e) {
-    prepareField.cleanField();
+    human.cleanField();
 
     shipsCollection.innerHTML = "";
-    prepareField.randomLocationShips();
+    human.randomLocationShips();
 
     const placement = new Placement();
     placement.setObserver();
 });
 
 document.querySelector(".clear-field").addEventListener('click', function (e) {
-    prepareField.cleanField();
+    human.cleanField();
 
     if (shipsCollection.children.length > 0) {
         shipsCollection.removeChild(shipsCollection.lastChild);
