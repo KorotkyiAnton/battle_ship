@@ -1,3 +1,6 @@
+let textStatus = document.querySelector(".status-text");
+let popupErr = document.querySelector(".popup-err");
+
 function showStatus(statusBad, statusNormal, statusGood) {
     document.querySelector(".status-bad").style.display = statusBad;
     document.querySelector(".status-normal").style.display = statusNormal;
@@ -14,13 +17,10 @@ function checkLoginUnique(login) {
         login: login
     };
 
-// Преобразуем объект в строку JSON
     const requestBody = JSON.stringify(requestData);
 
-// URL, на который отправляем запрос
     const url = "https://fmc2.avmg.com.ua/study/korotkyi/warship/server.php";
 
-// Опции для запроса, включая метод, заголовки и тело запроса
     const requestOptions = {
         method: "POST",
         headers: {
@@ -29,7 +29,6 @@ function checkLoginUnique(login) {
         body: requestBody
     };
 
-// Отправляем POST-запрос
     fetch(url, requestOptions)
         .then(response => {
             if (!response.ok) {
@@ -38,18 +37,27 @@ function checkLoginUnique(login) {
             return response.json();
         })
         .then(data => {
-            return data.isUnique;
+            if (!(localStorage.getItem("login") === null) && localStorage.getItem("login") === data.login) {
+                window.location.href = "acc";
+            } else if (!data.isUnique) {
+                textStatus.style.visibility = "visible";
+                showStatus("block", "none", "none");
+                textStatus.innerHTML = "";
+                popupErr.innerHTML = "";
+                textStatus.innerHTML += "На жаль, помилка - данний нікнейм вже зайнятий, спробуйте іншій.<br>";
+                popupErr.innerHTML += "На жаль, помилка - данний нікнейм вже зайнятий, спробуйте іншій.<br>";
+            } else {
+                localStorage.setItem("login", data.login)
+                window.location.href = "acc";
+            }
         })
         .catch(error => {
-            // Обработка ошибок
             console.error("Произошла ошибка:", error);
+            throw error;
         });
-    return false;
 }
 
 function validateLogin(login) {
-    let textStatus = document.querySelector(".status-text");
-    let popupErr = document.querySelector(".popup-err");
     textStatus.style.visibility = "visible";
     const startButton = document.querySelector(".big-purple-button");
     textStatus.innerHTML = "";
@@ -96,8 +104,6 @@ window.onload = function () {
     const startButton = document.querySelector(".big-purple-button");
     startButton.setAttribute('disabled', '');
     const nicknameInput = document.querySelector(".login-field");
-    let textStatus = document.querySelector(".status-text");
-    let popupErr = document.querySelector(".popup-err");
     let timeout;
 
     textStatus.style.visibility = "hidden";
@@ -105,17 +111,7 @@ window.onload = function () {
     showStatus("none", "none", "none");
 
     startButton.onclick = () => {
-        if (!checkLoginUnique(nicknameInput.value.trim())) {
-            textStatus.style.visibility = "visible";
-            showStatus("block", "none", "none");
-            textStatus.innerHTML = "";
-            popupErr.innerHTML = "";
-            textStatus.innerHTML += "На жаль, помилка - данний нікнейм вже зайнятий, спробуйте іншій.<br>";
-            popupErr.innerHTML += "На жаль, помилка - данний нікнейм вже зайнятий, спробуйте іншій.<br>";
-        } else {
-            localStorage.setItem("login", nicknameInput.value.trim())
-            window.location.href = "acc";
-        }
+        checkLoginUnique(nicknameInput.value.trim())
     }
 
     nicknameInput.oninput = () => {
