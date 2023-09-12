@@ -1,7 +1,7 @@
 body, head {
     height: 100%;
     font-family: "Comic Sans MS", "Comic Sans", cursive;
-    cursor: url("./src/u7.svg"), default;
+    cursor: url("seabattle/src/u7.svg"), default;
     background: #F8FFFF;
 }
 
@@ -35,6 +35,7 @@ header>div {
     width: calc(100%/3);
     min-width: calc(100%/3);
     max-width: calc(100%/3);
+    cursor: url("seabattle/src/u24.svg"), text;
 }
 
 .main-label > div {
@@ -44,6 +45,7 @@ header>div {
 
 main {
     display: flex;
+    position: relative;
     flex-direction: column;
     align-items: center;
     min-height: 90vh;
@@ -52,6 +54,7 @@ main {
 
 .login-form {
     display: flex;
+    position: relative;
     flex-direction: column;
     justify-content: space-between;
     margin-top: 283px;
@@ -74,12 +77,12 @@ main {
     align-self: center;
 }
 
-.big-purple-button:hover {
-    background-color: #B1B1E5; /* измените цвет при наведении */
+.big-purple-button:disabled {
+    background-color: #B1B1E5; /* измените цвет при блокировке */
 }
 
 .login-field {
-    cursor: url("./src/u24.svg"), text;
+    cursor: url("seabattle/src/u24.svg"), text;
     border-radius: 10px;
     border: 2px solid #483285;
     padding-left: 5px;
@@ -103,6 +106,39 @@ main {
     color: red;
     margin-bottom: 98px;
     text-align: center;
+    height: 80px;
+    width: 294px;
+    font-size: 13px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4; /* start showing ellipsis when 3rd line is reached */
+    white-space: pre-wrap; /* let the text wrap preserving spaces */
+}
+
+.popup-err {
+    position: absolute;
+    left: 60%;
+    top: 17%;
+    background: #FCFDD8;
+    width: 300px;
+    height: 200px;
+    font-size: 13px;
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 5px;
+    color: red;
+}
+
+.status-text + .popup-err {
+    opacity: 0;
+    transition: opacity 1s;
+    visibility: hidden;
+}
+
+.status-text:hover + .popup-err {
+    visibility: visible;
+    opacity: 1;
 }
 
 .place-ships {
@@ -134,45 +170,20 @@ main {
     position: relative;
 }
 
-.cells {
-    list-style: none;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+.field {
     width: 275px;
     height: 275px;
-}
-
-.cell, .header {
-    min-width: 25px;
-    min-height: 25px;
-    height: 25px;
-    width: 25px;
-}
-
-.header {
-    text-align: center;
-    font-weight: bold;
-    flex: 1;
-    color: #0000aa;
-    font-size: 18px;
-}
-
-.header:last-child {
-    margin-right: 9px;
-}
-
-.header:first-child {
-    margin-bottom: 3px;
-}
-
-.cell {
-    text-align: center;
+    flex-shrink: 0;
     position: relative;
-    background-color: #E1FFFF;
-    border: 1px solid #016FA0;
-    flex: 1;
-    padding: 5px;
+    background: url('acc/img/bg_play_field.png') no-repeat;
+}
+
+.ships {
+    width: 250px;
+    height: 250px;
+    position: relative;
+    left: 29px;
+    top: 27px;
 }
 
 .prepare-field {
@@ -186,17 +197,7 @@ main {
     border: 1px solid black;
     height: 200px;
     width: 180px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
     position: relative;
-}
-
-.docks>img {
-    position: absolute;
-    height: 25px;
-    margin-left: 6px;
-    margin-top: 5px;
 }
 
 .control-panel {
@@ -274,22 +275,120 @@ main {
     margin-left: 5px;
 }
 
-.ship-1, .ship-2, .ship-3, .ship-4 {
+.ship {
     height: 25px;
-    width: 25px;
+    position: absolute;
 }
 
-.ship-5, .ship-6, .ship-7 {
-    height: 25px;
-    width: 50px;
+.vertical {
+    transform: rotate(90deg);
+    transform-origin: 10px 10px;
 }
 
-.ship-8, .ship-9 {
-    height: 25px;
-    width: 75px;
-}
-
-.ship-10 {
-    height: 25px;
+.fourdeck {
     width: 100px;
+    height: 25px;
+    background: url("acc/img/s4.png") no-repeat;
+}
+
+.fourdeck.success {
+    width: 104px;
+    height: 29px;
+    background: url("acc/img/s4-val.png") no-repeat;
+}
+
+.fourdeck.unsuccess {
+    width: 104px;
+    height: 29px;
+    background: url("acc/img/s4-err.png") no-repeat;
+}
+
+.tripledeck {
+    width: 75px;
+    background: url("acc/img/s3.png") no-repeat;
+}
+
+.tripledeck.success {
+    width: 79px;
+    height: 29px;
+    background: url("acc/img/s3-val.png") no-repeat;
+}
+
+.tripledeck.unsuccess {
+    width: 79px;
+    height: 29px;
+    background: url("acc/img/s3-err.png") no-repeat;
+}
+
+.doubledeck {
+    width: 50px;
+    background: url("acc/img/s2.png") no-repeat;
+}
+
+.doubledeck.success {
+    width: 54px;
+    height: 29px;
+    background: url("acc/img/s2-val.png") no-repeat;
+}
+
+.doubledeck.unsuccess {
+    width: 54px;
+    height: 29px;
+    background: url("acc/img/s2-err.png") no-repeat;
+}
+
+.singledeck {
+    width: 25px;
+    background: url("acc/img/s1.png") no-repeat;
+}
+
+.singledeck.success {
+    width: 28px;
+    height: 28px;
+    background: url("acc/img/s1-val.png") no-repeat;
+}
+
+.singledeck.unsuccess {
+    width: 28px;
+    height: 28px;
+    background: url("acc/img/s1-err.png") no-repeat;
+}
+
+.initial-ships li {
+    height: 25px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+.initial-ships .ship {
+    width: 200px;
+    left: 0;
+    top: 0;
+    float: left;
+    cursor: move;
+}
+
+.initial-ships .tripledeck2 {
+    left: 80px;
+}
+
+.initial-ships .doubledeck2 {
+    left: 55px;
+}
+
+.initial-ships .doubledeck3 {
+    left: 110px;
+}
+
+.initial-ships .singledeck2 {
+    left: 30px;
+}
+
+.initial-ships .singledeck3 {
+    left: 60px;
+}
+
+.initial-ships .singledeck4 {
+    left: 90px;
 }
