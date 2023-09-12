@@ -1,0 +1,305 @@
+body, head {
+    height: 100%;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    cursor: url("../src/u7.svg"), default;
+    background: #F8FFFF;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+header>div {
+    width: calc(100%/3);
+    min-width: calc(100%/3);
+}
+
+.previous-page, .close {
+    transform: rotate(-90deg) ;
+    height: 60%;
+    width: auto;
+    object-fit: cover;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.main-label {
+    display: flex;
+    font-size: 36px;
+    color: #0000AA;
+    font-style: normal;
+    justify-content: center;
+    width: calc(100%/3);
+    min-width: calc(100%/3);
+    max-width: calc(100%/3);
+    cursor: url("../src/u24.svg"), text;
+}
+
+.main-label > div {
+    align-self: end;
+    margin-left: 20px;
+}
+
+main {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    min-height: 90vh;
+    height: 90vh;
+}
+
+.place-ships {
+    margin-bottom: 40px;
+    color: #0000aa;
+    text-align: left;
+    line-height: normal;
+    font-size: 18px;
+    margin-top: 47px;
+}
+
+.nickname {
+    margin-bottom: 41px;
+    font-size: 13px;
+    color: #0000aa;
+}
+
+.play-field {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.battle-field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 19px;
+    position: relative;
+}
+
+.field {
+    width: 275px;
+    height: 275px;
+    flex-shrink: 0;
+    position: relative;
+    background: url('./img/bg_play_field.png') no-repeat;
+}
+
+.ships {
+    width: 250px;
+    height: 250px;
+    position: relative;
+    left: 29px;
+    top: 27px;
+}
+
+.prepare-field {
+    display: flex;
+    flex-direction: column;
+    margin-right: 47px;
+    margin-top: 25px;
+}
+
+.docks {
+    border: 1px solid black;
+    height: 200px;
+    width: 180px;
+    position: relative;
+}
+
+.control-panel {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 11px;
+    width: 180px;
+    height: 20px;
+}
+
+.control-panel>img {
+    flex-grow: 1;
+}
+
+.ready {
+    background: #0000aa;
+    border: none;
+    color: #ffffff;
+    font-size: 13px;
+    width: 140px;
+    height: 40px;
+    opacity: 0.5;
+    padding: 2px 2px 2px 2px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 25px;
+}
+
+.rotate, .random {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    width: 60px;
+    height: 74px;
+}
+
+.rotate>span, .random>span {
+    margin-top: 5px;
+    font-size: 10px;
+    color: #6D70CF;
+}
+
+.rotate>img, .random>img {
+    border-radius: 5px;
+    object-fit: cover;
+    padding: 5px;
+    margin-bottom: 5px;
+    background-color: #6D70CF;
+    width: 60px;
+    height: 60px;
+}
+
+.clear-field {
+    margin-top: 12px;
+    padding: 2px;
+    width: 140px;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #797979;
+    background-color: rgba(128, 128, 255, 0.48);
+    box-sizing: border-box;
+    color: #0000aa;
+    text-align: center;
+    line-height: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.clear-field>img {
+    margin-left: 5px;
+}
+
+.ship {
+    height: 25px;
+    position: absolute;
+}
+
+.vertical {
+    transform: rotate(90deg);
+    transform-origin: 10px 10px;
+}
+
+.fourdeck {
+    width: 100px;
+    height: 25px;
+    background: url("./img/s4.png") no-repeat;
+}
+
+.fourdeck.success {
+    width: 104px;
+    height: 29px;
+    background: url("./img/s4-val.png") no-repeat;
+}
+
+.fourdeck.unsuccess {
+    width: 104px;
+    height: 29px;
+    background: url("./img/s4-err.png") no-repeat;
+}
+
+.tripledeck {
+    width: 75px;
+    background: url("./img/s3.png") no-repeat;
+}
+
+.tripledeck.success {
+    width: 79px;
+    height: 29px;
+    background: url("./img/s3-val.png") no-repeat;
+}
+
+.tripledeck.unsuccess {
+    width: 79px;
+    height: 29px;
+    background: url("./img/s3-err.png") no-repeat;
+}
+
+.doubledeck {
+    width: 50px;
+    background: url("./img/s2.png") no-repeat;
+}
+
+.doubledeck.success {
+    width: 54px;
+    height: 29px;
+    background: url("./img/s2-val.png") no-repeat;
+}
+
+.doubledeck.unsuccess {
+    width: 54px;
+    height: 29px;
+    background: url("./img/s2-err.png") no-repeat;
+}
+
+.singledeck {
+    width: 25px;
+    background: url("./img/s1.png") no-repeat;
+}
+
+.singledeck.success {
+    width: 28px;
+    height: 28px;
+    background: url("./img/s1-val.png") no-repeat;
+}
+
+.singledeck.unsuccess {
+    width: 28px;
+    height: 28px;
+    background: url("./img/s1-err.png") no-repeat;
+}
+
+.initial-ships li {
+    height: 25px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+.initial-ships .ship {
+    width: 200px;
+    left: 0;
+    top: 0;
+    float: left;
+    cursor: move;
+}
+
+.initial-ships .tripledeck2 {
+    left: 80px;
+}
+
+.initial-ships .doubledeck2 {
+    left: 55px;
+}
+
+.initial-ships .doubledeck3 {
+    left: 110px;
+}
+
+.initial-ships .singledeck2 {
+    left: 30px;
+}
+
+.initial-ships .singledeck3 {
+    left: 60px;
+}
+
+.initial-ships .singledeck4 {
+    left: 90px;
+}
