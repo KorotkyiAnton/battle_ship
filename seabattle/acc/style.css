@@ -124,17 +124,20 @@ main {
 }
 
 .ready {
-    background: #0000aa;
+    background: #0000AA;
     border: none;
     color: #ffffff;
     font-size: 13px;
     width: 140px;
     height: 40px;
-    opacity: 0.5;
     padding: 2px 2px 2px 2px;
     border-radius: 5px;
     cursor: pointer;
     margin-top: 25px;
+}
+
+.ready:disabled {
+    opacity: 0.5;
 }
 
 .rotate, .random {
