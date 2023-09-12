@@ -1,0 +1,56 @@
+body, head {
+    height: 100%;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    cursor: url("../../src/u7.svg"), default;
+    background: #F8FFFF;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+header>div {
+    width: calc(100%/3);
+    min-width: calc(100%/3);
+}
+
+.previous-page, .close {
+    transform: rotate(-90deg) ;
+    height: 60%;
+    width: auto;
+    object-fit: cover;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.main-label {
+    display: flex;
+    font-size: 36px;
+    color: #0000AA;
+    font-style: normal;
+    justify-content: center;
+    width: calc(100%/3);
+    min-width: calc(100%/3);
+    max-width: calc(100%/3);
+    cursor: url("../../src/u24.svg"), text;
+}
+
+.main-label > div {
+    align-self: end;
+    margin-left: 20px;
+}
+
+main {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 90vh;
+    height: 90vh;
+}
+
+
