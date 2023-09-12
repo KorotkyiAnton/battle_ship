@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sea Battle</title>
     <link rel="stylesheet" type="text/css" href="../../reset.css">
-    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 <body>
 <header>
@@ -36,7 +36,7 @@
             <div class="docks" id="docks">
             </div>
             <div class="control-panel" id="control-panel">
-                <button class="rotate">
+                <button class="rotate" id="rotate">
                     <img src="../src/u165.svg" alt="">
                     <span>Повертання</span>
                 </button>
@@ -67,9 +67,10 @@
             </li>
         </ul>
 
-        <input type="submit" value="Готовий" class="ready">
+        <input type="submit" value="Готовий" class="ready" disabled>
     </div>
 </main>
 </body>
-<script src="./script.js"></script>
+<script src="handler.js" type="module"></script>
+<script src="dragNdrop.js" type="module"></script>
 </html>
