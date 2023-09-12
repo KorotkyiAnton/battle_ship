@@ -108,6 +108,8 @@ window.onload = function () {
         if (!checkLoginUnique(nicknameInput.value.trim())) {
             textStatus.style.visibility = "visible";
             showStatus("block", "none", "none");
+            textStatus.innerHTML = "";
+            popupErr.innerHTML = "";
             textStatus.innerHTML += "На жаль, помилка - данний нікнейм вже зайнятий, спробуйте іншій.<br>";
             popupErr.innerHTML += "На жаль, помилка - данний нікнейм вже зайнятий, спробуйте іншій.<br>";
         } else {
