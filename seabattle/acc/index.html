@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sea Battle</title>
+    <link rel="stylesheet" type="text/css" href="../../reset.css">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+<header>
+    <img src="../src/u167.svg" alt="" class="previous-page">
+    <div class="main-label"><img src="../src/u6.svg" alt="Зображення корабля">
+        <div>Морський Бій</div>
+    </div>
+    <img src="../src/u166.svg" alt="" class="close">
+</header>
+
+<main>
+    <div class="place-ships">Розташуйте кораблі</div>
+    <div class="nickname">NickName</div>
+    <div class="play-field">
+        <div class="battle-field">
+            <div class="field" id="field">
+                <div class="ships" id="ships"></div>
+            </div>
+            <button class="clear-field">
+                <span data-target="clear">Очистити</span>
+                <img data-target="clear" src="../src/u189.svg" alt="">
+            </button>
+        </div>
+
+        <div class="prepare-field">
+            <div class="docks" id="docks">
+            </div>
+            <div class="control-panel" id="control-panel">
+                <button class="rotate">
+                    <img src="../src/u165.svg" alt="">
+                    <span>Повертання</span>
+                </button>
+                <button class="random">
+                    <img src="../src/u142.svg" alt="">
+                    <span>Автозаповнення</span>
+                </button>
+            </div>
+        </div>
+        <ul class="initial-ships" id="initial-ships">
+            <li>
+                <div id="fourdeck1" class="ship fourdeck"></div>
+            </li>
+            <li>
+                <div id="tripledeck1" class="ship tripledeck tripledeck1"></div>
+                <div id="tripledeck2" class="ship tripledeck tripledeck2"></div>
+            </li>
+            <li>
+                <div id="doubledeck1" class="ship doubledeck"></div>
+                <div id="doubledeck2" class="ship doubledeck doubledeck2"></div>
+                <div id="doubledeck3" class="ship doubledeck doubledeck3"></div>
+            </li>
+            <li>
+                <div id="singledeck1" class="ship singledeck"></div>
+                <div id="singledeck2" class="ship singledeck singledeck2"></div>
+                <div id="singledeck3" class="ship singledeck singledeck3"></div>
+                <div id="singledeck4" class="ship singledeck singledeck4"></div>
+            </li>
+        </ul>
+
+        <input type="submit" value="Готовий" class="ready">
+    </div>
+</main>
+</body>
+<script src="./script.js"></script>
+</html>
