@@ -9,6 +9,7 @@ window.onload = () => {
     function exitFromPreparePage() {
         window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/seabattle/";
         localStorage.removeItem("login");
+        localStorage.removeItem("shipCoords");
     }
 
     document.querySelector(".previous-page").addEventListener("click", exitFromPreparePage);
