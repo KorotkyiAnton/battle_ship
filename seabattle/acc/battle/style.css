@@ -45,12 +45,109 @@ header>div {
 
 main {
     display: flex;
+    color: #0000AA;
     position: relative;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
     min-height: 90vh;
     height: 90vh;
+}
+
+.time-to-turn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 16px;
+    margin-bottom: 35px;
+}
+
+.time-to-turn > div {
+    display: flex;
+}
+
+.time-to-turn>span {
+    font-size: 18px;
+}
+
+.skip {
+    display: flex;
+    justify-content: space-between;
+    width: 687px;
+}
+
+.skip > div {
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 79px;
+    text-align: center;
+}
+
+.skip span {
+    font-size: 20px;
+    text-align: center;
+    color: #910012;
+    width: 33px;
+    height: 32px;
+    padding: 2px 2px 2px 2px;
+    border: 1px solid #797979;
+    border-radius: 100%;
+}
+
+.player-nick {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 574px;
+}
+
+.player-nick > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+    text-align: center;
+}
+
+.player-nick span {
+    margin-top: 7px;
+    margin-bottom: 14px;
+}
+
+.player-nick > div:first-child {
+    margin-left: 25px;
+}
+
+.highlite {
+    width: 184px;
+    height: 29px;
+    padding: 2px 2px 2px 2px;
+    border-radius: 20px;
+    background-color: rgba(149, 242, 4, 0.27);
+}
+
+.battle-fields {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 574px;
+}
+
+.field {
+    width: 275px;
+    height: 275px;
+    flex-shrink: 0;
+    position: relative;
+    background: url('../img/bg_play_field.png') no-repeat;
+}
+
+.ships {
+    width: 250px;
+    height: 250px;
+    position: relative;
+    left: 29px;
+    top: 27px;
 }
 
 
