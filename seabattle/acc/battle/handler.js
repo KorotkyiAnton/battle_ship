@@ -35,6 +35,8 @@ window.onload = () => {
             document.querySelector(".opponent-nick").classList.add("highlite");
             document.querySelector(".mine-nick").classList.remove("highlite");
             document.querySelector(".opponent-field").setAttribute('disabled', '');
+            document.querySelector(".skip span").innerHTML =
+                (parseInt(document.querySelector(".skip span").innerText)-1).toString();
         } else {
             // В противном случае, уменьшаем время на 1 секунду
             initialTimeInSeconds--;
