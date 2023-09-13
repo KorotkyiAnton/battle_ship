@@ -19,41 +19,26 @@
 </header>
 
 <main>
-    <div class="time-to-turn">
-        <div>
-            <img src="img/u314.svg" alt="">
-            <span>час на хід</span>
-        </div>
-        <span>30 сек</span>
-    </div>
-    <div class="skip">
-        <div>
-            <div>Залишилося пропусків ходу</div>
-            <span>3</span>
-        </div>
-        <div>
-            <div>Залишилося пропусків ходу</div>
-            <span>3</span>
-        </div>
-    </div>
     <div class="player-nick">
         <div>
             <div>Хід</div>
-            <span class="highlite">nickName</span>
+            <span class="highlite mine-nick">nickName</span>
         </div>
         <div>
             <div>Хід</div>
-            <span>nickName</span>
+            <span class="opponent-nick" id="opponent-nick">nickName</span>
         </div>
     </div>
     <div class="battle-fields">
-        <div class="field">
+        <div class="field mine-field">
             <div class="ships"></div>
         </div>
-        <div class="field">
+        <div class="field opponent-field" id="opponent-field">
             <div class="ships"></div>
         </div>
     </div>
 </main>
 </body>
+<script src="battle.js" type="module"></script>
+<script src="handler.js" type="module"></script>
 </html>
