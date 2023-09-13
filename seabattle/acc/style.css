@@ -194,9 +194,18 @@ main {
     position: absolute;
 }
 
-.vertical {
+.vertical, .south {
     transform: rotate(90deg);
-    transform-origin: 10px 10px;
+    transform-origin: 10px 9px;
+}
+
+.north {
+    transform: rotate(-90deg);
+    transform-origin: 10px 9px;
+}
+
+.west {
+    transform: rotate(180deg);
 }
 
 .fourdeck {
