@@ -34,8 +34,8 @@ function sendSquadron(squadron) {
         };
     }
 
-    console.log(outputObj);
     localStorage.setItem("shipCoords", JSON.stringify(outputObj));
+    window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/seabattle/acc/battle";
 }
 
 class Field {
