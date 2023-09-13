@@ -150,4 +150,35 @@ main {
     top: 27px;
 }
 
+.ship {
+    height: 25px;
+    position: absolute;
+}
+
+.vertical {
+    transform: rotate(90deg);
+    transform-origin: 13px 12px;
+}
+
+.fourdeck {
+    width: 100px;
+    height: 25px;
+    background: url("../img/s4.png") no-repeat;
+}
+
+.tripledeck {
+    width: 75px;
+    background: url("../img/s3.png") no-repeat;
+}
+
+.doubledeck {
+    width: 50px;
+    background: url("../img/s2.png") no-repeat;
+}
+
+.singledeck {
+    width: 25px;
+    background: url("../img/s1.png") no-repeat;
+}
+
 
