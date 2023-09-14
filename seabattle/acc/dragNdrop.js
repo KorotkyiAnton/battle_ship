@@ -35,6 +35,7 @@ function sendSquadron(squadron) {
     }
 
     localStorage.setItem("shipCoords", JSON.stringify(outputObj));
+    window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/seabattle/acc/battle";
 }
 
 class Field {
@@ -314,10 +315,10 @@ class Placement {
         const decks = human.squadron[name].arrDecks.length;
 
         const directions = [
-            {kx: 0, ky: 1, x: human.squadron[name].x + decks - 1, y: human.squadron[name].y},  // Изначальное положение корабля
-            {kx: 1, ky: 0, x: human.squadron[name].x, y: human.squadron[name].y},  // Поворот на 90 градусов
-            {kx: 0, ky: -1, x: human.squadron[name].x, y: human.squadron[name].y - decks + 1}, // Поворот на 180 градусов
-            {kx: -1, ky: 0, x: human.squadron[name].x - decks + 1, y: human.squadron[name].y + decks - 1}  // Поворот на 270 градусов
+            {kx: 0, ky: 1, x: human.squadron[name].x, y: human.squadron[name].y - decks + 1},  // Изначальное положение корабля
+            {kx: 1, ky: 0, x: human.squadron[name].x- decks + 1, y: human.squadron[name].y+ decks - 1},  // Поворот на 90 градусов
+            {kx: 0, ky: -1, x: human.squadron[name].x + decks - 1, y: human.squadron[name].y}, // Поворот на 180 градусов
+            {kx: -1, ky: 0, x: human.squadron[name].x, y: human.squadron[name].y}  // Поворот на 270 градусов
         ];
 
         const rollBack = [
@@ -340,7 +341,7 @@ class Placement {
         // Вычисляем индекс следующего направления после поворота
         const nextIndex = (currentIndex + 1) % directions.length;
 
-
+        console.log(nextIndex)
         // Обновляем координаты и направление корабля
         obj.kx = directions[nextIndex].kx;
         obj.ky = directions[nextIndex].ky;
@@ -353,7 +354,6 @@ class Placement {
         const result = human.checkLocationShip(obj, decks);
 
         if (!result) {
-            console.log(currentIndex)
             obj.kx = rollBack[currentIndex].kx;
             obj.ky = rollBack[currentIndex].ky;
             obj.x = rollBack[currentIndex].x;
