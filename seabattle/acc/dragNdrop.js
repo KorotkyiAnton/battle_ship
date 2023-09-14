@@ -24,7 +24,16 @@ function sendSquadron(squadron) {
         const ship = squadron[key];
         const coords = ship.arrDecks.map(deck => String.fromCharCode(97 + deck[1]) + (deck[0] + 1));
         const shipStart = coords[0];
-        const orientation = ship.kx === 1 ? "vertical" : "horizontal";
+        let orientation = "";
+        if (ship.kx === -1) {
+            orientation = "north";
+        } else if (ship.kx === 1) {
+            orientation = "south";
+        } else if (ship.ky === -1) {
+            orientation = "west";
+        } else if (ship.ky === 1) {
+            orientation = "east";
+        }
 
         outputObj[key] = {
             coords,
@@ -316,7 +325,7 @@ class Placement {
 
         const directions = [
             {kx: 0, ky: 1, x: human.squadron[name].x, y: human.squadron[name].y - decks + 1},  // Изначальное положение корабля
-            {kx: 1, ky: 0, x: human.squadron[name].x- decks + 1, y: human.squadron[name].y+ decks - 1},  // Поворот на 90 градусов
+            {kx: 1, ky: 0, x: human.squadron[name].x - decks + 1, y: human.squadron[name].y + decks - 1},  // Поворот на 90 градусов
             {kx: 0, ky: -1, x: human.squadron[name].x + decks - 1, y: human.squadron[name].y}, // Поворот на 180 градусов
             {kx: -1, ky: 0, x: human.squadron[name].x, y: human.squadron[name].y}  // Поворот на 270 градусов
         ];

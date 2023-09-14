@@ -21,8 +21,15 @@ export function placeShipsOnField(shipData) {
             // Устанавливаем координаты и ориентацию корабля
             shipElement.style.top = (shipInfo.shipStart.slice(1) * 25).toString() + "px";
             shipElement.style.left = (((shipInfo.shipStart[0]).charCodeAt(0) - 96) * 25).toString() + "px";
-            if (shipInfo.orientation === 'vertical') {
-                shipElement.classList.add('vertical');
+            console.log(shipInfo.orientation)
+            if (shipInfo.orientation === 'west') {
+                shipElement.classList.add('west');
+            } else if (shipInfo.orientation === 'east') {
+                shipElement.classList.add('east');
+            } else if (shipInfo.orientation === 'north') {
+                shipElement.classList.add('north');
+            } else if (shipInfo.orientation === 'south') {
+                shipElement.classList.add('south');
             }
             console.log(shipElement)
 
