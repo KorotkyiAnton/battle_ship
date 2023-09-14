@@ -120,9 +120,9 @@ class Field {
         else if (y + ky * decks < 10 && ky === 1) toY = y + ky * decks + 1;
         else if (y === 9 && ky === 0) toY = y + 1;
         else if (y < 9 && ky === 0) toY = y + 2;
-        console.log(fromX, fromY, toX, toY)
+        console.log(String.fromCharCode(fromY + 97) + (fromX + 1), toX, String.fromCharCode(toY + 96))
 
-        if (toX === undefined || toY === undefined) return false;
+        if (toX === undefined || toY === undefined || fromX < 0 || fromY < 0) return false;
 
         return this.matrix.slice(fromX, toX)
             .filter(arr => arr.slice(fromY, toY).includes(1))
@@ -145,7 +145,7 @@ class Ships {
         this.arrDecks = [];
     }
 
-    static showShip(self, shipname, x, y, kx, ky) {
+    static showShip(self, shipname, x, y, kx, ky, length) {
         const div = document.createElement('div');
         const classname = shipname.slice(0, -1);
         let dirClass = '';
@@ -153,6 +153,7 @@ class Ships {
         // Добавляем классы для сторон поворота корабля
         if (kx === -1 && ky === 0) {
             dirClass = ' north';
+            x += length - 1;
         } else if (kx === 0 && ky === -1) {
             dirClass = ' west';
         } else if (kx === 1 && ky === 0) {
@@ -169,7 +170,9 @@ class Ships {
         let {player, field, shipname, decks, x, y, kx, ky, hits, arrDecks, k = 0} = this;
 
         while (k < decks) {
-            let i = x + k * kx, j = y + k * ky;
+            let kxForMatrix = Math.abs(kx);
+            let kyForMatrix = Math.abs(ky);
+            let i = x + k * kxForMatrix, j = y + k * kyForMatrix;
 
             player.matrix[i][j] = 1;
             arrDecks.push([i, j]);
@@ -178,7 +181,7 @@ class Ships {
 
         player.squadron[shipname] = {arrDecks, hits, x, y, kx, ky};
         if (player === human) {
-            Ships.showShip(human, shipname, x, y, kx, ky);
+            Ships.showShip(human, shipname, x, y, kx, ky, arrDecks.length);
             if (Object.keys(player.squadron).length === 10) {
                 console.log(player.squadron)
                 let readyButton = document.querySelector(".ready");
@@ -311,10 +314,17 @@ class Placement {
         const decks = human.squadron[name].arrDecks.length;
 
         const directions = [
-            { kx: 0, ky: 1,  x: human.squadron[name].x, y: human.squadron[name].y},  // Изначальное положение корабля
-            { kx: 1, ky: 0, x: human.squadron[name].x, y: human.squadron[name].y},  // Поворот на 90 градусов
-            { kx: 0, ky: -1, x: human.squadron[name].x, y: human.squadron[name].y-decks+1}, // Поворот на 180 градусов
-            { kx: -1, ky: 0, x: human.squadron[name].x, y: human.squadron[name].y+decks-1}  // Поворот на 270 градусов
+            {kx: 0, ky: 1, x: human.squadron[name].x + decks - 1, y: human.squadron[name].y},  // Изначальное положение корабля
+            {kx: 1, ky: 0, x: human.squadron[name].x, y: human.squadron[name].y},  // Поворот на 90 градусов
+            {kx: 0, ky: -1, x: human.squadron[name].x, y: human.squadron[name].y - decks + 1}, // Поворот на 180 градусов
+            {kx: -1, ky: 0, x: human.squadron[name].x - decks + 1, y: human.squadron[name].y + decks - 1}  // Поворот на 270 градусов
+        ];
+
+        const rollBack = [
+            {kx: 0, ky: 1, x: human.squadron[name].x, y: human.squadron[name].y},
+            {kx: 1, ky: 0, x: human.squadron[name].x, y: human.squadron[name].y},
+            {kx: 0, ky: -1, x: human.squadron[name].x, y: human.squadron[name].y},
+            {kx: -1, ky: 0, x: human.squadron[name].x, y: human.squadron[name].y}
         ];
 
         let obj = {
@@ -330,6 +340,7 @@ class Placement {
         // Вычисляем индекс следующего направления после поворота
         const nextIndex = (currentIndex + 1) % directions.length;
 
+
         // Обновляем координаты и направление корабля
         obj.kx = directions[nextIndex].kx;
         obj.ky = directions[nextIndex].ky;
@@ -342,10 +353,11 @@ class Placement {
         const result = human.checkLocationShip(obj, decks);
 
         if (!result) {
-            obj.kx = directions[currentIndex].kx;
-            obj.ky = directions[currentIndex].ky;
-            obj.x = directions[currentIndex].x;
-            obj.y = directions[currentIndex].y;
+            console.log(currentIndex)
+            obj.kx = rollBack[currentIndex].kx;
+            obj.ky = rollBack[currentIndex].ky;
+            obj.x = rollBack[currentIndex].x;
+            obj.y = rollBack[currentIndex].y;
         }
 
         obj.shipname = name;
