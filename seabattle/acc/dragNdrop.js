@@ -35,7 +35,6 @@ function sendSquadron(squadron) {
     }
 
     localStorage.setItem("shipCoords", JSON.stringify(outputObj));
-    window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/seabattle/acc/battle";
 }
 
 class Field {
@@ -107,29 +106,21 @@ class Field {
 
     checkLocationShip(obj, decks) {
         let {x, y, kx, ky, fromX, toX, fromY, toY} = obj;
+        kx = Math.abs(kx);
+        ky = Math.abs(ky);
 
-        if (kx === -1 || ky === 1) {
-            fromX = (x === 0) ? x : x - 1;
-            fromY = (y === 0) ? y : y - 1;
-        } else if ((kx === 1 && x - decks === 0)||(ky === -1 && y - decks === 0)) {
-            fromX = x - decks;
-            fromY = y - decks;
-        } else if ((kx === 1 && x - decks > 0)||(ky === -1 && y - decks > 0)) {
-            fromX = x - decks - 1;
-            fromY = y - decks - 1;
-        }
+        fromX = (x === 0) ? x : x - 1;
+        if (x + kx * decks === 10 && kx === 1) toX = x + kx * decks;
+        else if (x + kx * decks < 10 && kx === 1) toX = x + kx * decks + 1;
+        else if (x === 9 && kx === 0) toX = x + 1;
+        else if (x < 9 && kx === 0) toX = x + 2;
 
-        if (x + kx * decks === 10) toX = x + kx * decks;
-        else if (x + kx * decks < 10) toX = x + kx * decks + 1;
-        else if (x === 9) toX = x + 1;
-        else if (x < 9) toX = x + 2;
-
-        if (y + ky * decks === 10) toY = y + ky * decks;
-        else if (y + ky * decks < 10) toY = y + ky * decks + 1;
-        else if (y === 9) toY = y + 1;
-        else if (y < 9) toY = y + 2;
-
-        console.log(fromY, fromX, toY, toX)
+        fromY = (y === 0) ? y : y - 1;
+        if (y + ky * decks === 10 && ky === 1) toY = y + ky * decks;
+        else if (y + ky * decks < 10 && ky === 1) toY = y + ky * decks + 1;
+        else if (y === 9 && ky === 0) toY = y + 1;
+        else if (y < 9 && ky === 0) toY = y + 2;
+        console.log(fromX, fromY, toX, toY)
 
         if (toX === undefined || toY === undefined) return false;
 
@@ -154,25 +145,22 @@ class Ships {
         this.arrDecks = [];
     }
 
-    static showShip(self, shipname, x, y, kx, ky, length) {
-        console.log(kx, ky)
+    static showShip(self, shipname, x, y, kx, ky) {
         const div = document.createElement('div');
         const classname = shipname.slice(0, -1);
-        let dir = ' ';
-        if (kx === 1) {
-            dir = ' north';
-        } else if (kx === -1) {
-            dir = ' south';
-        } else if (ky === -1) {
-            dir = ' west';
-            y -= length - 1;
-        } else if (ky === 1) {
-            dir = ' ';
+        let dirClass = '';
+
+        // Добавляем классы для сторон поворота корабля
+        if (kx === -1 && ky === 0) {
+            dirClass = ' north';
+        } else if (kx === 0 && ky === -1) {
+            dirClass = ' west';
+        } else if (kx === 1 && ky === 0) {
+            dirClass = ' south';
         }
-        console.log(dir)
 
         div.setAttribute('id', shipname);
-        div.className = `ship ${classname}${dir}`;
+        div.className = `ship ${classname} ${dirClass}`;
         div.style.cssText = `left:${y * Field.SHIP_SIDE}px; top:${x * Field.SHIP_SIDE}px;`;
         self.field.appendChild(div);
     }
@@ -190,8 +178,9 @@ class Ships {
 
         player.squadron[shipname] = {arrDecks, hits, x, y, kx, ky};
         if (player === human) {
-            Ships.showShip(human, shipname, x, y, kx, ky, arrDecks.length);
+            Ships.showShip(human, shipname, x, y, kx, ky);
             if (Object.keys(player.squadron).length === 10) {
+                console.log(player.squadron)
                 let readyButton = document.querySelector(".ready");
                 readyButton.removeAttribute('disabled');
                 readyButton.addEventListener("click", function () {
@@ -313,50 +302,50 @@ class Placement {
 
     rotationShip(e) {
         e.preventDefault();
+        if (e.which !== 3 || startGame) return;
 
         const el = e.target.closest('.ship');
         const name = Placement.getShipName(el);
 
         if (human.squadron[name].decks === 1) return;
+        const decks = human.squadron[name].arrDecks.length;
+
+        const directions = [
+            { kx: 0, ky: 1,  x: human.squadron[name].x, y: human.squadron[name].y},  // Изначальное положение корабля
+            { kx: 1, ky: 0, x: human.squadron[name].x, y: human.squadron[name].y},  // Поворот на 90 градусов
+            { kx: 0, ky: -1, x: human.squadron[name].x, y: human.squadron[name].y-decks+1}, // Поворот на 180 градусов
+            { kx: -1, ky: 0, x: human.squadron[name].x, y: human.squadron[name].y+decks-1}  // Поворот на 270 градусов
+        ];
 
         let obj = {
             x: human.squadron[name].x,
-            y: human.squadron[name].y
+            y: human.squadron[name].y,
+            kx: human.squadron[name].kx,
+            ky: human.squadron[name].ky
         };
 
-        if (human.squadron[name].kx === 1) {
-            obj.kx = 0;
-            obj.ky = 1;
-        } else if (human.squadron[name].ky === 1) {
-            obj.kx = -1;
-            obj.ky = 0;
-        } else if (human.squadron[name].kx === -1) {
-            obj.kx = 0;
-            obj.ky = -1;
-        } else if (human.squadron[name].ky === -1) {
-            obj.kx = 1;
-            obj.ky = 0;
-        }
+        // Находим индекс текущего направления корабля в массиве направлений
+        const currentIndex = directions.findIndex(dir => dir.kx === obj.kx && dir.ky === obj.ky);
 
-        const decks = human.squadron[name].arrDecks.length;
+        // Вычисляем индекс следующего направления после поворота
+        const nextIndex = (currentIndex + 1) % directions.length;
+
+        // Обновляем координаты и направление корабля
+        obj.kx = directions[nextIndex].kx;
+        obj.ky = directions[nextIndex].ky;
+        obj.x = directions[nextIndex].x;
+        obj.y = directions[nextIndex].y;
+
         this.removeShipFromSquadron(el);
         human.field.removeChild(el);
 
         const result = human.checkLocationShip(obj, decks);
+
         if (!result) {
-            if (obj.ky === 1) {
-                obj.kx = 1;
-                obj.ky = 0;
-            } else if (obj.kx === 1) {
-                obj.kx = 0;
-                obj.ky = -1;
-            } else if (obj.ky === -1) {
-                obj.kx = -1;
-                obj.ky = 0;
-            } else if (obj.kx === -1) {
-                obj.kx = 0;
-                obj.ky = 1;
-            }
+            obj.kx = directions[currentIndex].kx;
+            obj.ky = directions[currentIndex].ky;
+            obj.x = directions[currentIndex].x;
+            obj.y = directions[currentIndex].y;
         }
 
         obj.shipname = name;
