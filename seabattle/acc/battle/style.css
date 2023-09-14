@@ -155,9 +155,18 @@ main {
     position: absolute;
 }
 
-.vertical {
+.south {
     transform: rotate(90deg);
-    transform-origin: 13px 12px;
+    transform-origin: 15px 10px;
+}
+
+.north {
+    transform: rotate(-90deg);
+    transform-origin: 11px 12px;
+}
+
+.west {
+    transform: rotate(180deg);
 }
 
 .fourdeck {
