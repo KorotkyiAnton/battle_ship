@@ -3,6 +3,7 @@ body, head {
     font-family: "Comic Sans MS", "Comic Sans", cursive;
     cursor: url("../src/u7.svg"), default;
     background: #F8FFFF;
+    user-select: none;
 }
 
 header {
@@ -192,16 +193,21 @@ main {
 .ship {
     height: 25px;
     position: absolute;
+    margin-left: -5px;
 }
 
-.vertical, .south {
+.selected {
+    border: 2px solid black;
+}
+
+.south {
     transform: rotate(90deg);
-    transform-origin: 10px 9px;
+    transform-origin: 15px 10px;
 }
 
 .north {
     transform: rotate(-90deg);
-    transform-origin: 10px 9px;
+    transform-origin: 11px 12px;
 }
 
 .west {
