@@ -171,7 +171,7 @@ class Ships {
         }
 
         div.setAttribute('id', shipname);
-        div.className = `ship ${classname} ${dirClass}`;
+        div.className = `ship selected ${classname} ${dirClass}`;
         div.style.cssText = `left:${y * Field.SHIP_SIDE}px; top:${x * Field.SHIP_SIDE}px;`;
         self.field.appendChild(div);
     }
@@ -223,7 +223,7 @@ class Placement {
         document.addEventListener('mousedown', this.onMouseDown.bind(this));
         document.addEventListener('mousemove', this.onMouseMove.bind(this));
         document.addEventListener('mouseup', this.onMouseUp.bind(this));
-        humanfield.addEventListener('contextmenu', this.rotationShip.bind(this));
+        //humanfield.addEventListener('contextmenu', this.rotationShip.bind(this));
         isHandlerPlacement = true;
     }
 
@@ -269,7 +269,7 @@ class Placement {
             this.clone.style.zIndex = '1000';
             document.body.appendChild(this.clone);
 
-            this.removeShipFromSquadron(this.clone);
+            Placement.removeShipFromSquadron(this.clone);
         }
 
         let currentLeft = Math.round(e.pageX - this.shiftX),
@@ -311,13 +311,42 @@ class Placement {
             this.createShipAfterMoving();
         }
         this.removeClone();
+        Placement.removeSelected();
+        Placement.addSelected();
     }
 
-    rotationShip(e) {
-        e.preventDefault();
-        if (e.which !== 3 || startGame) return;
+    static removeSelected() {
+        const ships = document.querySelectorAll('.ships .ship');
+        ships.forEach(ships => {
+            ships.classList.remove('selected');
+        });
+    }
 
-        const el = e.target.closest('.ship');
+    static addSelected() {
+        const ships = document.querySelectorAll('.ships .ship');
+
+        ships.forEach(ship => {
+            ship.addEventListener('click', () => {
+                ship.classList.add('selected');
+            });
+        });
+
+        const rotateButton = getElement('rotate');
+
+        if (rotateButton) {
+            rotateButton.addEventListener('click', function (e) {
+                e.preventDefault();
+                const lastSelectedShip = document.querySelector('.selected'); // Получите последний выбранный корабль
+                if (lastSelectedShip) {
+                    Placement.rotationShip(e, lastSelectedShip);
+                }
+            });
+        }
+    }
+
+    static rotationShip(e, el) {
+        console.log(el)
+
         const name = Placement.getShipName(el);
 
         if (human.squadron[name].decks === 1) return;
@@ -357,7 +386,7 @@ class Placement {
         obj.x = directions[nextIndex].x;
         obj.y = directions[nextIndex].y;
 
-        this.removeShipFromSquadron(el);
+        Placement.removeShipFromSquadron(el);
         human.field.removeChild(el);
 
         const result = human.checkLocationShip(obj, decks);
@@ -449,7 +478,7 @@ class Placement {
         return obj;
     }
 
-    removeShipFromSquadron(el) {
+    static removeShipFromSquadron(el) {
         const name = Placement.getShipName(el);
         if (!human.squadron[name]) return;
 

@@ -197,8 +197,20 @@ main {
 }
 
 
-.selected {
-    background: black;
+.selected::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, transparent 0%, rgba(10, 167, 210, 0.5) 10%, transparent 60%);
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.05s ease-in-out;
+    pointer-events: none;
+}
+
+.selected:active::before {
+    transform: scale(2);
 }
 
 .south {
