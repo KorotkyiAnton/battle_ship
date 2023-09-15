@@ -1,4 +1,5 @@
-let startGame = false;
+import {sendSquadron} from "./connectionWithDB.js";
+
 let isHandlerPlacement = false;
 
 const getElement = id => document.getElementById(id);
@@ -13,39 +14,6 @@ const getCoordinates = el => {
 };
 
 const humanfield = getElement('ships');
-
-function sendSquadron(squadron) {
-    let outputObj = {};
-    outputObj.messageId = 10;
-    outputObj.messageType = "allShipCoordsToDB";
-    outputObj.createDate = new Date();
-
-    for (const key in squadron) {
-        const ship = squadron[key];
-        const coords = ship.arrDecks.map(deck => String.fromCharCode(97 + deck[1]) + (deck[0] + 1));
-        const shipStart = coords[0];
-        let orientation = "";
-        if (ship.kx === -1) {
-            orientation = "north";
-        } else if (ship.kx === 1) {
-            orientation = "south";
-        } else if (ship.ky === -1) {
-            orientation = "west";
-        } else if (ship.ky === 1) {
-            orientation = "east";
-        }
-
-        outputObj[key] = {
-            coords,
-            hits: ship.hits,
-            shipStart,
-            orientation
-        };
-    }
-
-    localStorage.setItem("shipCoords", JSON.stringify(outputObj));
-    window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/seabattle/acc/battle";
-}
 
 class Field {
     static FIELD_SIDE = 250;
@@ -156,6 +124,12 @@ class Ships {
     }
 
     static showShip(self, shipname, x, y, kx, ky, length) {
+        const ships = document.querySelectorAll('.ships .ship');
+
+        // Удалить класс 'selected' у всех кораблей
+        ships.forEach(ship => {
+            ship.classList.remove('selected');
+        });
         const div = document.createElement('div');
         const classname = shipname.slice(0, -1);
         let dirClass = '';
@@ -228,10 +202,12 @@ class Placement {
     }
 
     onMouseDown(e) {
-        if (e.which !== 1 || startGame) return;
+        //if (e.which !== 1 || startGame) return;
 
         const el = e.target.closest('.ship');
+
         if (!el) return;
+        el.classList.add("selected");
 
         this.pressed = true;
 
@@ -311,42 +287,9 @@ class Placement {
             this.createShipAfterMoving();
         }
         this.removeClone();
-        Placement.removeSelected();
-        Placement.addSelected();
     }
 
-    static removeSelected() {
-        const ships = document.querySelectorAll('.ships .ship');
-        ships.forEach(ships => {
-            ships.classList.remove('selected');
-        });
-    }
-
-    static addSelected() {
-        const ships = document.querySelectorAll('.ships .ship');
-
-        ships.forEach(ship => {
-            ship.addEventListener('click', () => {
-                ship.classList.add('selected');
-            });
-        });
-
-        const rotateButton = getElement('rotate');
-
-        if (rotateButton) {
-            rotateButton.addEventListener('click', function (e) {
-                e.preventDefault();
-                const lastSelectedShip = document.querySelector('.selected'); // Получите последний выбранный корабль
-                if (lastSelectedShip) {
-                    Placement.rotationShip(e, lastSelectedShip);
-                }
-            });
-        }
-    }
-
-    static rotationShip(e, el) {
-        console.log(el)
-
+    rotationShip(e, el) {
         const name = Placement.getShipName(el);
 
         if (human.squadron[name].decks === 1) return;
@@ -354,7 +297,7 @@ class Placement {
 
         const directions = [
             {kx: 0, ky: 1, x: human.squadron[name].x, y: human.squadron[name].y - decks + 1},  // Изначальное положение корабля
-            {kx: 1, ky: 0, x: human.squadron[name].x - decks + 1, y: human.squadron[name].y + decks - 1},  // Поворот на 90 градусов
+            {kx: 1, ky: 0, x: human.squadron[name].x- decks + 1, y: human.squadron[name].y+ decks - 1},  // Поворот на 90 градусов
             {kx: 0, ky: -1, x: human.squadron[name].x + decks - 1, y: human.squadron[name].y}, // Поворот на 180 градусов
             {kx: -1, ky: 0, x: human.squadron[name].x, y: human.squadron[name].y}  // Поворот на 270 градусов
         ];
@@ -515,6 +458,15 @@ document.querySelector(".random").addEventListener('click', function (e) {
     human.randomLocationShips();
 
     const placement = new Placement();
+    placement.setObserver();
+});
+
+document.querySelector(".rotate").addEventListener('click', function (e) {
+    const placement = new Placement();
+    const selectedShip = document.querySelector(".selected");
+    console.log(selectedShip)
+
+    placement.rotationShip(e, selectedShip);
     placement.setObserver();
 });
 
