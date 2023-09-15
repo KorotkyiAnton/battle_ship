@@ -1,4 +1,4 @@
-import {sendSquadron} from "./connectionWithDB.js";
+import {sendSquadron, isTimerRunning, startTimer, stopTimer, requestToDB} from "./connectionWithDB.js";
 
 let isHandlerPlacement = false;
 
@@ -98,7 +98,6 @@ class Field {
         else if (y + ky * decks < 10 && ky === 1) toY = y + ky * decks + 1;
         else if (y === 9 && ky === 0) toY = y + 1;
         else if (y < 9 && ky === 0) toY = y + 2;
-        console.log(String.fromCharCode(fromY + 97) + (fromX + 1), toX, String.fromCharCode(toY + 96))
 
         if (toX === undefined || toY === undefined || fromX < 0 || fromY < 0) return false;
 
@@ -167,12 +166,11 @@ class Ships {
         if (player === human) {
             Ships.showShip(human, shipname, x, y, kx, ky, arrDecks.length);
             if (Object.keys(player.squadron).length === 10) {
-                console.log(player.squadron)
-                let readyButton = document.querySelector(".ready");
+                const readyButton = document.getElementById('readyButton');
+                const queueStart = document.querySelector(".start-queue");
                 readyButton.removeAttribute('disabled');
-                readyButton.addEventListener("click", function () {
-                    sendSquadron(player.squadron);
-                });
+                queueStart.style.visibility = "visible";
+                sendSquadron(player.squadron);
             }
         }
     }
@@ -297,7 +295,7 @@ class Placement {
 
         const directions = [
             {kx: 0, ky: 1, x: human.squadron[name].x, y: human.squadron[name].y - decks + 1},  // Изначальное положение корабля
-            {kx: 1, ky: 0, x: human.squadron[name].x- decks + 1, y: human.squadron[name].y+ decks - 1},  // Поворот на 90 градусов
+            {kx: 1, ky: 0, x: human.squadron[name].x - decks + 1, y: human.squadron[name].y + decks - 1},  // Поворот на 90 градусов
             {kx: 0, ky: -1, x: human.squadron[name].x + decks - 1, y: human.squadron[name].y}, // Поворот на 180 градусов
             {kx: -1, ky: 0, x: human.squadron[name].x, y: human.squadron[name].y}  // Поворот на 270 градусов
         ];
@@ -322,7 +320,6 @@ class Placement {
         // Вычисляем индекс следующего направления после поворота
         const nextIndex = (currentIndex + 1) % directions.length;
 
-        console.log(nextIndex)
         // Обновляем координаты и направление корабля
         obj.kx = directions[nextIndex].kx;
         obj.ky = directions[nextIndex].ky;
@@ -470,8 +467,25 @@ document.querySelector(".rotate").addEventListener('click', function (e) {
     placement.setObserver();
 });
 
+const readyButton = document.getElementById('readyButton');
+const timerElement = document.getElementById('timer');
+const otherElementsToDisable = document.querySelectorAll('.ships, .ship, .rotate, .clear-field, .random');
+
+readyButton.addEventListener('click', function () {
+    if (!isTimerRunning) {
+        startTimer(timerElement, otherElementsToDisable, readyButton);
+        readyButton.value = 'Відміна гри';
+    } else {
+        stopTimer(timerElement, otherElementsToDisable, readyButton);
+    }
+});
+
 document.querySelector(".clear-field").addEventListener('click', function (e) {
     human.cleanField();
+    const readyButton = document.getElementById('readyButton');
+    const queueStart = document.querySelector(".start-queue");
+    readyButton.setAttribute('disabled', '');
+    queueStart.style.visibility = "hidden";
 
     if (shipsCollection.children.length > 0) {
         shipsCollection.removeChild(shipsCollection.lastChild);
