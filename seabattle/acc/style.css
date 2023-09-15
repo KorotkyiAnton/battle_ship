@@ -124,6 +124,34 @@ main {
     flex-grow: 1;
 }
 
+.queue {
+    color: #0000AA;
+    display: flex;
+    flex-direction: column;
+}
+
+.start-queue {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.start-queue > span {
+    text-align: center;
+    line-height: 30px;
+    width: 146px;
+    height: 34px;
+    padding: 2px 2px 2px 2px;
+    border-radius: 20px;
+    background-color: rgba(128, 255, 255, 0.36);
+    font-size: 13px;
+}
+
+.timer {
+    display: flex;
+    margin-top: 32px;
+}
+
 .ready {
     background: #0000AA;
     border: none;
@@ -135,6 +163,7 @@ main {
     border-radius: 5px;
     cursor: pointer;
     margin-top: 25px;
+    margin-bottom: 40px;
 }
 
 .ready:disabled {
@@ -196,6 +225,7 @@ main {
     margin-left: -5px;
 }
 
+.selected{}
 
 .selected::before {
     content: "";
