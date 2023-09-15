@@ -5,6 +5,11 @@ function showStatus(statusBad, statusNormal, statusGood) {
     document.querySelector(".status-bad").style.display = statusBad;
     document.querySelector(".status-normal").style.display = statusNormal;
     document.querySelector(".status-good").style.display = statusGood;
+
+    const startButton = document.querySelector(".big-purple-button");
+    if(statusBad === "block") {
+        startButton.setAttribute('disabled', "");
+    }
 }
 
 function checkLoginUnique(login) {
@@ -38,7 +43,11 @@ function checkLoginUnique(login) {
         })
         .then(data => {
             if (!(localStorage.getItem("login") === null) && localStorage.getItem("login") === data.login) {
-                window.location.href = "acc";
+                if(data.status === 0 || data.status=== 1) {
+                    window.location.href = "acc";
+                } else if(data.status === 2) {
+                    window.location.href = "acc/battle";
+                }
             } else if (!data.isUnique) {
                 textStatus.style.visibility = "visible";
                 showStatus("block", "none", "none");
