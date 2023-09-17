@@ -3,6 +3,7 @@ body, head {
     font-family: "Comic Sans MS", "Comic Sans", cursive;
     cursor: url("../../src/u7.svg"), default;
     background: #F8FFFF;
+    user-select: none;
 }
 
 header {
@@ -119,7 +120,7 @@ main {
     margin-left: 25px;
 }
 
-.highlite {
+.highlight {
     width: 184px;
     height: 29px;
     padding: 2px 2px 2px 2px;
@@ -146,8 +147,8 @@ main {
     width: 250px;
     height: 250px;
     position: relative;
-    left: 29px;
-    top: 27px;
+    left: 25px;
+    top: 25px;
 }
 
 .ship {
@@ -157,7 +158,7 @@ main {
 
 .south {
     transform: rotate(90deg);
-    transform-origin: 15px 10px;
+    transform-origin: 12px 12px;
 }
 
 .north {
@@ -167,6 +168,7 @@ main {
 
 .west {
     transform: rotate(180deg);
+    margin-top: -1px;
 }
 
 .fourdeck {
