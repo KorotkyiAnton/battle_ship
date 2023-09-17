@@ -1,0 +1,2 @@
+uncomment <script> in prepare layout
+change path in server to usual server name
