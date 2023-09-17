@@ -473,9 +473,11 @@ const otherElementsToDisable = document.querySelectorAll('.ships, .ship, .rotate
 
 readyButton.addEventListener('click', function () {
     if (!isTimerRunning) {
-        startTimer(timerElement, otherElementsToDisable, readyButton);
+        console.log(isTimerRunning)
+        startTimer(timerElement, otherElementsToDisable, readyButton, human.squadron);
         readyButton.value = 'Відміна гри';
     } else {
+        readyButton.value = 'Готовий';
         stopTimer(timerElement, otherElementsToDisable, readyButton);
     }
 });

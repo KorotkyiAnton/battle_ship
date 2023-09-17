@@ -22,17 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     "game_id" => rand(1, 100),
                     "second_player_login" => $second_player_login,
                     "your_turn" => (bool)rand(0, 1),
-                    "time_for_search" => $i
+                    "time_for_search" => $i,
+                    "ships" => $postData["ships"]
                 ]);
                 break;
             }
             sleep(1);
         }
-        echo json_encode([
-            "messageId" => 9,
-            "messageType" => "usersNotFound",
-            "createDate" => new DateTime()
-        ]);
     } else {
         //SELECT id FROM Games WHERE first_player = user_id
         //UPDATE Games SET second_player = user_id2, first_turn = CASE WHEN first_turn < user_input THEN user_input ELSE first_turn
@@ -43,7 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             "createDate" => new DateTime(),
             "game_id" => rand(1, 100),
             "first_player_login" => $first_player_login,
-            "your_turn" => (bool)rand(0, 1)
+            "your_turn" => (bool)rand(0, 1),
+            "ships" => $postData["ships"]
         ]);
     }
 }

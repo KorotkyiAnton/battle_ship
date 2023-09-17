@@ -13,13 +13,13 @@ header {
     margin-bottom: 10px;
 }
 
-header>div {
-    width: calc(100%/3);
-    min-width: calc(100%/3);
+header > div {
+    width: calc(100% / 3);
+    min-width: calc(100% / 3);
 }
 
 .previous-page, .close {
-    transform: rotate(-90deg) ;
+    transform: rotate(-90deg);
     height: 60%;
     width: auto;
     object-fit: cover;
@@ -33,9 +33,9 @@ header>div {
     color: #0000AA;
     font-style: normal;
     justify-content: center;
-    width: calc(100%/3);
-    min-width: calc(100%/3);
-    max-width: calc(100%/3);
+    width: calc(100% / 3);
+    min-width: calc(100% / 3);
+    max-width: calc(100% / 3);
     cursor: url("../src/u24.svg"), text;
 }
 
@@ -90,12 +90,54 @@ main {
     background: url('./img/bg_play_field.png') no-repeat;
 }
 
+.game-search-spinner {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 25px;
+    top: 25px;
+    width: 250px;
+    height: 250px;
+    background: rgba(51, 51, 51, 0.5);
+    user-select: none;
+    z-index: 2000;
+}
+
+.spinner {
+    display: inline-block;
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.spinner img {
+    width: 100%;
+    height: 100%;
+    animation: moveUpDown 3s ease-in-out infinite;
+}
+
+@keyframes moveUpDown {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    10%, 50% {
+        transform: scaleY(0.85) translateY(97px);
+    }
+    70% {
+        transform: scaleY(0.95) translateY(50px);
+    }
+    30% {
+        transform: scaleY(0.9) translateY(30px);
+    }
+}
+
 .ships {
     width: 250px;
     height: 250px;
     position: relative;
-    left: 29px;
-    top: 27px;
+    left: 25px;
+    top: 25px;
 }
 
 .prepare-field {
@@ -120,7 +162,7 @@ main {
     height: 20px;
 }
 
-.control-panel>img {
+.control-panel > img {
     flex-grow: 1;
 }
 
@@ -182,13 +224,13 @@ main {
     height: 74px;
 }
 
-.rotate>span, .random>span {
+.rotate > span, .random > span {
     margin-top: 5px;
     font-size: 10px;
     color: #6D70CF;
 }
 
-.rotate>img, .random>img {
+.rotate > img, .random > img {
     border-radius: 5px;
     object-fit: cover;
     padding: 5px;
@@ -215,37 +257,46 @@ main {
     align-items: center;
 }
 
-.clear-field>img {
+.clear-field > img {
     margin-left: 5px;
 }
 
 .ship {
     height: 25px;
     position: absolute;
-    margin-left: -5px;
 }
 
-.selected{}
+.selected {
+}
 
-.selected::before {
+.ship:active::after {
     content: "";
     position: absolute;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, transparent 0%, rgba(10, 167, 210, 0.5) 10%, transparent 60%);
+    background: linear-gradient(to bottom, #0072ff, #00c6ff, #00ffcc);
     border-radius: 50%;
     transform: scale(0);
-    transition: transform 0.05s ease-in-out;
+    opacity: 0;
+    animation: ripple 0.4s linear;
     pointer-events: none;
+    z-index: 0;
 }
 
-.selected:active::before {
-    transform: scale(2);
+@keyframes ripple {
+    0% {
+        transform: scale(1.2);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
 }
 
 .south {
     transform: rotate(90deg);
-    transform-origin: 15px 10px;
+    transform-origin: 12px 12px;
 }
 
 .north {
@@ -255,6 +306,7 @@ main {
 
 .west {
     transform: rotate(180deg);
+    margin-top: -1px;
 }
 
 .fourdeck {
