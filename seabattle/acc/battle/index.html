@@ -38,11 +38,11 @@
     </div>
     <div class="player-nick">
         <div>
-            <div>Хід</div>
+            <div class="mine-turn">Хід</div>
             <span class="highlight mine-nick">nickName</span>
         </div>
         <div>
-            <div>Хід</div>
+            <div class="opponent-turn"></div>
             <span class="opponent-nick">nickName</span>
         </div>
     </div>
@@ -51,6 +51,11 @@
             <div class="ships"></div>
         </div>
         <div class="field opponent-field">
+            <div class="game-search-spinner" style="visibility: hidden">
+                <div class="spinner">
+                    <img src="../img/anchor.png" alt="Якорь">
+                </div>
+            </div>
             <div class="ships"></div>
         </div>
     </div>
@@ -58,5 +63,5 @@
 </body>
 <script src="battle.js" type="module"></script>
 <script src="connectionWithDB.js" type="module"></script>
-<!--<script src="handler.js" type="module"></script>-->
+<script src="handler.js" type="module"></script>
 </html>
