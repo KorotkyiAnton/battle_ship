@@ -67,23 +67,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         )
     );
 
-    function checkIsHit($ships, $shot)
+    function checkIsHit($ships, $shot): int
     {
         $isHit = 0;
         foreach ($ships as $ship) {
-            if(in_array($shot, $ship["coords"])) {
+            if (in_array($shot, $ship["coords"])) {
                 $isHit = 1;
             }
+            $isHit = $shot === "h9"? 2: $isHit;
         }
         return $isHit;
     }
 
-    if($postData["messageType"] === "shotRequest") {
-        echo json_encode([
-            "messageId" => 11,
-            "messageType" => "shotResponse",
-            "createDate" => new DateTime(),
-            "response" => checkIsHit($fieldWithShips, $postData["request"])
-        ]);
+    function calculateCoordinate($turn): string
+    {
+        $letters = range('a', 'j');
+        $numbers = range(1, 10);
+
+        $letterIndex = ($turn - 1) % count($letters);
+        $numberIndex = floor(($turn - 1) / count($letters)) % count($numbers);
+
+        $letter = $letters[$letterIndex];
+        $number = $numbers[$numberIndex];
+
+        return $letter . $number;
+    }
+
+    if ($postData["messageType"] === "shotRequest") {
+        if ($postData["request"] !== 0) {
+            echo json_encode([
+                "messageId" => 11,
+                "messageType" => "shotResponse",
+                "createDate" => new DateTime(),
+                "response" => checkIsHit($fieldWithShips, $postData["request"])
+            ]);
+        } else {
+            sleep(2);
+            echo json_encode([
+                "messageId" => 11,
+                "messageType" => "shotRequest",
+                "createDate" => new DateTime(),
+                "request" => calculateCoordinate($postData["turn"])
+            ]);
+        }
+    } else if ($postData["messageType"] === "shotResponse" && $postData["response"] === 1) {
+        echo json_encode("opponent hit ".$postData["coordinate"]);
+    } else if ($postData["messageType"] === "shotResponse" && $postData["response"] === 0) {
+        echo json_encode("opponent miss ".$postData["coordinate"]);
     }
 }
