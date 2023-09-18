@@ -1,4 +1,4 @@
-import {sendSquadron, isTimerRunning, startTimer, stopTimer, requestToDB} from "./connectionWithDB.js";
+import {sendSquadron, isTimerRunning, startTimer, stopTimer, requestToDB} from "./prepareConnection.js";
 
 let isHandlerPlacement = false;
 
@@ -100,6 +100,7 @@ class Field {
         else if (y < 9 && ky === 0) toY = y + 2;
 
         if (toX === undefined || toY === undefined || fromX < 0 || fromY < 0) return false;
+        console.log(String.fromCharCode(fromY + 97) + (fromX + 1), toX, String.fromCharCode(toY + 96))
 
         return this.matrix.slice(fromX, toX)
             .filter(arr => arr.slice(fromY, toY).includes(1))
@@ -200,6 +201,15 @@ class Placement {
     }
 
     onMouseDown(e) {
+        if(e.target.tagName === "DIV") {
+            const ships = document.querySelectorAll('.ships .ship');
+
+            // Удалить класс 'selected' у всех кораблей
+            ships.forEach(ship => {
+                ship.classList.remove('selected');
+            });
+        }
+
         //if (e.which !== 1 || startGame) return;
 
         const el = e.target.closest('.ship');

@@ -129,7 +129,7 @@ window.onload = function () {
         timeout = setTimeout(function () {
                 validateLogin(nicknameInput.value.trim());
             },
-            1000);
+            500);
     };
     nicknameInput.onchange = () => {
         validateLogin(nicknameInput.value.trim());
