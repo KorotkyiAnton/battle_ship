@@ -60,9 +60,11 @@ main {
     line-height: normal;
     font-size: 18px;
     margin-top: 47px;
+    cursor: url("../src/u24.svg"), text;
 }
 
 .nickname {
+    cursor: url("../src/u24.svg"), text;
     margin-bottom: 41px;
     font-size: 13px;
     color: #0000aa;
@@ -88,6 +90,7 @@ main {
     flex-shrink: 0;
     position: relative;
     background: url('./img/bg_play_field.png') no-repeat;
+    cursor: url("../src/u24.svg"), text;
 }
 
 .game-search-spinner {
@@ -138,6 +141,7 @@ main {
     position: relative;
     left: 25px;
     top: 25px;
+    cursor: url("../src/u7.svg"), default;
 }
 
 .prepare-field {
@@ -224,6 +228,10 @@ main {
     height: 74px;
 }
 
+.rotate:active, .random:active {
+    scale: 0.9;
+}
+
 .rotate > span, .random > span {
     margin-top: 5px;
     font-size: 10px;
@@ -255,6 +263,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .clear-field > img {
@@ -264,9 +273,11 @@ main {
 .ship {
     height: 25px;
     position: absolute;
+    cursor: pointer;
 }
 
 .selected {
+    box-shadow: 0 0 10px #0072ff;
 }
 
 .ship:active::after {
@@ -274,7 +285,7 @@ main {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, #0072ff, #00c6ff, #00ffcc);
+    background: #0072ff;
     border-radius: 50%;
     transform: scale(0);
     opacity: 0;
@@ -289,7 +300,7 @@ main {
         opacity: 0.5;
     }
     100% {
-        transform: scale(1.5);
+        transform: scale(1.3);
         opacity: 0;
     }
 }
@@ -394,7 +405,6 @@ main {
     left: 0;
     top: 0;
     float: left;
-    cursor: move;
 }
 
 .initial-ships .tripledeck2 {

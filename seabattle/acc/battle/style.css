@@ -13,13 +13,13 @@ header {
     margin-bottom: 10px;
 }
 
-header>div {
-    width: calc(100%/3);
-    min-width: calc(100%/3);
+header > div {
+    width: calc(100% / 3);
+    min-width: calc(100% / 3);
 }
 
 .previous-page, .close {
-    transform: rotate(-90deg) ;
+    transform: rotate(-90deg);
     height: 60%;
     width: auto;
     object-fit: cover;
@@ -33,9 +33,9 @@ header>div {
     color: #0000AA;
     font-style: normal;
     justify-content: center;
-    width: calc(100%/3);
-    min-width: calc(100%/3);
-    max-width: calc(100%/3);
+    width: calc(100% / 3);
+    min-width: calc(100% / 3);
+    max-width: calc(100% / 3);
     cursor: url("../../src/u24.svg"), text;
 }
 
@@ -66,7 +66,7 @@ main {
     display: flex;
 }
 
-.time-to-turn>span {
+.time-to-turn > span {
     font-size: 18px;
 }
 
@@ -111,6 +111,10 @@ main {
     text-align: center;
 }
 
+.mine-turn, .opponent-turn {
+    height: 18px;
+}
+
 .player-nick span {
     margin-top: 7px;
     margin-bottom: 14px;
@@ -126,6 +130,48 @@ main {
     padding: 2px 2px 2px 2px;
     border-radius: 20px;
     background-color: rgba(149, 242, 4, 0.27);
+}
+
+.game-search-spinner {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 25px;
+    top: 25px;
+    width: 250px;
+    height: 250px;
+    background: rgba(51, 51, 51, 0.5);
+    user-select: none;
+    z-index: 3000;
+}
+
+.spinner {
+    display: inline-block;
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.spinner img {
+    width: 100%;
+    height: 100%;
+    animation: moveUpDown 3s ease-in-out infinite;
+}
+
+@keyframes moveUpDown {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    10%, 50% {
+        transform: scaleY(0.85) translateY(97px);
+    }
+    70% {
+        transform: scaleY(0.95) translateY(50px);
+    }
+    30% {
+        transform: scaleY(0.9) translateY(30px);
+    }
 }
 
 .battle-fields {
@@ -190,6 +236,22 @@ main {
 .singledeck {
     width: 25px;
     background: url("../img/s1.png") no-repeat;
+}
+
+.hit {
+    background: url("./img/hit.png");
+    position: absolute;
+    z-index: 2000;
+    width: 25px;
+    height: 25px;
+}
+
+.miss {
+    background: url("./img/miss.png");
+    position: absolute;
+    z-index: 2000;
+    width: 25px;
+    height: 25px;
 }
 
 
