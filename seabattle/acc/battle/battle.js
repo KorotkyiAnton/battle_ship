@@ -1,5 +1,5 @@
 export function placeShipsOnField(shipData) {
-    let mineField = document.querySelector('.mine-field');
+    let mineField = document.querySelector('.mine-field .ships');
     for (let shipId in shipData) {
         if (shipId !== 'messageId' && shipId !== 'messageType' && shipId !== 'createDate') {
             let shipInfo = shipData[shipId];
@@ -19,18 +19,20 @@ export function placeShipsOnField(shipData) {
             shipElement.classList.add(shipId);
 
             // Устанавливаем координаты и ориентацию корабля
-            shipElement.style.top = (shipInfo.shipStart.slice(1) * 25).toString() + "px";
-            shipElement.style.left = (((shipInfo.shipStart[0]).charCodeAt(0) - 96) * 25).toString() + "px";
+            shipElement.style.top = ((parseInt(shipInfo.shipStart.slice(1))-1) * 25).toString() + "px";
+            shipElement.style.left = (((shipInfo.shipStart[0]).charCodeAt(0) - 97) * 25).toString() + "px";
             //console.log(shipInfo.orientation)
-            if (shipInfo.orientation === 'west') {
-                shipElement.classList.add('west');
-            } else if (shipInfo.orientation === 'east') {
-                shipElement.classList.add('east');
-            } else if (shipInfo.orientation === 'north') {
-                shipElement.classList.add('north');
-            } else if (shipInfo.orientation === 'south') {
-                shipElement.classList.add('south');
+            if (shipInfo.orientation === 'left') {
+                shipElement.classList.add('left');
+            } else if (shipInfo.orientation === 'right') {
+                shipElement.classList.add('right');
+            } else if (shipInfo.orientation === 'up') {
+                shipElement.classList.add('up');
+                shipElement.style.top = ((parseInt(shipInfo.shipStart.slice(1))) * 25).toString() + "px";
+            } else if (shipInfo.orientation === 'down') {
+                shipElement.classList.add('down');
             }
+            console.log(shipElement.style.top)
 
             // Добавляем корабль на поле mine-field
             mineField.appendChild(shipElement);
