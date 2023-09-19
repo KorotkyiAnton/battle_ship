@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (in_array($shot, $ship["coords"])) {
                 $isHit = 1;
             }
-            $isHit = $shot === "h9"? 2: $isHit;
+            $isHit = $shot === "h9" || $shot === "g5" || $shot === "g7" || $shot === "d2" || $shot === "i3" ? 2 : $isHit;
         }
         return $isHit;
     }
@@ -95,12 +95,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($postData["messageType"] === "shotRequest") {
         if ($postData["request"] !== 0) {
-            echo json_encode([
-                "messageId" => 11,
-                "messageType" => "shotResponse",
-                "createDate" => new DateTime(),
-                "response" => checkIsHit($fieldWithShips, $postData["request"])
-            ]);
+            if ($postData["request"] === "h9") {
+                echo json_encode([
+                    "messageId" => 11,
+                    "messageType" => "shotResponse",
+                    "createDate" => new DateTime(),
+                    "response" => checkIsHit($fieldWithShips, $postData["request"]),
+                    "ships" => ["f9", "g9", "h9"]
+                ]);
+            } else if ($postData["request"] === "g5") {
+                echo json_encode([
+                    "messageId" => 11,
+                    "messageType" => "shotResponse",
+                    "createDate" => new DateTime(),
+                    "response" => checkIsHit($fieldWithShips, $postData["request"]),
+                    "ships" => ["g5"]
+                ]);
+            } else if ($postData["request"] === "g7") {
+                echo json_encode([
+                    "messageId" => 11,
+                    "messageType" => "shotResponse",
+                    "createDate" => new DateTime(),
+                    "response" => checkIsHit($fieldWithShips, $postData["request"]),
+                    "ships" => ["g7"]
+                ]);
+            } else if ($postData["request"] === "d2") {
+                echo json_encode([
+                    "messageId" => 11,
+                    "messageType" => "shotResponse",
+                    "createDate" => new DateTime(),
+                    "response" => checkIsHit($fieldWithShips, $postData["request"]),
+                    "ships" => ["d2"]
+                ]);
+            } else if ($postData["request"] === "i3") {
+                echo json_encode([
+                    "messageId" => 11,
+                    "messageType" => "shotResponse",
+                    "createDate" => new DateTime(),
+                    "response" => checkIsHit($fieldWithShips, $postData["request"]),
+                    "ships" => ["i3"]
+                ]);
+            } else {
+                echo json_encode([
+                    "messageId" => 11,
+                    "messageType" => "shotResponse",
+                    "createDate" => new DateTime(),
+                    "response" => checkIsHit($fieldWithShips, $postData["request"])
+                ]);
+            }
         } else {
             sleep(2);
             echo json_encode([
@@ -111,8 +153,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ]);
         }
     } else if ($postData["messageType"] === "shotResponse" && $postData["response"] === 1) {
-        echo json_encode("opponent hit ".$postData["coordinate"]);
+        echo json_encode("opponent hit " . $postData["coordinate"]);
     } else if ($postData["messageType"] === "shotResponse" && $postData["response"] === 0) {
-        echo json_encode("opponent miss ".$postData["coordinate"]);
+        echo json_encode("opponent miss " . $postData["coordinate"]);
     }
 }
