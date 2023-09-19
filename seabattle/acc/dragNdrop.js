@@ -62,6 +62,12 @@ class Field {
                 ship.createShip();
             }
         }
+        const ships = document.querySelectorAll('.ships .ship');
+
+        // Удалить класс 'selected' у всех кораблей
+        ships.forEach(ship => {
+            ship.classList.remove('selected');
+        });
     }
 
     getCoordsDecks(decks) {
@@ -100,7 +106,6 @@ class Field {
         else if (y < 9 && ky === 0) toY = y + 2;
 
         if (toX === undefined || toY === undefined || fromX < 0 || fromY < 0) return false;
-        console.log(String.fromCharCode(fromY + 97) + (fromX + 1), toX, String.fromCharCode(toY + 96))
 
         return this.matrix.slice(fromX, toX)
             .filter(arr => arr.slice(fromY, toY).includes(1))
@@ -136,12 +141,12 @@ class Ships {
 
         // Добавляем классы для сторон поворота корабля
         if (kx === -1 && ky === 0) {
-            dirClass = ' north';
+            dirClass = ' up';
             x += length - 1;
         } else if (kx === 0 && ky === -1) {
-            dirClass = ' west';
+            dirClass = ' left';
         } else if (kx === 1 && ky === 0) {
-            dirClass = ' south';
+            dirClass = ' down';
         }
 
         div.setAttribute('id', shipname);
@@ -201,7 +206,7 @@ class Placement {
     }
 
     onMouseDown(e) {
-        if(e.target.tagName === "DIV") {
+        if (e.target.tagName === "DIV") {
             const ships = document.querySelectorAll('.ships .ship');
 
             // Удалить класс 'selected' у всех кораблей
@@ -215,7 +220,9 @@ class Placement {
         const el = e.target.closest('.ship');
 
         if (!el) return;
-        el.classList.add("selected");
+        if(el.parentElement.classList.contains("ships")) {
+            el.classList.add("selected");
+        }
 
         this.pressed = true;
 
@@ -299,6 +306,7 @@ class Placement {
 
     rotationShip(e, el) {
         const name = Placement.getShipName(el);
+        if(name===null) return;
 
         if (human.squadron[name].decks === 1) return;
         const decks = human.squadron[name].arrDecks.length;
@@ -404,6 +412,13 @@ class Placement {
             decks: this.decks
         };
 
+        let result = human.checkLocationShip(options, options.decks);
+
+        if(!result) {
+            options.x = this.dragObject.top/25;
+            options.y = this.dragObject.left/25;
+        }
+
         const ship = new Ships(human, options);
         ship.createShip();
         humanfield.removeChild(this.clone);
@@ -458,6 +473,10 @@ window.addEventListener("load", function () {
     placement.setObserver();
 })
 
+document.querySelector(".mine-field .ships").addEventListener("dblclick", e => {
+    e.preventDefault()
+})
+
 document.querySelector(".random").addEventListener('click', function (e) {
     human.cleanField();
 
@@ -471,7 +490,6 @@ document.querySelector(".random").addEventListener('click', function (e) {
 document.querySelector(".rotate").addEventListener('click', function (e) {
     const placement = new Placement();
     const selectedShip = document.querySelector(".selected");
-    console.log(selectedShip)
 
     placement.rotationShip(e, selectedShip);
     placement.setObserver();
@@ -483,7 +501,6 @@ const otherElementsToDisable = document.querySelectorAll('.ships, .ship, .rotate
 
 readyButton.addEventListener('click', function () {
     if (!isTimerRunning) {
-        console.log(isTimerRunning)
         startTimer(timerElement, otherElementsToDisable, readyButton, human.squadron);
         readyButton.value = 'Відміна гри';
     } else {

@@ -10,13 +10,13 @@ export function sendSquadron(squadron) {
         const shipStart = coords[0];
         let orientation = "";
         if (ship.kx === -1) {
-            orientation = "north";
+            orientation = "up";
         } else if (ship.kx === 1) {
-            orientation = "south";
+            orientation = "down";
         } else if (ship.ky === -1) {
-            orientation = "west";
+            orientation = "left";
         } else if (ship.ky === 1) {
-            orientation = "east";
+            orientation = "right";
         }
 
         outputObj[key] = {
@@ -51,6 +51,7 @@ export function startTimer(timerElement, otherElementsToDisable, readyButton, sq
         if (data.messageType === "gameCreateInfo" || data.messageType === "gameConnectInfo") {
             localStorage.setItem("gameInfo", JSON.stringify(data));
             window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/seabattle/acc/battle";
+            document.querySelector(".in-game").style.visibility = "visible";
         }
     });
 
@@ -100,18 +101,6 @@ export async function requestToDB(url, requestData, recursion = false) {
         body: requestBody
     };
 
-    if (recursion) {
-        setTimeout(await requestToDB(url, requestData, false).then(async data => {
-            turnCounter++;
-            console.log(data)
-            let shipsCoordinates = localStorage.getItem("shipCoords");
-            if (checkCoordinateInJSON(shipsCoordinates, data.request)) {
-                turnCounter++;
-                setTimeout(await requestToDB(url, requestData, true), 1000);
-            }
-        }), 1000);
-    }
-
     return fetch(url, requestOptions)
         .then(response => {
             if (!response.ok) {
@@ -120,7 +109,6 @@ export async function requestToDB(url, requestData, recursion = false) {
             return response.json();
         })
         .catch(error => {
-            console.error("Произошла ошибка:", error);
             throw error;
         });
 }
