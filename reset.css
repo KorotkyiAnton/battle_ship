@@ -66,3 +66,17 @@ select {
         scroll-behavior: auto !important;
     }
 }
+
+.err {
+    font-family: "Arial", sans-serif;
+    display: flex;
+    flex-direction: column;
+    font-size: 130px;
+    justify-content: center;
+    align-items: center;
+    color:  #333333;
+}
+
+.err p:last-child {
+    font-size: 36px;
+}
