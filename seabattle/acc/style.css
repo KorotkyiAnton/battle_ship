@@ -19,6 +19,7 @@ header > div {
 }
 
 .previous-page, .close {
+    cursor: pointer;
     transform: rotate(-90deg);
     height: 60%;
     width: auto;
@@ -51,6 +52,34 @@ main {
     align-items: center;
     min-height: 90vh;
     height: 90vh;
+}
+
+.in-game{
+    position: absolute;
+    color: white;
+    font-size: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(51, 51, 51, 1);
+    z-index: 10000;
+}
+
+.dot {
+    opacity: 0;
+    animation: fadeInOut 1.5s linear infinite;
+}
+
+@keyframes fadeInOut {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
 }
 
 .place-ships {
@@ -280,7 +309,7 @@ main {
     box-shadow: 0 0 10px #0072ff;
 }
 
-.ship:active::after {
+.ships .ship:active::after {
     content: "";
     position: absolute;
     width: 100%;
@@ -305,17 +334,17 @@ main {
     }
 }
 
-.south {
+.down {
     transform: rotate(90deg);
     transform-origin: 12px 12px;
 }
 
-.north {
+.up {
     transform: rotate(-90deg);
     transform-origin: 11px 12px;
 }
 
-.west {
+.left {
     transform: rotate(180deg);
     margin-top: -1px;
 }
@@ -327,15 +356,11 @@ main {
 }
 
 .fourdeck.success {
-    width: 104px;
-    height: 29px;
-    background: url("./img/s4-val.png") no-repeat;
+    box-shadow: 0 0 10px darkgreen;
 }
 
 .fourdeck.unsuccess {
-    width: 104px;
-    height: 29px;
-    background: url("./img/s4-err.png") no-repeat;
+    box-shadow: 0 0 10px darkred;
 }
 
 .tripledeck {
@@ -344,15 +369,11 @@ main {
 }
 
 .tripledeck.success {
-    width: 79px;
-    height: 29px;
-    background: url("./img/s3-val.png") no-repeat;
+    box-shadow: 0 0 10px darkgreen;
 }
 
 .tripledeck.unsuccess {
-    width: 79px;
-    height: 29px;
-    background: url("./img/s3-err.png") no-repeat;
+    box-shadow: 0 0 10px darkred;
 }
 
 .doubledeck {
@@ -361,15 +382,11 @@ main {
 }
 
 .doubledeck.success {
-    width: 54px;
-    height: 29px;
-    background: url("./img/s2-val.png") no-repeat;
+    box-shadow: 0 0 10px darkgreen;
 }
 
 .doubledeck.unsuccess {
-    width: 54px;
-    height: 29px;
-    background: url("./img/s2-err.png") no-repeat;
+    box-shadow: 0 0 10px darkred;
 }
 
 .singledeck {
@@ -378,15 +395,11 @@ main {
 }
 
 .singledeck.success {
-    width: 28px;
-    height: 28px;
-    background: url("./img/s1-val.png") no-repeat;
+    box-shadow: 0 0 10px darkgreen;
 }
 
 .singledeck.unsuccess {
-    width: 28px;
-    height: 28px;
-    background: url("./img/s1-err.png") no-repeat;
+    box-shadow: 0 0 10px darkred;
 }
 
 .initial-ships li {
