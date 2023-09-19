@@ -17,8 +17,47 @@
     </div>
     <img src="../../src/u166.svg" alt="" class="close">
 </header>
-
 <main>
+    <div class="u-lose" style="visibility: hidden">
+        <div class="loc-nick">
+            anton23,
+        </div>
+        <div>
+            Ви програли!
+        </div>
+    </div>
+    <div class="u-win" style="visibility: hidden">
+        <div class="loc-nick">
+            anton23,
+        </div>
+        <div>
+            Ви перемогли!
+        </div>
+    </div>
+    <div class="message-box" style="visibility: hidden">
+        <p>Зв'язок з сервером втрачено.</p>
+        <p>Спроба повторного підключення...</p>
+        <div class="spinner"></div>
+    </div>
+    <div class="message-box" style="visibility: hidden">
+        <p>У Гравця втрачено зв'язок з сервером.</p>
+        <p>Спроба повторного підключення...</p>
+        <div class="spinner"></div>
+    </div>
+    <div class="message-box" style="visibility: hidden">
+        <p>Ваш Суперник вийшов з гри.</p>
+        <p>Ви автоматично перемагаєте!</p>
+    </div>
+    <div class="overlay" id="confirmationOverlay">
+        <div class="confirmation-box">
+            <p>Ви впевнені, що хочете перервати гру?</p>
+            <p>(Ви автоматично програєте)</p>
+            <div>
+                <button id="confirmButton">Так</button>
+                <button id="cancelButton">Ні</button>
+            </div>
+        </div>
+    </div>
     <div class="time-to-turn">
         <div>
             <img src="img/u314.svg" alt="">
@@ -52,13 +91,15 @@
         </div>
         <div class="field opponent-field">
             <div class="game-search-spinner" style="visibility: hidden">
-                <div class="spinner">
+                <div class="spinner-anc">
                     <img src="../img/anchor.png" alt="Якорь">
                 </div>
             </div>
             <div class="ships"></div>
         </div>
     </div>
+    <div class="exit-after-game" style="visibility: hidden">Вийти в головне меню</div>
+    <div class="play-again" style="visibility: hidden">Грати ще</div>
 </main>
 </body>
 <script src="battle.js" type="module"></script>
