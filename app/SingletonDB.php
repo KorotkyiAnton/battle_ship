@@ -10,10 +10,10 @@ class SingletonDB
     private static ?SingletonDB $instance = null;
     private PDO $pdo;
 
-    private string $host = '10.10.1.133';
+    private string $host = '127.0.0.1'; //10.10.1.133
     private string $db = 'study';
-    private string $user = 'a.korotkyi';
-    private string $pass = 'HY&er98f';
+    private string $user = 'root'; //a.korotkyi
+    private string $pass = ''; //HY&er98f
     private string $charset = 'utf8';
 
     // Private constructor to prevent direct instantiation
@@ -47,5 +47,5 @@ class SingletonDB
     private function __clone() {}
 
     // Prevent serialization of the object
-    private function __wakeup() {}
+    public function __wakeup() {}
 }
