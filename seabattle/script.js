@@ -7,7 +7,7 @@ function showStatus(statusBad, statusNormal, statusGood) {
     document.querySelector(".status-good").style.display = statusGood;
 
     const startButton = document.querySelector(".big-purple-button");
-    if(statusBad === "block") {
+    if(statusBad === "block" || statusNormal === "block") {
         startButton.setAttribute('disabled', "");
     }
 }
