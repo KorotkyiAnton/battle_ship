@@ -57,4 +57,19 @@ class Controller
     {
         return $this->model->getUserStatusFromQueues($login);
     }
+
+    public function updateUserStatusInQueues($login): bool
+    {
+        return $this->model->updateUserStatusInQueues($login);
+    }
+
+    public function findUsersThatSearchForGame($login): int
+    {
+        return $this->model->getUserIdWhereStatusInSearch($login);
+    }
+
+    public function createNewGame($login)
+    {
+        $this->model->createNewGameInGames($login);
+    }
 }

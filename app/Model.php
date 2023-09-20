@@ -14,37 +14,12 @@ class Model
         $this->db = SingletonDB::getInstance();
     }
 
-    public function createRecord($tableName, $data)
-    {
-        // Реализация создания записи в таблице
-        // $tableName - имя таблицы
-        // $data - ассоциативный массив с данными для вставки
-        // Возвращает true в случае успеха или false в случае ошибки
-    }
-
     public function isLoginUnique($param): bool
     {
         $connection = $this->db->getConnection();
         $statement = $connection->prepare("SELECT COUNT(LOWER(login)) 'login'  FROM Users  WHERE login = LOWER(?)");
         $statement->execute([$param]);
         return !($statement->fetchAll()[0]["login"]);
-    }
-
-    public function updateRecord($tableName, $id, $data)
-    {
-        // Реализация обновления записи в таблице по ID
-        // $tableName - имя таблицы
-        // $id - идентификатор записи
-        // $data - ассоциативный массив с данными для обновления
-        // Возвращает true в случае успеха или false в случае ошибки
-    }
-
-    public function deleteRecord($tableName, $id)
-    {
-        // Реализация удаления записи из таблицы по ID
-        // $tableName - имя таблицы
-        // $id - идентификатор записи
-        // Возвращает true в случае успеха или false в случае ошибки
     }
 
     public function addLoginToDB($login): bool
@@ -62,13 +37,15 @@ class Model
     {
         $connection = $this->db->getConnection();
         $statement = $connection->prepare(
-            "SELECT id FROM Users WHERE LOWER(Users.login) = LOWER(?)"
+            "SELECT id, is_online FROM Users WHERE LOWER(Users.login) = LOWER(?)"
         );
         $statement->execute([$login]);
-        $userId = $statement->fetchAll()[0]["id"];
-        $userStatus = "";
+        $fetchData = $statement->fetchAll();
+        $userId = $fetchData[0]["id"];
+        $isOnline = $fetchData[0]["is_online"];
+        $userStatus = 0;
 
-        if(!is_null($userId)) {
+        if(!is_null($userId) && !$isOnline) {
             $statement = $connection->prepare(
                 "SELECT status FROM Queues WHERE user_id = ?"
             );
@@ -81,5 +58,29 @@ class Model
         }
 
         return intval($userStatus);
+    }
+
+    public function updateUserStatusInQueues($login): bool
+    {
+        $connection = $this->db->getConnection();
+        $statement = $connection->prepare("UPDATE Queues SET status = 1 WHERE user_id = (SELECT id FROM Users WHERE LOWER(Users.login) = LOWER(?))");
+        return $statement->execute([$login]);
+    }
+
+    public function getUserIdWhereStatusInSearch($login): int
+    {
+        $connection = $this->db->getConnection();
+        $statement = $connection->prepare(
+            "SELECT id  FROM Queues  WHERE status = 1 AND 
+                              user_id = (SELECT id FROM Users WHERE NOT LOWER(Users.login) = LOWER(?) LIMIT 1)");
+        $statement->execute([$login]);
+        return intval($statement->fetchAll()[0]["id"]);
+    }
+
+    public function createNewGameInGames($login)
+    {
+        $connection = $this->db->getConnection();
+        $statement = $connection->prepare("INSERT INTO Games (first_player, first_turn) VALUES (?, 52)");
+        return $statement->execute([$login]);
     }
 }
