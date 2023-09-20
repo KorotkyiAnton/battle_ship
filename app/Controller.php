@@ -1,7 +1,7 @@
 <?php
 
 namespace app;
-require_once __DIR__."/Model.php";
+require_once __DIR__ . "/Model.php";
 
 class Controller
 {
@@ -13,43 +13,48 @@ class Controller
         $this->model = new Model();
     }
 
-    public function validateLogin($login): bool
+    public function validateLogin($login): string
     {
-        $isError = false;
+        $errorMsg = "";
 
         // Проверка длины логина
         if (strlen($login) < 3 || strlen($login) > 10) {
-            $isError = true;
+            $errorMsg .= "Нажаль, помилка - дозволена довжина нікнейму від 3 до 10 символів;<br>";
         }
 
         // Проверка символов логина
         if (!preg_match("/^[0-9А-яA-Za-zЁёЇїІіЄєҐґ\-\'_]+$/", $login)) {
-            $isError = true;
+            $errorMsg .= "На жаль, помилка - нікнейм може містити літери (zZ-яЯ),цифри (0-9), спецсимволи (Word space, -, ', _);<br>";
         }
 
         // Проверка начального символа
         if (!preg_match("/^[0-9А-яA-Za-zЁёЇїІіЄєҐґ]/", $login[0])) {
-            $isError = true;
+            $errorMsg .= "Нікнейм повинен починатися з літер чи цифр;";
         }
 
         // Проверка конечного символа
         if (!preg_match("/^[0-9А-яA-Za-zЁёЇїІіЄєҐґ]$/", $login[strlen($login) - 1])) {
-            $isError = true;
+            $errorMsg .= "Нікнейм повинен закінчуватися на літеру чи цифру;<br>";
         }
 
-        if(!$this->checkUnique($login)) {
-            $isError = true;
+        if (!$this->checkUnique($login)) {
+            $errorMsg .= "На жаль, помилка - данний нікнейм вже зайнятий, спробуйте інший.<br>";
         }
 
-        if(!$isError) {
+        if ($errorMsg === "") {
             $this->model->addLoginToDB($login);
         }
 
-        return $isError;
+        return $errorMsg;
     }
 
     private function checkUnique($login): bool
     {
         return $this->model->isLoginUnique($login);
+    }
+
+    public function checkUserStatusOnQueue($login): int
+    {
+        return $this->model->getUserStatusFromQueues($login);
     }
 }

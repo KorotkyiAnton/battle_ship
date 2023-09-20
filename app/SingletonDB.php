@@ -10,21 +10,21 @@ class SingletonDB
     private static ?SingletonDB $instance = null;
     private PDO $pdo;
 
-    private string $host = '127.0.0.1'; //10.10.1.133
-    private string $db = 'study';
-    private string $user = 'root'; //a.korotkyi
-    private string $pass = ''; //HY&er98f
-    private string $charset = 'utf8';
-
     // Private constructor to prevent direct instantiation
     private function __construct() {
+        $host = $_ENV['DB_HOST'];
+        $db = $_ENV['DB_NAME'];
+        $user = $_ENV['DB_USER'];
+        $pass = $_ENV['DB_PASS'];
+        $charset = $_ENV['DB_CHARSET'];
+
         try {
-            $dsn = "mysql:host={$this->host};dbname={$this->db};charset={$this->charset}";
-            $this->pdo = new PDO($dsn, $this->user, $this->pass);
+            $dsn = "mysql:host={$host};dbname={$db};charset={$charset}";
+            $this->pdo = new PDO($dsn, $user, $pass);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             // Handle database connection error here
-            die("Database connection failed: " . $e->getMessage());
+            die(json_encode("Database connection failed: " . $e->getMessage()));
         }
     }
 

@@ -1,7 +1,7 @@
 <?php
 
 namespace app;
-require_once __DIR__."/SingletonDB.php";
+require_once __DIR__ . "/SingletonDB.php";
 
 class Model
 {
@@ -56,5 +56,30 @@ class Model
         $connection = $this->db->getConnection();
         $statement = $connection->prepare("INSERT INTO Users (login, is_online, last_update) VALUES (?, ?, ?)");
         return $statement->execute([$login, $isOnline, $lastUpdate]);
+    }
+
+    public function getUserStatusFromQueues($login): int
+    {
+        $connection = $this->db->getConnection();
+        $statement = $connection->prepare(
+            "SELECT id FROM Users WHERE LOWER(Users.login) = LOWER(?)"
+        );
+        $statement->execute([$login]);
+        $userId = $statement->fetchAll()[0]["id"];
+        $userStatus = "";
+
+        if(!is_null($userId)) {
+            $statement = $connection->prepare(
+                "SELECT status FROM Queues WHERE user_id = ?"
+            );
+            $statement->execute([$userId]);
+            $userStatus = $statement->fetchAll()[0]["status"];
+            if (is_null($userStatus)) {
+                $statement = $connection->prepare("INSERT INTO Queues (user_id, status) VALUES (?, ?)");
+                $statement->execute([$userId, 0]);
+            }
+        }
+
+        return intval($userStatus);
     }
 }
