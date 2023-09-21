@@ -4,6 +4,7 @@ use Dotenv\Dotenv;
 
 require_once __DIR__ . "/app/Controller.php";
 require_once __DIR__ . "/app/Model.php";
+require_once __DIR__ . "/app/Logger.php";
 require_once __DIR__ . "/vendor/autoload.php";
 
 header('Content-Type: application/json; charset=utf-8');
@@ -13,15 +14,17 @@ $dotenv = Dotenv::createImmutable(__DIR__); // Adjust the path accordingly
 $dotenv->load();
 
 $controller = new \app\Controller();
-$model = new \app\Model();
+$logger = new \app\Logger();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $postData = json_decode(file_get_contents('php://input'), true);
     if (isset($postData["login"]) && $postData["messageType"] === "isLoginUnique") {
         $validationResult = "";
         $validationResult = $controller->validateLogin($postData["login"]);
+        $logger->log("User {$postData["login"]} validate login in server with result: $validationResult");
         $status = 0;
         $status = $controller->checkUserStatusOnQueue($postData["login"]);
+        $logger->log("User {$postData["login"]} check if he reconnect to game. Now user status in Queue is: $status");
 
         echo json_encode([
             'messageId' => 5,
@@ -35,18 +38,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     else if (isset($postData["messageType"]) && $postData["messageType"] === "requestIsUsersInQueue") {
         $userStatusInSearch = $controller->updateUserStatusInQueues($postData["login"], 1);
+        $logger->log("User {$postData["login"]} stand in Queue with status $userStatusInSearch");
         $userIdInSearch = $controller->findUsersThatSearchForGame($postData["login"]);
         $randNumber = rand(1, 100);
+        $logger->log("User {$postData["login"]} gets $randNumber on randomizer");
         if (!$userIdInSearch) { //SELECT user_id FROM Queues WHERE status=1 LIMIT=1
             $newGame = 0;
             $i = 0;
             if ($postData["continueSearch"]) {
                 //INSERT INTO Games (first_player, first_turn) VALUES (4, 52)
                 $newGame = $controller->createNewGame($postData["login"], $randNumber);
+                $logger->log("User {$postData["login"]} create new game with id = $newGame");
             } else {
                 $controller->deleteEmptyGame($postData["login"]);
                 $controller->updateUserStatusInQueues($postData["login"], 0);
                 $i = 90;
+                $logger->log("User {$postData["login"]} leave Queue");
             }
 
             for ($i; $i < 90; $i++) {
@@ -58,6 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $newGameId = $newGame;
                     $controller->addShipsAndCoordinates($postData["shipCoordinates"], $newGameId);
                     $firstTurn = $controller->getFirstTurnFromDB($newGameId);
+                    $logger->log("User {$postData["login"]} find opponent with name $second_player_login. ".
+                        ($firstTurn === $randNumber ? 'User turn first': 'User turn second'));
                     echo json_encode([
                         "messageId" => 10,
                         "messageType" => "gameCreateInfo",
@@ -73,6 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 sleep(1);
             }
             if ($i === 90) {
+                $logger->log("User {$postData["login"]} cant find opponents");
                 $controller->deleteEmptyGame($postData["login"]);
                 $controller->updateUserStatusInQueues($postData["login"], 0);
                 echo json_encode([
@@ -89,6 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $first_player_login = $controller->getSecondUserLogin($userIdInSearch);//SELECT login FROM Users WHERE id = $isUserPresentInQueue
             $connectToGame = $controller->connectToGame($postData["login"], $userIdInSearch, $randNumber);
             $connectGameId = $connectToGame[0];
+            $logger->log("User {$postData["login"]} connect to game with id = $connectGameId");
             /***
              * ToDo: uncomment controller method when I start test app with real people
              */
@@ -105,6 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ]);
         }
     } else if($postData["messageType"] === "exitFromPage") {
+        $logger->log("User {$postData["login"]} exit games. All info is removed.");
         $controller->deleteEmptyGame($postData["login"]);
         $controller->removePlayerFromQueue($postData["login"]);
         $controller->removePlayerFromUserList($postData["login"]);
