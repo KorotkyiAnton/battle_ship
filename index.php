@@ -32,14 +32,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'login' => $postData["login"],
             'status' => $status
         ]);
-    } else if (isset($postData["messageType"]) && $postData["messageType"] === "requestIsUsersInQueue") {
+    }
+    else if (isset($postData["messageType"]) && $postData["messageType"] === "requestIsUsersInQueue") {
         $userStatusInSearch = $controller->updateUserStatusInQueues($postData["login"], 1);
         $userIdInSearch = $controller->findUsersThatSearchForGame($postData["login"]);
         $randNumber = rand(1, 100);
         if (!$userIdInSearch) { //SELECT user_id FROM Queues WHERE status=1 LIMIT=1
-            //INSERT INTO Games (first_player, first_turn) VALUES (4, 52)
-            $newGame = $controller->createNewGame($postData["login"], $randNumber);
-            for ($i = 0; $i < 90; $i++) {
+            $newGame = 0;
+            $i = 0;
+            if ($postData["continueSearch"]) {
+                //INSERT INTO Games (first_player, first_turn) VALUES (4, 52)
+                $newGame = $controller->createNewGame($postData["login"], $randNumber);
+            } else {
+                $controller->deleteEmptyGame($postData["login"]);
+                $controller->updateUserStatusInQueues($postData["login"], 0);
+                $i = 90;
+            }
+
+            for ($i; $i < 90; $i++) {
                 $userIdInSearch = $controller->findUsersThatSearchForGame($postData["login"]);
                 if ($userIdInSearch) {
                     $second_player_login = $controller->getSecondUserLogin($userIdInSearch);
@@ -49,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $controller->addShipsAndCoordinates($postData["shipCoordinates"], $newGameId);
                     $firstTurn = $controller->getFirstTurnFromDB($newGameId);
                     echo json_encode([
-                        "messageId" => 11,
+                        "messageId" => 10,
                         "messageType" => "gameCreateInfo",
                         "createDate" => new DateTime(),
                         "game_id" => $newGameId,
@@ -62,11 +72,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 sleep(1);
             }
-            if($i === 90) {
+            if ($i === 90) {
                 $controller->deleteEmptyGame($postData["login"]);
                 $controller->updateUserStatusInQueues($postData["login"], 0);
                 echo json_encode([
-                    "messageId" => 11,
+                    "messageId" => 10,
                     "messageType" => "gameNotFoundInfo",
                     "createDate" => new DateTime(),
                     "errMsg" => "Ми не знайшли гру. Спробуй ще!",
@@ -82,11 +92,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             /***
              * ToDo: uncomment controller method when I start test app with real people
              */
-            //$controller->addShipsAndCoordinates($postData["shipCoordinates"], $connectGameId);
+            $controller->addShipsAndCoordinates($postData["shipCoordinates"], $connectGameId);
             $firstTurn = $connectToGame[1];
 
             echo json_encode([
-                "messageId" => 11,
+                "messageId" => 10,
                 "messageType" => "gameConnectInfo",
                 "createDate" => new DateTime(),
                 "game_id" => $connectGameId,
@@ -94,5 +104,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "your_turn" => $firstTurn === $randNumber
             ]);
         }
+    } else if($postData["messageType"] === "exitFromPage") {
+        $controller->deleteEmptyGame($postData["login"]);
+        $controller->removePlayerFromQueue($postData["login"]);
+        $controller->removePlayerFromUserList($postData["login"]);
     }
 }

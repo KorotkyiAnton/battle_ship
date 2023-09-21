@@ -97,4 +97,14 @@ class Controller
     {
         $this->model->addShipAndCoordinatesToPrivateTable($shipCoordinates, $gameId);
     }
+
+    public function removePlayerFromQueue($login)
+    {
+        $this->model->deleteUserFromQueues($login);
+    }
+
+    public function removePlayerFromUserList($login)
+    {
+        $this->model->deleteUserFromUsers($login);
+    }
 }

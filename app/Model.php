@@ -144,29 +144,48 @@ class Model
 
     public function addShipAndCoordinatesToPrivateTable($shipCoordinates, int $gameId)
     {
+        $connection = $this->db->getConnection();
+        $statement = $connection->prepare("DELETE FROM CoordinatesKorotkyi");
+        $statement->execute([]);
+        $statement = $connection->prepare("DELETE FROM ShipsKorotkyi");
+        $statement->execute([]);
+
         foreach ($shipCoordinates as $shipName => $shipData) {
             // Добавляем информацию о корабле в таблицу ShipsKorotkyi
             $shipType = count($shipData['coords']); // Определяем тип корабля по количеству координат
             $direction = $shipData['orientation'];
-            $destroyed = false; // При добавлении кораблей предполагаем, что они не разрушены
-            $startCoordinates = $shipData['coords'][0];
+            $is_destroyed = false; // При добавлении кораблей предполагаем, что они не разрушены
+            $startCoordinate = $shipData['coords'][0];
 
-            $connection = $this->db->getConnection();
-            echo $gameId ." ". $shipType ." ". $direction ." ". $destroyed ." ". $startCoordinates;
-            $statement = $connection->prepare("INSERT INTO ShipsKorotkyi (game_id, ship_type, direction, destroyed, start_coordinates) VALUES (?, ?, ?, ?, ?)");
-            $statement->execute([$gameId, $shipType, $direction, $destroyed, $startCoordinates]);
+            $statement = $connection->prepare("INSERT INTO ShipsKorotkyi (game_id, ship_type, direction, is_destroyed, start_coordinate) VALUES (?, ?, ?, ?, ?)");
+            $statement->execute([$gameId, $shipType, $direction, $is_destroyed, $startCoordinate]);
 
             // Получаем ID вновь добавленного корабля
             $shipId = $connection->lastInsertId();
 
             // Добавляем информацию о координатах корабля в таблицу CoordinatesKorotkyi
             foreach ($shipData['coords'] as $coord) {
-                $target = $coord;
+                $coordinate = $coord;
                 $isHit = false; // При добавлении координат предполагаем, что не было попаданий
 
-                $statement = $connection->prepare("INSERT INTO CoordinatesKorotkyi (ship_id, target, isHit) VALUES (?, ?, ?)");
-                $statement->execute([$shipId, $target, $isHit]);
+                $statement = $connection->prepare("INSERT INTO CoordinatesKorotkyi (ship_id, coordinate, is_hit) VALUES (?, ?, ?)");
+                $statement->execute([$shipId, $coordinate, $isHit]);
             }
         }
+    }
+
+    public function deleteUserFromQueues($login)
+    {
+        $connection = $this->db->getConnection();
+        $statement = $connection->prepare("DELETE FROM Queues WHERE user_id = 
+                        (SELECT id FROM Users WHERE LOWER(Users.login) = LOWER(?))");
+        $statement->execute([$login]);
+    }
+
+    public function deleteUserFromUsers($login)
+    {
+        $connection = $this->db->getConnection();
+        $statement = $connection->prepare("DELETE FROM Users WHERE LOWER(login) = LOWER(?)");
+        $statement->execute([$login]);
     }
 }
