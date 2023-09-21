@@ -58,9 +58,9 @@ class Controller
         return $this->model->getUserStatusFromQueues($login);
     }
 
-    public function updateUserStatusInQueues($login): bool
+    public function updateUserStatusInQueues($login, $status): bool
     {
-        return $this->model->updateUserStatusInQueues($login);
+        return $this->model->updateUserStatusInQueues($login, $status);
     }
 
     public function findUsersThatSearchForGame($login): int
@@ -68,8 +68,28 @@ class Controller
         return $this->model->getUserIdWhereStatusInSearch($login);
     }
 
-    public function createNewGame($login)
+    public function createNewGame($login, $randNumber): int
     {
-        $this->model->createNewGameInGames($login);
+        return $this->model->createNewGameInGames($login, $randNumber);
+    }
+
+    public function getSecondUserLogin(int $userIdInSearch): string
+    {
+        return $this->model->getSecondUserLoginFromUsers($userIdInSearch);
+    }
+
+    public function connectToGame($login, $first_player, $randNumber): array
+    {
+        return $this->model->connectToCurrentGame($login, $first_player, $randNumber);
+    }
+
+    public function getFirstTurnFromDB(int $newGameId): int
+    {
+        return $this->model->getFirstTurnFromGames($newGameId);
+    }
+
+    public function deleteEmptyGame($login)
+    {
+        return $this->model->deleteGameWithEmptySecondPlayerFromGames($login);
     }
 }
