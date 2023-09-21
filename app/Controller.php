@@ -88,8 +88,13 @@ class Controller
         return $this->model->getFirstTurnFromGames($newGameId);
     }
 
-    public function deleteEmptyGame($login)
+    public function deleteEmptyGame($login): bool
     {
         return $this->model->deleteGameWithEmptySecondPlayerFromGames($login);
+    }
+
+    public function addShipsAndCoordinates($shipCoordinates, int $gameId)
+    {
+        $this->model->addShipAndCoordinatesToPrivateTable($shipCoordinates, $gameId);
     }
 }

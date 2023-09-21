@@ -46,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $controller->updateUserStatusInQueues($postData["login"], 2);
                     $controller->updateUserStatusInQueues($second_player_login, 2);
                     $newGameId = $newGame;
+                    $controller->addShipsAndCoordinates($postData["shipCoordinates"], $newGameId);
                     $firstTurn = $controller->getFirstTurnFromDB($newGameId);
                     echo json_encode([
                         "messageId" => 11,
@@ -78,6 +79,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $first_player_login = $controller->getSecondUserLogin($userIdInSearch);//SELECT login FROM Users WHERE id = $isUserPresentInQueue
             $connectToGame = $controller->connectToGame($postData["login"], $userIdInSearch, $randNumber);
             $connectGameId = $connectToGame[0];
+            /***
+             * ToDo: uncomment controller method when I start test app with real people
+             */
+            //$controller->addShipsAndCoordinates($postData["shipCoordinates"], $connectGameId);
             $firstTurn = $connectToGame[1];
 
             echo json_encode([
