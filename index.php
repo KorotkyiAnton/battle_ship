@@ -14,6 +14,7 @@ $dotenv = Dotenv::createImmutable(__DIR__); // Adjust the path accordingly
 $dotenv->load();
 
 $controller = new \app\Controller();
+$model = new \app\Model();
 $logger = new \app\Logger();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -24,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $logger->log("User {$postData["login"]} validate login in server with result: $validationResult");
         $status = 0;
         $status = $controller->checkUserStatusOnQueue($postData["login"]);
-        $logger->log("User {$postData["login"]} check if he reconnect to game. Now user status in Queue is: $status");
+        $logger->log("User {$postData["login"]} check if he reconnects to game. Now user status in Queue is: $status");
 
         echo json_encode([
             'messageId' => 5,
@@ -35,8 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'login' => $postData["login"],
             'status' => $status
         ]);
-    }
-    else if (isset($postData["messageType"]) && $postData["messageType"] === "requestIsUsersInQueue") {
+    } else if (isset($postData["messageType"]) && $postData["messageType"] === "requestIsUsersInQueue") {
         $userStatusInSearch = $controller->updateUserStatusInQueues($postData["login"], 1);
         $logger->log("User {$postData["login"]} stand in Queue with status $userStatusInSearch");
         $userIdInSearch = $controller->findUsersThatSearchForGame($postData["login"]);
@@ -59,21 +59,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             for ($i; $i < 90; $i++) {
                 $userIdInSearch = $controller->findUsersThatSearchForGame($postData["login"]);
                 if ($userIdInSearch) {
-                    $second_player_login = $controller->getSecondUserLogin($userIdInSearch);
+                    $firstPlayerId = $model->getUserIdFromLogin($postData["login"]);
+                    $secondPlayerLogin = $controller->getSecondUserLogin($userIdInSearch);
                     $controller->updateUserStatusInQueues($postData["login"], 2);
-                    $controller->updateUserStatusInQueues($second_player_login, 2);
+                    $controller->updateUserStatusInQueues($secondPlayerLogin, 2);
                     $newGameId = $newGame;
                     $controller->addShipsAndCoordinates($postData["shipCoordinates"], $newGameId);
                     $firstTurn = $controller->getFirstTurnFromDB($newGameId);
-                    $logger->log("User {$postData["login"]} find opponent with name $second_player_login. ".
-                        ($firstTurn === $randNumber ? 'User turn first': 'User turn second'));
+                    $logger->log("User {$postData["login"]} find opponent with name $secondPlayerLogin. " .
+                        ($firstTurn === $randNumber ? 'User turn first' : 'User turn second'));
                     echo json_encode([
                         "messageId" => 10,
                         "messageType" => "gameCreateInfo",
                         "createDate" => new DateTime(),
                         "game_id" => $newGameId,
-                        "second_player_login" => $second_player_login,
-                        "your_turn" => $firstTurn === $randNumber,
+                        "opponent_login" => $secondPlayerLogin,
+                        "your_turn" => $firstTurn === $firstPlayerId,
                         "time_for_search" => $i
                     ]);
                     break;
@@ -96,7 +97,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             //SELECT id FROM Games WHERE first_player = user_id
             //UPDATE Games SET second_player = user_id2, first_turn = CASE WHEN first_turn < user_input THEN user_input ELSE first_turn
-            $first_player_login = $controller->getSecondUserLogin($userIdInSearch);//SELECT login FROM Users WHERE id = $isUserPresentInQueue
+            $secondPlayerId = $model->getUserIdFromLogin($postData["login"]);
+            $firstPlayerLogin = $controller->getSecondUserLogin($userIdInSearch);//SELECT login FROM Users WHERE id = $isUserPresentInQueue
             $connectToGame = $controller->connectToGame($postData["login"], $userIdInSearch, $randNumber);
             $connectGameId = $connectToGame[0];
             $logger->log("User {$postData["login"]} connect to game with id = $connectGameId");
@@ -111,14 +113,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "messageType" => "gameConnectInfo",
                 "createDate" => new DateTime(),
                 "game_id" => $connectGameId,
-                "first_player_login" => $first_player_login,
-                "your_turn" => $firstTurn === $randNumber
+                "opponent_login" => $firstPlayerLogin,
+                "your_turn" => $firstTurn === $secondPlayerId
             ]);
         }
-    } else if($postData["messageType"] === "exitFromPage") {
+    } else if ($postData["messageType"] === "exitFromPage") {
         $logger->log("User {$postData["login"]} exit games. All info is removed.");
         $controller->deleteEmptyGame($postData["login"]);
         $controller->removePlayerFromQueue($postData["login"]);
         $controller->removePlayerFromUserList($postData["login"]);
+    } else if ($postData["messageType"] === "localShipStoreEmpty") {
+        $shipsSquadron = $controller->formShipsJSON();
+        $gameInfo = $controller->getCurrentGameInfo($postData["login"]);
+        $gameId = $gameInfo[0];
+        $playerId = $gameInfo[1];
+        $opponentLogin = $gameInfo[2];
+        $firstTurn = $gameInfo[3];
+
+        echo json_encode([
+            "messageId" => 12,
+            "messageType" => "shipsFromDB",
+            "createDate" => new DateTime(),
+            "game_id" => $gameId,
+            "opponent_login" => $opponentLogin,
+            "your_turn" => $firstTurn === $playerId,
+            "shipCoordinates" => $shipsSquadron
+        ]);
     }
 }

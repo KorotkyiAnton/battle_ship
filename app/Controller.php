@@ -107,4 +107,14 @@ class Controller
     {
         $this->model->deleteUserFromUsers($login);
     }
+
+    public function formShipsJSON(): array
+    {
+        return $this->model->getShipsFromDB();
+    }
+
+    public function getCurrentGameInfo($login):array
+    {
+        return $this->model->getGameRecordFromGames($login);
+    }
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace app;
+ini_set('allow_url_fopen', 1);
 
 use Exception;
 
@@ -11,7 +12,7 @@ class Logger {
     /**
      * @throws Exception
      */
-    public function __construct($logFile = 'log.txt') {
+    public function __construct($logFile = __DIR__.'/log.txt') {
         $this->logFile = $logFile;
         $this->openLogFile();
     }
