@@ -62,7 +62,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $firstPlayerId = $model->getUserIdFromLogin($postData["login"]);
                     $secondPlayerLogin = $controller->getSecondUserLogin($userIdInSearch);
                     $controller->updateUserStatusInQueues($postData["login"], 2);
-                    $controller->updateUserStatusInQueues($secondPlayerLogin, 2);
                     $newGameId = $newGame;
                     $controller->addShipsAndCoordinates($postData["shipCoordinates"], $newGameId);
                     $firstTurn = $controller->getFirstTurnFromDB($newGameId);
@@ -106,6 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
              * ToDo: uncomment controller method when I start test app with real people
              */
             $controller->addShipsAndCoordinates($postData["shipCoordinates"], $connectGameId);
+            $controller->updateUserStatusInQueues($postData["login"], 2);
             $firstTurn = $connectToGame[1];
 
             echo json_encode([
@@ -138,6 +138,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             "opponent_login" => $opponentLogin,
             "your_turn" => $firstTurn === $playerId,
             "shipCoordinates" => $shipsSquadron
+        ]);
+    } else if ($postData["messageType"] === "shotRequestCoords") {
+        $controller->sendShotToOpponent($postData["gameId"], $postData["shotCoords"], $postData["login"]);
+        $shotResponse = NULL;
+        $userOnline = $controller->userOnline($model->getUserIdFromLogin($postData["opponent"]));
+//        if(!$userOnline) {
+//            for ($i=0; $i < 90; $i++) {
+//                $userOnline = $controller->userOnline($model->getUserIdFromLogin($postData["opponent"]));
+//                if($userOnline) {
+//                    $shotResponse = $controller->getApprovalStatusFromOpponent($postData["gameId"], $postData["shotCoords"], $postData["login"]);
+//                    break;
+//                }
+//            }
+//        } else {
+        $shotResponse = $controller->getApprovalStatusFromOpponent($postData["gameId"], $postData["shotCoords"], $postData["login"]);
+//        }
+
+
+        echo json_encode([
+            "messageId" => 14,
+            "messageType" => "shotResponseCoords",
+            "createDate" => new DateTime(),
+            "shotResponse" => $shotResponse,
+            "shotCoords" => $postData["shotCoords"]
+        ]);
+    } else if ($postData["messageType"] === "shotResponseCoords") {
+        for ($i = 0; $i < 30; $i++) {
+            $shotResponse = $controller->listenRequestFromOpponent($postData["gameId"], $postData["login"]);
+            if ($shotResponse !== null) {
+                break;
+            }
+            sleep(1);
+        }
+
+        echo json_encode([
+            "messageId" => 16,
+            "messageType" => "shotResponseCoords",
+            "createDate" => new DateTime(),
+            "shotResponse" => $shotResponse[1],
+            "shotCoords" => $shotResponse[0]
         ]);
     }
 }

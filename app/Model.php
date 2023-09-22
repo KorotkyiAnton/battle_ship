@@ -251,4 +251,107 @@ class Model
 
         return [$fetchData["id"], $userId, $secondPlayerLogin, intval($fetchData["first_turn"])];
     }
+
+    public function countTurns($gameId): int
+    {
+        $connection = $this->db->getConnection();
+        $statement = $connection->prepare(
+            "SELECT COUNT(id) 'turn' FROM Shots WHERE game_id = ?");
+        $statement->execute([$gameId]);
+        $turn = $statement->fetchAll()[0]["turn"];
+
+        return intval($turn);
+    }
+
+    public function sendRequestToShots($gameId, $shotCoords, $login)
+    {
+        $userId = $this->getUserIdFromLogin($login);
+
+        $connection = $this->db->getConnection();
+        $statement = $connection->prepare("INSERT INTO Shots (player_id, game_id, target, request, response, turn_number, shot_time) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $statement->execute([$userId, $gameId, $shotCoords, 1, NULL, $this->countTurns($gameId), date('Y-m-d H:i:s')]);
+    }
+
+    public function getResponseStatusFromShots($gameId, $shotCoords, $login): ?int
+    {
+        $userId = $this->getUserIdFromLogin($login);
+
+        $connection = $this->db->getConnection();
+        $statement = $connection->prepare(
+            "SELECT response FROM Shots WHERE game_id = ? AND target = ? AND NOT player_id = ?");
+        $statement->execute([$gameId, $shotCoords, $userId]);
+
+        return $statement->fetchAll()[0]["response"];
+    }
+
+    public function getUserOnlineStatusFromUsers(int $opponentId): bool
+    {
+        $connection = $this->db->getConnection();
+        $statement = $connection->prepare(
+            "SELECT is_online FROM Users WHERE id = ?");
+        $statement->execute([$opponentId]);
+
+        return boolval($statement->fetchAll()[0]["is_online"]);
+    }
+
+    public function getRequestFromShots($gameId, $login): string
+    {
+        $userId = $this->getUserIdFromLogin($login);
+
+        $connection = $this->db->getConnection();
+        $statement = $connection->prepare(
+            "SELECT target FROM Shots WHERE game_id = ? AND NOT player_id = ?");
+        $statement->execute([$gameId, $userId]);
+        $target = $statement->fetchAll()[0]["target"];
+
+        $statement = $connection->prepare("UPDATE CoordinatesKorotkyi SET is_hit = true WHERE coordinate = ?");
+        $statement->execute([$target]);
+
+        return strval($target);
+    }
+
+    public function checkIfOpponentHit(string $target): int
+    {
+        $connection = $this->db->getConnection();
+        $statement = $connection->prepare("SELECT ship_id FROM CoordinatesKorotkyi WHERE coordinate = ?");
+        $statement->execute([$target]);
+        $hitShipId = $statement->fetchAll()[0]["ship_id"];
+        $outputArray = [];
+
+        if ($hitShipId === null) {
+            return 0;
+        } else {
+            $connection = $this->db->getConnection();
+            $statement = $connection->prepare("SELECT coordinate, is_hit FROM CoordinatesKorotkyi WHERE ship_id = ?");
+            $statement->execute([$hitShipId]);
+
+            foreach ($statement->fetchAll() as $item) {
+                $outputArray[$item['coordinate']] = intval($item['is_hit']);
+            }
+        }
+        var_dump($outputArray);
+        return 1;
+
+        $isHitCount = 0; // Счетчик попаданий
+        $isDestroyed = false; // Признак потопления корабля
+
+        foreach ($outputArray as $coordinate => $isHit) {
+            $isHit = (bool)$isHit;
+
+            if ($isHit && $coordinate === $target) {
+                return 1;
+            } else {
+                return 2;
+            }
+
+//            if ($isHitCount === 4) {
+//                // Если все палубы корабля подбиты, обновляем is_destroyed
+//                $updateSql = "UPDATE ShipsKorotkyi SET is_destroyed = 1 WHERE id = :ship_id";
+//                $updateStmt = $conn->prepare($updateSql);
+//                $updateStmt->bindParam(':ship_id', $shipId, PDO::PARAM_INT);
+//                $updateStmt->execute();
+//                $isDestroyed = true;
+//            }
+        }
+    }
 }

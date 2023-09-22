@@ -113,8 +113,38 @@ class Controller
         return $this->model->getShipsFromDB();
     }
 
-    public function getCurrentGameInfo($login):array
+    public function getCurrentGameInfo($login): array
     {
         return $this->model->getGameRecordFromGames($login);
+    }
+
+    public function sendShotToOpponent($gameId, $shotCoords, $login)
+    {
+        $this->model->sendRequestToShots($gameId, $shotCoords, $login);
+    }
+
+    public function getApprovalStatusFromOpponent($gameId, $shotCoords, $login)
+    {
+        for ($i = 0; $i < 5; $i++) {
+            $status = $this->model->getResponseStatusFromShots($gameId, $shotCoords, $login);
+            if ($status !== null) {
+                return $status;
+            }
+            sleep(1);
+        }
+    }
+
+    public function userOnline(int $opponentId): bool
+    {
+        return $this->model->getUserOnlineStatusFromUsers($opponentId);
+    }
+
+    public function listenRequestFromOpponent($gameId, $login): ?array
+    {
+        $target = $this->model->getRequestFromShots($gameId, $login);
+        if($target === "") {
+            return null;
+        }
+        return [$target, $this->model->checkIfOpponentHit($target)];
     }
 }
