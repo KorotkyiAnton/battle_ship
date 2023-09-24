@@ -85,7 +85,7 @@ class Controller
 
     public function getFirstTurnFromDB(int $newGameId): int
     {
-        return $this->model->getFirstTurnFromGames($newGameId);
+        return $this->model->getSecondPlayerRollFromGames($newGameId);
     }
 
     public function deleteEmptyGame($login): bool
@@ -141,10 +141,13 @@ class Controller
 
     public function listenRequestFromOpponent($gameId, $login): ?array
     {
-        $target = $this->model->getRequestFromShots($gameId, $login);
-        if($target === "") {
-            return null;
+        for ($i = 0; $i < 30; $i++) {
+            $target = $this->model->getRequestFromShots($gameId, $login);
+            if($target !== "") {
+                return [$target, $this->model->checkIfOpponentHit($target, $gameId, $login)];
+            }
+            sleep(1);
         }
-        return [$target, $this->model->checkIfOpponentHit($target)];
+        return null;
     }
 }

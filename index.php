@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         "createDate" => new DateTime(),
                         "game_id" => $newGameId,
                         "opponent_login" => $secondPlayerLogin,
-                        "your_turn" => $firstTurn === $firstPlayerId,
+                        "your_turn" => $firstTurn < $randNumber,
                         "time_for_search" => $i
                     ]);
                     break;
@@ -114,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 "createDate" => new DateTime(),
                 "game_id" => $connectGameId,
                 "opponent_login" => $firstPlayerLogin,
-                "your_turn" => $firstTurn === $secondPlayerId
+                "your_turn" => $firstTurn < $randNumber
             ]);
         }
     } else if ($postData["messageType"] === "exitFromPage") {
@@ -136,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             "createDate" => new DateTime(),
             "game_id" => $gameId,
             "opponent_login" => $opponentLogin,
-            "your_turn" => $firstTurn === $playerId,
+            "your_turn" => $firstTurn,
             "shipCoordinates" => $shipsSquadron
         ]);
     } else if ($postData["messageType"] === "shotRequestCoords") {
@@ -164,13 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             "shotCoords" => $postData["shotCoords"]
         ]);
     } else if ($postData["messageType"] === "shotResponseCoords") {
-        for ($i = 0; $i < 30; $i++) {
-            $shotResponse = $controller->listenRequestFromOpponent($postData["gameId"], $postData["login"]);
-            if ($shotResponse !== null) {
-                break;
-            }
-            sleep(1);
-        }
+        $shotResponse = $controller->listenRequestFromOpponent($postData["gameId"], $postData["login"]);
 
         echo json_encode([
             "messageId" => 16,

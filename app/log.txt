@@ -1,0 +1,103 @@
+[2023-09-23 19:37:45] User anton cant find opponents
+[2023-09-23 19:37:45] User antor stand in Queue with status 1
+[2023-09-23 19:37:45] User antor gets 78 on randomizer
+[2023-09-23 19:37:45] User antor create new game with id = 141
+[2023-09-23 19:39:16] User antor cant find opponents
+[2023-09-23 19:39:16] User anton stand in Queue with status 1
+[2023-09-23 19:39:16] User anton gets 76 on randomizer
+[2023-09-23 19:39:16] User anton create new game with id = 142
+[2023-09-23 19:40:47] User anton cant find opponents
+[2023-09-23 19:40:47] User antor stand in Queue with status 1
+[2023-09-23 19:40:47] User antor gets 73 on randomizer
+[2023-09-23 19:40:47] User antor create new game with id = 143
+[2023-09-23 19:42:18] User antor cant find opponents
+[2023-09-23 19:42:18] User anton stand in Queue with status 1
+[2023-09-23 19:42:18] User anton gets 83 on randomizer
+[2023-09-23 19:42:18] User anton create new game with id = 144
+[2023-09-23 19:43:49] User anton cant find opponents
+[2023-09-23 19:43:49] User antor stand in Queue with status 1
+[2023-09-23 19:43:49] User antor gets 23 on randomizer
+[2023-09-23 19:43:49] User antor create new game with id = 145
+[2023-09-23 19:45:20] User antor cant find opponents
+[2023-09-23 19:45:20] User anton stand in Queue with status 1
+[2023-09-23 19:45:20] User anton gets 88 on randomizer
+[2023-09-23 19:45:20] User anton create new game with id = 146
+[2023-09-23 19:46:52] User anton cant find opponents
+[2023-09-23 19:48:39] User anton stand in Queue with status 1
+[2023-09-23 19:48:39] User anton gets 13 on randomizer
+[2023-09-23 19:48:39] User anton create new game with id = 147
+[2023-09-23 19:50:10] User anton cant find opponents
+[2023-09-23 19:50:10] User antor stand in Queue with status 1
+[2023-09-23 19:50:10] User antor gets 80 on randomizer
+[2023-09-23 19:50:10] User antor create new game with id = 148
+[2023-09-23 19:51:41] User antor cant find opponents
+[2023-09-23 19:51:41] User anton stand in Queue with status 1
+[2023-09-23 19:51:41] User anton gets 33 on randomizer
+[2023-09-23 19:51:41] User anton create new game with id = 149
+[2023-09-23 19:53:12] User anton cant find opponents
+[2023-09-23 19:53:12] User antor stand in Queue with status 1
+[2023-09-23 19:53:12] User antor gets 82 on randomizer
+[2023-09-23 19:53:12] User antor create new game with id = 150
+[2023-09-23 19:54:43] User antor cant find opponents
+[2023-09-23 19:54:43] User anton stand in Queue with status 1
+[2023-09-23 19:54:43] User anton gets 78 on randomizer
+[2023-09-23 19:54:43] User anton connect to game with id = 0
+[2023-09-23 19:54:43] User antor stand in Queue with status 1
+[2023-09-23 19:54:43] User antor gets 6 on randomizer
+[2023-09-23 19:54:43] User antor connect to game with id = 0
+[2023-09-23 20:01:09] User anton stand in Queue with status 1
+[2023-09-23 20:01:09] User anton gets 55 on randomizer
+[2023-09-23 20:01:11] User antor stand in Queue with status 1
+[2023-09-23 20:01:11] User antor gets 14 on randomizer
+[2023-09-23 20:01:42] User anton stand in Queue with status 1
+[2023-09-23 20:01:42] User anton gets 3 on randomizer
+[2023-09-23 20:01:52] User antor stand in Queue with status 1
+[2023-09-23 20:01:52] User antor gets 44 on randomizer
+[2023-09-23 20:02:48] User anton stand in Queue with status 1
+[2023-09-23 20:02:48] User anton gets 68 on randomizer
+[2023-09-23 20:02:48] User anton create new game with id = 151
+[2023-09-23 20:03:57] User anton find opponent with name antor. User turn second
+[2023-09-23 20:03:57] User antor stand in Queue with status 1
+[2023-09-23 20:03:57] User antor gets 55 on randomizer
+[2023-09-23 20:03:57] User antor create new game with id = 152
+[2023-09-23 20:05:29] User antor cant find opponents
+[2023-09-23 20:41:25] User anton stand in Queue with status 1
+[2023-09-23 20:41:25] User anton gets 96 on randomizer
+[2023-09-23 20:41:25] User anton create new game with id = 153
+[2023-09-23 20:42:56] User anton cant find opponents
+[2023-09-23 20:42:56] User antor stand in Queue with status 1
+[2023-09-23 20:42:56] User antor gets 10 on randomizer
+[2023-09-23 20:42:56] User antor create new game with id = 154
+[2023-09-23 20:44:28] User antor cant find opponents
+[2023-09-23 21:12:43] User anton stand in Queue with status 1
+[2023-09-23 21:12:43] User anton gets 4 on randomizer
+[2023-09-23 21:12:43] User anton create new game with id = 155
+[2023-09-23 21:12:46] User antor stand in Queue with status 1
+[2023-09-23 21:12:46] User antor gets 99 on randomizer
+[2023-09-23 21:12:46] User antor connect to game with id = 155
+[2023-09-23 21:13:41] User anton stand in Queue with status 1
+[2023-09-23 21:13:41] User anton gets 84 on randomizer
+[2023-09-23 21:13:41] User anton create new game with id = 156
+[2023-09-23 21:13:44] User antor stand in Queue with status 1
+[2023-09-23 21:13:44] User antor gets 62 on randomizer
+[2023-09-23 21:13:44] User antor connect to game with id = 156
+[2023-09-23 21:14:07] User anton stand in Queue with status 1
+[2023-09-23 21:14:07] User anton gets 80 on randomizer
+[2023-09-23 21:14:07] User anton create new game with id = 157
+[2023-09-23 21:14:09] User antor stand in Queue with status 1
+[2023-09-23 21:14:09] User antor gets 69 on randomizer
+[2023-09-23 21:14:09] User antor connect to game with id = 157
+[2023-09-23 21:14:14] User anton cant find opponents
+[2023-09-23 21:15:47] User anton cant find opponents
+[2023-09-24 07:52:31] User anton stand in Queue with status 1
+[2023-09-24 07:52:31] User anton gets 18 on randomizer
+[2023-09-24 07:52:31] User anton create new game with id = 158
+[2023-09-24 07:52:39] User antor stand in Queue with status 1
+[2023-09-24 07:52:39] User antor gets 70 on randomizer
+[2023-09-24 07:52:39] User antor connect to game with id = 158
+[2023-09-24 09:45:56] User anton stand in Queue with status 1
+[2023-09-24 09:45:56] User anton gets 41 on randomizer
+[2023-09-24 09:45:56] User anton create new game with id = 159
+[2023-09-24 09:45:59] User antor stand in Queue with status 1
+[2023-09-24 09:45:59] User antor gets 59 on randomizer
+[2023-09-24 09:45:59] User antor connect to game with id = 159

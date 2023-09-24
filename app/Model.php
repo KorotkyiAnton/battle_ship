@@ -90,7 +90,7 @@ class Model
     public function createNewGameInGames($login, $randNumber): int
     {
         $connection = $this->db->getConnection();
-        $statement = $connection->prepare("INSERT INTO Games (first_player, first_turn) VALUES (?, ?)");
+        $statement = $connection->prepare("INSERT INTO Games (first_player, first_player_roll) VALUES (?, ?)");
         $statement->execute([$this->getUserIdFromLogin($login), $randNumber]);
 
         return intval($connection->lastInsertId());
@@ -115,25 +115,24 @@ class Model
         $statement->execute([$first_player]);
         $gameId = $statement->fetchAll()[0]["id"];
 
-        $statement = $connection->prepare("UPDATE Games SET second_player = ?, 
-                 first_turn = CASE WHEN first_turn < ? THEN ? ELSE ? END WHERE id = ?");
-        $statement->execute([$this->getUserIdFromLogin($login), $randNumber, $first_player, $this->getUserIdFromLogin($login), $gameId]);
+        $statement = $connection->prepare("UPDATE Games SET second_player = ?, second_player_roll = ? WHERE id = ?");
+        $statement->execute([$this->getUserIdFromLogin($login), $randNumber, $gameId]);
 
         $statement = $connection->prepare(
-            "SELECT first_turn FROM Games WHERE id = ?");
+            "SELECT first_player_roll FROM Games WHERE id = ?");
         $statement->execute([$gameId]);
-        $first_turn = $statement->fetchAll()[0]["first_turn"];
+        $first_turn = $statement->fetchAll()[0]["first_player_roll"];
 
         return [intval($gameId), intval($first_turn)];
     }
 
-    public function getFirstTurnFromGames(int $newGameId): int
+    public function getSecondPlayerRollFromGames(int $newGameId): int
     {
         $connection = $this->db->getConnection();
         $statement = $connection->prepare(
-            "SELECT first_turn FROM Games WHERE id = ?");
+            "SELECT second_player_roll FROM Games WHERE id = ?");
         $statement->execute([$newGameId]);
-        $first_turn = $statement->fetchAll()[0]["first_turn"];
+        $first_turn = $statement->fetchAll()[0]["second_player_roll"];
 
         return intval($first_turn);
     }
@@ -145,7 +144,7 @@ class Model
         return $statement->execute([$this->getUserIdFromLogin($login)]);
     }
 
-    public function addShipAndCoordinatesToPrivateTable($shipCoordinates, int $gameId)
+    public function addShipAndCoordinatesToPrivateTable($shipCoordinates, int $gameId): void
     {
         $connection = $this->db->getConnection();
         $statement = $connection->prepare("DELETE FROM CoordinatesKorotkyi");
@@ -241,35 +240,38 @@ class Model
 
         $connection = $this->db->getConnection();
         $statement = $connection->prepare(
-            "SELECT id, first_player, second_player, first_turn FROM Games 
-                                                   WHERE (first_player = ? OR second_player = ?) AND winner IS NULL");
+            "SELECT id, first_player, second_player, first_player_roll, second_player_roll FROM Games 
+                                                   WHERE (first_player = ? OR second_player = ?) AND winner IS NULL ORDER BY id DESC LIMIT 1");
         $statement->execute([$userId, $userId]);
         $fetchData = $statement->fetchAll()[0];
         $secondPlayerLogin = intval($fetchData["first_player"]) === $userId ?
             $this->getSecondUserLoginFromUsers($fetchData["second_player"]) :
             $this->getSecondUserLoginFromUsers($fetchData["first_player"]);
+        $firstTurn = intval($fetchData["first_player"]) === $userId ?
+            intval($fetchData["first_player_roll"]) > intval($fetchData["second_player_roll"]) :
+            intval($fetchData["second_player_roll"]) > intval($fetchData["first_player_roll"]);
 
-        return [$fetchData["id"], $userId, $secondPlayerLogin, intval($fetchData["first_turn"])];
+        return [$fetchData["id"], $userId, $secondPlayerLogin, $firstTurn];
     }
 
     public function countTurns($gameId): int
     {
         $connection = $this->db->getConnection();
         $statement = $connection->prepare(
-            "SELECT COUNT(id) 'turn' FROM Shots WHERE game_id = ?");
+            "SELECT COUNT(id)'turn_number' FROM Shots WHERE game_id = ? AND response IS NULL");
         $statement->execute([$gameId]);
-        $turn = $statement->fetchAll()[0]["turn"];
+        $turn = $statement->fetchAll()[0]["turn_number"];
 
         return intval($turn);
     }
 
-    public function sendRequestToShots($gameId, $shotCoords, $login)
+    public function sendRequestToShots($gameId, $shotCoords, $login): void
     {
         $userId = $this->getUserIdFromLogin($login);
 
         $connection = $this->db->getConnection();
         $statement = $connection->prepare("INSERT INTO Shots (player_id, game_id, target, request, response, turn_number, shot_time) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $statement->execute([$userId, $gameId, $shotCoords, 1, NULL, $this->countTurns($gameId), date('Y-m-d H:i:s')]);
+        $statement->execute([$userId, $gameId, $shotCoords, 1, NULL, $this->countTurns($gameId)+1, date('Y-m-d H:i:s')]);
     }
 
     public function getResponseStatusFromShots($gameId, $shotCoords, $login): ?int
@@ -278,8 +280,8 @@ class Model
 
         $connection = $this->db->getConnection();
         $statement = $connection->prepare(
-            "SELECT response FROM Shots WHERE game_id = ? AND target = ? AND NOT player_id = ?");
-        $statement->execute([$gameId, $shotCoords, $userId]);
+            "SELECT response FROM Shots WHERE game_id = ? AND target = ? AND NOT player_id = ? AND turn_number = ?");
+        $statement->execute([$gameId, $shotCoords, $userId, $this->countTurns($gameId)]);
 
         return $statement->fetchAll()[0]["response"];
     }
@@ -300,9 +302,10 @@ class Model
 
         $connection = $this->db->getConnection();
         $statement = $connection->prepare(
-            "SELECT target FROM Shots WHERE game_id = ? AND NOT player_id = ?");
-        $statement->execute([$gameId, $userId]);
+            "SELECT target FROM Shots WHERE game_id = ? AND turn_number = ? ORDER BY id DESC LIMIT 1");
+        $statement->execute([$gameId, $this->countTurns($gameId)]);
         $target = $statement->fetchAll()[0]["target"];
+        echo $target."; ".$this->countTurns($gameId);
 
         $statement = $connection->prepare("UPDATE CoordinatesKorotkyi SET is_hit = true WHERE coordinate = ?");
         $statement->execute([$target]);
@@ -310,48 +313,68 @@ class Model
         return strval($target);
     }
 
-    public function checkIfOpponentHit(string $target): int
+    public function checkIfOpponentHit(string $target, $gameId, $login): int
     {
         $connection = $this->db->getConnection();
         $statement = $connection->prepare("SELECT ship_id FROM CoordinatesKorotkyi WHERE coordinate = ?");
         $statement->execute([$target]);
         $hitShipId = $statement->fetchAll()[0]["ship_id"];
         $outputArray = [];
+        $userId = $this->getUserIdFromLogin($login);
 
         if ($hitShipId === null) {
+            $this->insertResponseToShots($userId, $gameId, $target, 0);
             return 0;
-        } else {
-            $connection = $this->db->getConnection();
-            $statement = $connection->prepare("SELECT coordinate, is_hit FROM CoordinatesKorotkyi WHERE ship_id = ?");
-            $statement->execute([$hitShipId]);
-
-            foreach ($statement->fetchAll() as $item) {
-                $outputArray[$item['coordinate']] = intval($item['is_hit']);
-            }
         }
-        var_dump($outputArray);
-        return 1;
+        $connection = $this->db->getConnection();
+        $statement = $connection->prepare("SELECT coordinate, is_hit FROM CoordinatesKorotkyi WHERE ship_id = ?");
+        $statement->execute([$hitShipId]);
+
+        foreach ($statement->fetchAll() as $item) {
+            $outputArray[$item['coordinate']] = intval($item['is_hit']);
+        }
 
         $isHitCount = 0; // Счетчик попаданий
-        $isDestroyed = false; // Признак потопления корабля
+        //var_dump($outputArray);
 
-        foreach ($outputArray as $coordinate => $isHit) {
+        foreach ($outputArray as $isHit) {
             $isHit = (bool)$isHit;
-
-            if ($isHit && $coordinate === $target) {
-                return 1;
-            } else {
-                return 2;
+            if ($isHit) {
+                $isHitCount+=1;
             }
-
-//            if ($isHitCount === 4) {
-//                // Если все палубы корабля подбиты, обновляем is_destroyed
-//                $updateSql = "UPDATE ShipsKorotkyi SET is_destroyed = 1 WHERE id = :ship_id";
-//                $updateStmt = $conn->prepare($updateSql);
-//                $updateStmt->bindParam(':ship_id', $shipId, PDO::PARAM_INT);
-//                $updateStmt->execute();
-//                $isDestroyed = true;
-//            }
         }
+
+        //echo $isHitCount . " " . count($outputArray);
+        if ($isHitCount === count($outputArray)) {
+            $connection = $this->db->getConnection();
+            $statement = $connection->prepare("UPDATE ShipsKorotkyi SET is_destroyed = true WHERE id = ?");
+            $statement->execute([$hitShipId]);
+            $statement = $connection->prepare("SELECT direction FROM ShipsKorotkyi WHERE id = ?");
+            $statement->execute([$hitShipId]);
+            $direction = $statement->fetchAll()[0]["direction"];
+            if ($direction === "right") {
+                $this->insertResponseToShots($userId, $gameId, $target, 21, array_keys($outputArray)[count($outputArray) - 1]);
+                return 21;
+            } else if ($direction === "down") {
+                $this->insertResponseToShots($userId, $gameId, $target, 22, array_keys($outputArray)[count($outputArray) - 1]);
+                return 22;
+            } else if ($direction === "left") {
+                $this->insertResponseToShots($userId, $gameId, $target, 23, array_keys($outputArray)[0]);
+                return 23;
+            } else if ($direction === "up") {
+                $this->insertResponseToShots($userId, $gameId, $target, 24, array_keys($outputArray)[0]);
+                return 24;
+            }
+        }
+
+        $this->insertResponseToShots($userId, $gameId, $target, 1);
+        return 1;
+    }
+
+    private function insertResponseToShots(int $userId, $gameId, string $target, int $response, $startCoord = NULL): void
+    {
+        $connection = $this->db->getConnection();
+        $statement = $connection->prepare("INSERT INTO Shots (player_id, game_id, target, request, response, turn_number, shot_time, start_coord) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $statement->execute([$userId, $gameId, $target, 0, $response, $this->countTurns($gameId), date('Y-m-d H:i:s'), $startCoord]);
     }
 }
