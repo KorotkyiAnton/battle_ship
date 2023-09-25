@@ -57,13 +57,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             for ($i; $i < 90; $i++) {
-                $userIdInSearch = $controller->findUsersThatSearchForGame($postData["login"]);
+                $userIdInSearch = $controller->checkSecondUserConnect($newGame);
                 if ($userIdInSearch) {
                     $firstPlayerId = $model->getUserIdFromLogin($postData["login"]);
                     $secondPlayerLogin = $controller->getSecondUserLogin($userIdInSearch);
                     $controller->updateUserStatusInQueues($postData["login"], 2);
                     $newGameId = $newGame;
-                    $controller->addShipsAndCoordinates($postData["shipCoordinates"], $newGameId);
+                    $controller->addShipsAndCoordinates($postData["shipCoordinates"], $newGameId, $postData["login"]);
                     $firstTurn = $controller->getFirstTurnFromDB($newGameId);
                     $logger->log("User {$postData["login"]} find opponent with name $secondPlayerLogin. " .
                         ($firstTurn === $randNumber ? 'User turn first' : 'User turn second'));
@@ -84,7 +84,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($i === 90) {
                 $logger->log("User {$postData["login"]} cant find opponents");
                 $controller->deleteEmptyGame($postData["login"]);
-                $controller->updateUserStatusInQueues($postData["login"], 0);
+                if($controller->checkUserStatusOnQueue($postData["login"]) !== 2) {
+                    $controller->updateUserStatusInQueues($postData["login"], 0);
+                }
                 echo json_encode([
                     "messageId" => 10,
                     "messageType" => "gameNotFoundInfo",
@@ -104,7 +106,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             /***
              * ToDo: uncomment controller method when I start test app with real people
              */
-            $controller->addShipsAndCoordinates($postData["shipCoordinates"], $connectGameId);
+            $controller->addShipsAndCoordinates($postData["shipCoordinates"], $connectGameId, $postData["login"]);
+            $controller->addShipsAndCoordinates($postData["shipCoordinates"], $connectGameId, $postData["login"]);
             $controller->updateUserStatusInQueues($postData["login"], 2);
             $firstTurn = $connectToGame[1];
 
@@ -123,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $controller->removePlayerFromQueue($postData["login"]);
         $controller->removePlayerFromUserList($postData["login"]);
     } else if ($postData["messageType"] === "localShipStoreEmpty") {
-        $shipsSquadron = $controller->formShipsJSON();
+        $shipsSquadron = $controller->formShipsJSON($postData["login"]);
         $gameInfo = $controller->getCurrentGameInfo($postData["login"]);
         $gameId = $gameInfo[0];
         $playerId = $gameInfo[1];
@@ -154,6 +157,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //        } else {
         $shotResponse = $controller->getApprovalStatusFromOpponent($postData["gameId"], $postData["shotCoords"], $postData["login"]);
 //        }
+        $winner= 0;
+
+        if($shotResponse === 0 || $shotResponse === 21 || $shotResponse === 22 || $shotResponse === 23 || $shotResponse === 24) {
+            $winner = $controller->getWinnerForRequester($postData["gameId"], $postData["login"], $postData["opponent"]);
+        }
 
 
         echo json_encode([
@@ -161,17 +169,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             "messageType" => "shotResponseCoords",
             "createDate" => new DateTime(),
             "shotResponse" => $shotResponse,
-            "shotCoords" => $postData["shotCoords"]
+            "shotCoords" => $postData["shotCoords"],
+            "winner" => $winner
         ]);
     } else if ($postData["messageType"] === "shotResponseCoords") {
         $shotResponse = $controller->listenRequestFromOpponent($postData["gameId"], $postData["login"]);
+        $endOfTheGame = $controller->getWinnerOfGame($postData["gameId"], $postData["login"], $postData["opponent"]);
 
         echo json_encode([
             "messageId" => 16,
             "messageType" => "shotResponseCoords",
             "createDate" => new DateTime(),
             "shotResponse" => $shotResponse[1],
-            "shotCoords" => $shotResponse[0]
+            "shotCoords" => $shotResponse[0],
+            "winner" => $endOfTheGame
         ]);
+    } else if ($postData["messageType"] === "userCancelPage") {
+        $logger->log("User {$postData["login"]} exit games. All info is removed.");
+        $controller->updateWinner($postData["gameId"], $postData["login"]);
+        $controller->removePlayerFromQueue($postData["login"]);
+    } else if ($postData["messageType"] === "userEnterPreviousPage") {
+        $logger->log("User {$postData["login"]} exit games. All info is removed.");
+        $controller->updateWinner($postData["gameId"], $postData["login"]);
+        $controller->removePlayerFromQueue($postData["login"]);
     }
 }

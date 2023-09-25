@@ -93,9 +93,9 @@ class Controller
         return $this->model->deleteGameWithEmptySecondPlayerFromGames($login);
     }
 
-    public function addShipsAndCoordinates($shipCoordinates, int $gameId)
+    public function addShipsAndCoordinates($shipCoordinates, int $gameId, $login)
     {
-        $this->model->addShipAndCoordinatesToPrivateTable($shipCoordinates, $gameId);
+        $this->model->addShipAndCoordinatesToPrivateTable($shipCoordinates, $gameId , $login);
     }
 
     public function removePlayerFromQueue($login)
@@ -108,9 +108,9 @@ class Controller
         $this->model->deleteUserFromUsers($login);
     }
 
-    public function formShipsJSON(): array
+    public function formShipsJSON($login): array
     {
-        return $this->model->getShipsFromDB();
+        return $this->model->getShipsFromDB($login);
     }
 
     public function getCurrentGameInfo($login): array
@@ -149,5 +149,25 @@ class Controller
             sleep(1);
         }
         return null;
+    }
+
+    public function checkSecondUserConnect(int $newGame): int
+    {
+        return $this->model->checkUserIdInGames($newGame);
+    }
+
+    public function getWinnerOfGame($gameId, $login, $opponent): int
+    {
+        return $this->model->getWinnerFromGamesIfGameIsEnd($gameId, $login, $opponent);
+    }
+
+    public function getWinnerForRequester($gameId, $login, $opponent): int
+    {
+        return $this->model->getWinnerFromGamesIfYouEndGame($gameId, $login, $opponent);
+    }
+
+    public function updateWinner($gameId, $login)
+    {
+        $this->model->updateWinnerInGames($gameId, $login);
     }
 }
