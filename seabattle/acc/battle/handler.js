@@ -4,6 +4,7 @@ window.onload = () => {
     } else {
         document.querySelector(".mine-nick").innerHTML = "";
         document.querySelector(".mine-nick").innerHTML = localStorage.getItem("login");
+        document.querySelector(".opponent-nick").innerHTML = JSON.parse(localStorage.getItem("gameInfo")).opponent_login;
     }
 
     function exitFromBattlePage() {

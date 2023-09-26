@@ -127,7 +127,7 @@ class Controller
     {
         for ($i = 0; $i < 5; $i++) {
             $status = $this->model->getResponseStatusFromShots($gameId, $shotCoords, $login);
-            if ($status !== null) {
+            if ($status[0] !== null) {
                 return $status;
             }
             sleep(1);

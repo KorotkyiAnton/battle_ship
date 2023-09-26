@@ -63,10 +63,11 @@ class Model
             );
             $statement->execute([$userId]);
             $userStatus = $statement->fetchAll()[0]["status"];
-            if (is_null($userStatus)) {
-                $statement = $connection->prepare("INSERT INTO Queues (user_id, status) VALUES (?, ?)");
-                $statement->execute([$userId, 0]);
-            }
+        }
+
+        if ($userStatus === 0) {
+            $statement = $connection->prepare("INSERT INTO Queues (user_id, status) VALUES (?, ?)");
+            $statement->execute([$userId, 0]);
         }
 
         return intval($userStatus);
@@ -284,16 +285,47 @@ class Model
         $statement->execute([$userId, $gameId, $shotCoords, 1, NULL, $this->countTurns($gameId) + 1, date('Y-m-d H:i:s')]);
     }
 
-    public function getResponseStatusFromShots($gameId, $shotCoords, $login): ?int
+    public function getResponseStatusFromShots($gameId, $shotCoords, $login): ?array
     {
         $userId = $this->getUserIdFromLogin($login);
 
         $connection = $this->db->getConnection();
         $statement = $connection->prepare(
-            "SELECT response FROM Shots WHERE game_id = ? AND target = ? AND NOT player_id = ? AND turn_number = ?");
+            "SELECT response, start_coord FROM Shots WHERE game_id = ? AND target = ? AND NOT player_id = ? AND turn_number = ?");
         $statement->execute([$gameId, $shotCoords, $userId, $this->countTurns($gameId)]);
+        $fetchedData = $statement->fetchAll()[0];
+        $startCoord = $fetchedData["start_coord"];
+        $ships = null;
+        if($startCoord !== null) {
+            $statement = $connection->prepare(
+                "SELECT GROUP_CONCAT(target) 'ships' FROM Shots WHERE response IS NOT NULL AND game_id=? AND (target LIKE ? OR target LIKE ?)");
+            $statement->execute([$gameId, $shotCoords[0]."%", "_".substr($shotCoords, 1)]);
+            $ships = $statement->fetchAll()[0]["ships"];
+            $ships = explode(",", $ships);
+            $output = [];
 
-        return $statement->fetchAll()[0]["response"];
+            $startCoordLetter = ord(substr($startCoord, 0, 1));
+            $startCoordNumber = intval(substr($startCoord, 1));
+
+            foreach ($ships as $shipKey => $ship) {
+                $shipLetter = ord(substr($ship, 0, 1));
+                $shipNumber = intval(substr($ship, 1));
+                if(count($output)> 0) {
+                    $outputLetter = ord(substr($output[count($output)-1], 0, 1));
+                    $outputNumber = intval(substr($output[count($output)-1], 1));
+                }
+
+                if( ($startCoordLetter === $shipLetter && abs($startCoordNumber - $shipNumber) <= 1) ||
+                    (count($output) > 0 && $outputLetter === $shipLetter && abs($outputNumber - $shipNumber) <= 1) ||
+                    ($startCoordNumber === $shipNumber && abs($startCoordLetter - $shipLetter) <= 1) ||
+                    (count($output) > 0 && $outputNumber === $shipNumber && abs($outputLetter - $shipLetter) <= 1)
+                ) {
+                    $output[] = $ship;
+                }
+            }
+        }
+
+        return [$fetchedData["response"], $output];
     }
 
     public function getUserOnlineStatusFromUsers(int $opponentId): bool
@@ -407,7 +439,6 @@ class Model
         $statement = $connection->prepare("SELECT COUNT(id) 'destroyed_count' FROM ShipsKorotkyi WHERE game_id = ? AND user_id = ? AND is_destroyed = 1");
         $statement->execute([$gameId, $this->getUserIdFromLogin($login)]);
         $destroyedCount = intval($statement->fetchAll()[0]["destroyed_count"]);
-        echo $destroyedCount;
 
         $statement = $connection->prepare("SELECT COUNT(id) 'skips' FROM Shots WHERE game_id = ? AND player_id = ? AND target = 'afk'");
         $statement->execute([$gameId, $this->getUserIdFromLogin($login)]);

@@ -18,13 +18,12 @@ function checkLoginUnique(login) {
         messageId: 1,
         messageType: "isLoginUnique",
         createDate: new Date(),
-        isUnique: false,
         login: login
     };
 
     const requestBody = JSON.stringify(requestData);
 
-    const url = "https://fmc2.avmg.com.ua/study/korotkyi/warship/server.php";
+    const url = "https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php";
 
     const requestOptions = {
         method: "POST",
@@ -48,14 +47,15 @@ function checkLoginUnique(login) {
                 } else if(data.status === 2) {
                     window.location.href = "acc/battle";
                 }
-            } else if (!data.isUnique) {
+            } else if (!data.isWriteToDB) {
                 textStatus.style.visibility = "visible";
                 showStatus("block", "none", "none");
                 textStatus.innerHTML = "";
                 popupErr.innerHTML = "";
-                textStatus.innerHTML += "На жаль, помилка - данний нікнейм вже зайнятий, спробуйте іншій.<br>";
-                popupErr.innerHTML += "На жаль, помилка - данний нікнейм вже зайнятий, спробуйте іншій.<br>";
+                textStatus.innerHTML = data.errMsg;
+                popupErr.innerHTML = data.errMsg;
             } else {
+                console.log(data);
                 localStorage.setItem("login", data.login)
                 window.location.href = "acc";
             }

@@ -1,8 +1,5 @@
 export function sendSquadron(squadron) {
     let outputObj = {};
-    outputObj.messageId = 10;
-    outputObj.messageType = "allShipCoordsToDB";
-    outputObj.createDate = new Date();
 
     for (const key in squadron) {
         const ship = squadron[key];
@@ -39,16 +36,19 @@ export function startTimer(timerElement, otherElementsToDisable, readyButton, sq
     isTimerRunning = true;
     disableOtherElements(otherElementsToDisable, true);
 
-    requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/seabattle/acc/server.php",
+    console.log(JSON.parse(localStorage.getItem("shipCoords")));
+
+    requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php",
         {
             messageId: 9,
             messageType: "requestIsUsersInQueue",
             createDate: new Date(),
-            id: Math.random() * 100,
-            firstTurn: Math.random() * 100,
-            ships: squadron
+            login: localStorage.getItem("login"),
+            continueSearch: true,
+            shipCoordinates: JSON.parse(localStorage.getItem("shipCoords"))
         }).then(data => {
         if (data.messageType === "gameCreateInfo" || data.messageType === "gameConnectInfo") {
+            data.shipCoordinates = JSON.parse(localStorage.getItem("shipCoords"));
             localStorage.setItem("gameInfo", JSON.stringify(data));
             window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/seabattle/acc/battle";
             document.querySelector(".in-game").style.visibility = "visible";

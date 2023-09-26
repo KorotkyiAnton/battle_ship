@@ -126,6 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $controller->removePlayerFromQueue($postData["login"]);
         $controller->removePlayerFromUserList($postData["login"]);
     } else if ($postData["messageType"] === "localShipStoreEmpty") {
+        $logger->log("User {$postData["login"]} get info from private table");
         $shipsSquadron = $controller->formShipsJSON($postData["login"]);
         $gameInfo = $controller->getCurrentGameInfo($postData["login"]);
         $gameId = $gameInfo[0];
@@ -159,30 +160,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //        }
         $winner= 0;
 
-        if($shotResponse === 0 || $shotResponse === 21 || $shotResponse === 22 || $shotResponse === 23 || $shotResponse === 24) {
+        if($shotResponse[0] === 0 || $shotResponse[0] === 21 || $shotResponse[0] === 22 || $shotResponse[0] === 23 || $shotResponse[0] === 24) {
             $winner = $controller->getWinnerForRequester($postData["gameId"], $postData["login"], $postData["opponent"]);
         }
 
+        $yourTurn = 0;
 
+        if($shotResponse[0] > 0) {
+            $yourTurn = 1;
+        }
+
+        $logger->log("User {$postData["login"]} strike cell ".$postData["shotCoords"]." with result ".$shotResponse[0]);
         echo json_encode([
             "messageId" => 14,
             "messageType" => "shotResponseCoords",
             "createDate" => new DateTime(),
-            "shotResponse" => $shotResponse,
+            "shotResponse" => $shotResponse[0],
             "shotCoords" => $postData["shotCoords"],
-            "winner" => $winner
+            "ships" => $shotResponse[1],
+            "winner" => $winner,
+            "yourTurn" => $yourTurn
         ]);
     } else if ($postData["messageType"] === "shotResponseCoords") {
         $shotResponse = $controller->listenRequestFromOpponent($postData["gameId"], $postData["login"]);
         $endOfTheGame = $controller->getWinnerOfGame($postData["gameId"], $postData["login"], $postData["opponent"]);
+        $yourTurn = 1;
 
+        if($shotResponse[1] > 0) {
+            $yourTurn = 0;
+        }
+
+        $logger->log("User {$postData["opponent"]} strike cell ".$shotResponse[0]." with result ".$shotResponse[1]);
         echo json_encode([
             "messageId" => 16,
             "messageType" => "shotResponseCoords",
             "createDate" => new DateTime(),
             "shotResponse" => $shotResponse[1],
             "shotCoords" => $shotResponse[0],
-            "winner" => $endOfTheGame
+            "winner" => $endOfTheGame,
+            "yourTurn" => $yourTurn
         ]);
     } else if ($postData["messageType"] === "userCancelPage") {
         $logger->log("User {$postData["login"]} exit games. All info is removed.");

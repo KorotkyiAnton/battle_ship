@@ -32,7 +32,7 @@ export function placeShipsOnField(shipData) {
             } else if (shipInfo.orientation === 'down') {
                 shipElement.classList.add('down');
             }
-            console.log(shipElement.style.top)
+            //console.log(shipElement.style.top)
 
             // Добавляем корабль на поле mine-field
             mineField.appendChild(shipElement);
