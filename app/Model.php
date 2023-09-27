@@ -169,6 +169,9 @@ class Model
             $direction = $shipData['orientation'];
             $is_destroyed = false; // При добавлении кораблей предполагаем, что они не разрушены
             $startCoordinate = $shipData['coords'][0];
+            if($direction === "right" || $direction === "down") {
+                $startCoordinate = $shipData['coords'][$shipType-1];
+            }
             $statement = $connection->prepare("INSERT INTO ShipsKorotkyi (game_id, ship_type, direction, is_destroyed, start_coordinate, user_id) VALUES (?, ?, ?, ?, ?, ?)");
             $statement->execute([$gameId, $shipType, $direction, $is_destroyed, $startCoordinate, $this->getUserIdFromLogin($login)]);
 
@@ -296,36 +299,52 @@ class Model
         $fetchedData = $statement->fetchAll()[0];
         $startCoord = $fetchedData["start_coord"];
         $ships = null;
-        if($startCoord !== null) {
+        if ($startCoord !== null) {
             $statement = $connection->prepare(
-                "SELECT GROUP_CONCAT(target) 'ships' FROM Shots WHERE response IS NOT NULL AND game_id=? AND (target LIKE ? OR target LIKE ?)");
-            $statement->execute([$gameId, $shotCoords[0]."%", "_".substr($shotCoords, 1)]);
+                "SELECT GROUP_CONCAT(target) 'ships' FROM Shots WHERE (response = 1 OR response LIKE '2_') AND game_id=? AND (target LIKE ? OR target LIKE ?)");
+            $statement->execute([$gameId, $shotCoords[0] . "%", "_" . substr($shotCoords, 1)]);
             $ships = $statement->fetchAll()[0]["ships"];
             $ships = explode(",", $ships);
-            $output = [];
 
-            $startCoordLetter = ord(substr($startCoord, 0, 1));
-            $startCoordNumber = intval(substr($startCoord, 1));
+            $direction = intval($fetchedData["response"]) === 21 || intval($fetchedData["response"]) === 22 ? 0 : 1;
 
-            foreach ($ships as $shipKey => $ship) {
-                $shipLetter = ord(substr($ship, 0, 1));
-                $shipNumber = intval(substr($ship, 1));
-                if(count($output)> 0) {
-                    $outputLetter = ord(substr($output[count($output)-1], 0, 1));
-                    $outputNumber = intval(substr($output[count($output)-1], 1));
-                }
+            $ships = $this->findShipCoordinates($startCoord, $direction, $ships);
+        }
+        return [$fetchedData["response"], $ships];
+    }
 
-                if( ($startCoordLetter === $shipLetter && abs($startCoordNumber - $shipNumber) <= 1) ||
-                    (count($output) > 0 && $outputLetter === $shipLetter && abs($outputNumber - $shipNumber) <= 1) ||
-                    ($startCoordNumber === $shipNumber && abs($startCoordLetter - $shipLetter) <= 1) ||
-                    (count($output) > 0 && $outputNumber === $shipNumber && abs($outputLetter - $shipLetter) <= 1)
+    public function findShipCoordinates($startCoord, $direction,  $lineCoordinates): array
+    {
+        $shipCoordinates = [];
+        $shipCoordinates[] = $startCoord; // Добавляем стартовую координату в начало корабля
+
+        // Сортируем массив координат для обеспечения правильного порядка
+        if($direction) {
+            sort($lineCoordinates);
+        } else {
+            rsort($lineCoordinates);
+        }
+
+        foreach ($lineCoordinates as $coord) {
+            $coordLetter = ord(substr($coord, 0, 1));
+            $coordNumber = intval(substr($coord, 1));
+
+            foreach ($shipCoordinates as $outputCoordinate) {
+                $outputLetter = ord(substr($outputCoordinate, 0, 1));
+                $outputNumber = intval(substr($outputCoordinate, 1));
+
+                if (
+                    ($outputLetter === $coordLetter && abs($outputNumber - $coordNumber) <= 1) ||
+                    ($outputNumber === $coordNumber && abs($outputLetter - $coordLetter) <= 1)
                 ) {
-                    $output[] = $ship;
+                    $shipCoordinates[] = $coord;
                 }
             }
         }
 
-        return [$fetchedData["response"], $output];
+        sort($shipCoordinates);
+
+        return array_values(array_unique($shipCoordinates));
     }
 
     public function getUserOnlineStatusFromUsers(int $opponentId): bool
@@ -345,16 +364,16 @@ class Model
             "SELECT turn_number  'turn_number' FROM Shots WHERE response IS NOT NULL AND game_id = ? ORDER BY id DESC LIMIT 1");
         $statement->execute([$gameId]);
 
-        return intval($statement->fetchAll()[0]["turn_number"])+1;
+        return intval($statement->fetchAll()[0]["turn_number"]) + 1;
     }
 
     public function getRequestFromShots($gameId, $login): string
     {
-        $query = "SELECT target FROM Shots WHERE game_id = ? AND turn_number = ? ORDER BY id DESC LIMIT 1";
+        $query = "SELECT target FROM Shots WHERE game_id = ? AND turn_number = ? AND NOT player_id = ? ORDER BY id DESC LIMIT 1";
 
         $connection = $this->db->getConnection();
         $statement = $connection->prepare($query);
-        $statement->execute([$gameId, $this->checkResponse($gameId)]);
+        $statement->execute([$gameId, $this->checkResponse($gameId), $this->getUserIdFromLogin($login)]);
         $target = $statement->fetchAll()[0]["target"];
 
         $statement = $connection->prepare("UPDATE CoordinatesKorotkyi SET is_hit = true WHERE coordinate = ?");
@@ -366,8 +385,9 @@ class Model
     public function checkIfOpponentHit(string $target, $gameId, $login): int
     {
         $connection = $this->db->getConnection();
-        $statement = $connection->prepare("SELECT ship_id FROM CoordinatesKorotkyi WHERE coordinate = ?");
-        $statement->execute([$target]);
+        $statement = $connection->prepare("SELECT DISTINCT ship_id FROM CoordinatesKorotkyi WHERE coordinate = ? AND ship_id IN 
+                                                                 (SELECT id FROM ShipsKorotkyi WHERE user_id = ? AND game_id=?)");
+        $statement->execute([$target, $this->getUserIdFromLogin($login), $gameId]);
         $hitShipId = $statement->fetchAll()[0]["ship_id"];
         $outputArray = [];
         $userId = $this->getUserIdFromLogin($login);
@@ -432,7 +452,7 @@ class Model
         $statement = $connection->prepare("SELECT winner FROM Games WHERE id = ?");
         $statement->execute([$gameId]);
         $winner = intval($statement->fetchAll()[0]["winner"]);
-        if($winner !== 0) {
+        if ($winner !== 0) {
             return $winner;
         }
 
@@ -444,7 +464,7 @@ class Model
         $statement->execute([$gameId, $this->getUserIdFromLogin($login)]);
         $skips = intval($statement->fetchAll()[0]["skips"]);
 
-        if($destroyedCount === 10) {
+        if ($destroyedCount === 10) {
             $this->updateUserStatusInQueues($login, 0);
             $statement = $connection->prepare("UPDATE Games SET winner = ? WHERE id = ?");
             $statement->execute([$this->getUserIdFromLogin($opponent), $gameId]);
@@ -464,7 +484,7 @@ class Model
         $statement = $connection->prepare("SELECT winner FROM Games WHERE id = ?");
         $statement->execute([$gameId]);
         $winner = intval($statement->fetchAll()[0]["winner"]);
-        if($winner !== 0) {
+        if ($winner !== 0) {
             return $winner;
         }
 
@@ -475,7 +495,7 @@ class Model
         $statement = $connection->prepare("SELECT COUNT(id) 'skips' FROM Shots WHERE game_id = ? AND player_id = ? AND target = 'afk'");
         $statement->execute([$gameId, $this->getUserIdFromLogin($login)]);
         $skips = intval($statement->fetchAll()[0]["skips"]);
-        if($destroyedCount === 10) {
+        if ($destroyedCount === 10) {
             $this->updateUserStatusInQueues($login, 0);
             $statement = $connection->prepare("UPDATE Games SET winner = ? WHERE id = ?");
             $statement->execute([$this->getUserIdFromLogin($login), $gameId]);
@@ -494,5 +514,18 @@ class Model
         $connection = $this->db->getConnection();
         $statement = $connection->prepare("UPDATE Games SET winner = ? WHERE id = ?");
         $statement->execute([$this->getUserIdFromLogin($login), $gameId]);
+    }
+
+    public function getShipWithTargetAndWithDestroyed($gameId, $target, $login): array
+    {
+        $connection = $this->db->getConnection();
+        $statement = $connection->prepare(
+            "SELECT GROUP_CONCAT(coordinate) 'coords' 
+        FROM CoordinatesKorotkyi WHERE ship_id IN
+        (SELECT id FROM ShipsKorotkyi WHERE user_id = ? AND start_coordinate IN 
+        (SELECT start_coord FROM Shots WHERE game_id= ? AND response LIKE '2_' AND target = ?) AND game_id =?)");
+        $statement->execute([$this->getUserIdFromLogin($login), $gameId, $target, $gameId]);
+        $destroyedShipCoordinates = $statement->fetchAll()[0]["coords"];
+        return explode(",", $destroyedShipCoordinates);
     }
 }

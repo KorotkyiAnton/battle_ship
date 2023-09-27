@@ -125,12 +125,12 @@ class Controller
 
     public function getApprovalStatusFromOpponent($gameId, $shotCoords, $login)
     {
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 25; $i++) {
             $status = $this->model->getResponseStatusFromShots($gameId, $shotCoords, $login);
             if ($status[0] !== null) {
                 return $status;
             }
-            sleep(1);
+            usleep(200000);
         }
     }
 
@@ -141,12 +141,12 @@ class Controller
 
     public function listenRequestFromOpponent($gameId, $login): ?array
     {
-        for ($i = 0; $i < 30; $i++) {
+        for ($i = 0; $i < 150; $i++) {
             $target = $this->model->getRequestFromShots($gameId, $login);
             if($target !== "") {
                 return [$target, $this->model->checkIfOpponentHit($target, $gameId, $login)];
             }
-            sleep(1);
+            usleep(200000);
         }
         return null;
     }
@@ -169,5 +169,10 @@ class Controller
     public function updateWinner($gameId, $login)
     {
         $this->model->updateWinnerInGames($gameId, $login);
+    }
+
+    public function getDestroyedShip($gameId, $target, $login): array
+    {
+        return $this->model->getShipWithTargetAndWithDestroyed($gameId, $target, $login);
     }
 }

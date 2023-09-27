@@ -145,7 +145,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ]);
     } else if ($postData["messageType"] === "shotRequestCoords") {
         $controller->sendShotToOpponent($postData["gameId"], $postData["shotCoords"], $postData["login"]);
-        $shotResponse = NULL;
         $userOnline = $controller->userOnline($model->getUserIdFromLogin($postData["opponent"]));
 //        if(!$userOnline) {
 //            for ($i=0; $i < 90; $i++) {
@@ -185,9 +184,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $shotResponse = $controller->listenRequestFromOpponent($postData["gameId"], $postData["login"]);
         $endOfTheGame = $controller->getWinnerOfGame($postData["gameId"], $postData["login"], $postData["opponent"]);
         $yourTurn = 1;
+        $destroyedShip = null;
 
         if($shotResponse[1] > 0) {
             $yourTurn = 0;
+        }
+        if($shotResponse[1] > 20) {
+            $destroyedShip = $controller->getDestroyedShip($postData["gameId"], $shotResponse[0], $postData["login"]);
         }
 
         $logger->log("User {$postData["opponent"]} strike cell ".$shotResponse[0]." with result ".$shotResponse[1]);
@@ -197,6 +200,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             "createDate" => new DateTime(),
             "shotResponse" => $shotResponse[1],
             "shotCoords" => $shotResponse[0],
+            "ships"=> $destroyedShip,
             "winner" => $endOfTheGame,
             "yourTurn" => $yourTurn
         ]);
