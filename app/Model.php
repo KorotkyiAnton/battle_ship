@@ -297,61 +297,44 @@ class Model
 
         $connection = $this->db->getConnection();
         $statement = $connection->prepare(
-            "SELECT response, start_coord FROM Shots WHERE game_id = ? AND target = ? AND NOT player_id = ? AND turn_number = ?");
+            "SELECT response, start_coord, ship_length FROM Shots WHERE game_id = ? AND target = ? AND NOT player_id = ? AND turn_number = ?");
         $statement->execute([$gameId, $shotCoords, $userId, $this->countTurns($gameId)]);
         $fetchedData = $statement->fetchAll()[0];
         $startCoord = $fetchedData["start_coord"];
+        $length = intval($fetchedData["ship_length"]);
         $ships = null;
-        if ($startCoord !== null) {
-            $statement = $connection->prepare(
-                "SELECT GROUP_CONCAT(target) 'ships' FROM Shots WHERE (response = 1 OR response LIKE '2_') AND game_id=? AND (target LIKE ? OR target LIKE ?)");
-            $statement->execute([$gameId, $shotCoords[0] . "%", "_" . substr($shotCoords, 1)]);
-            $ships = $statement->fetchAll()[0]["ships"];
-            $ships = explode(",", $ships);
 
-            $direction = intval($fetchedData["response"]) === 21 || intval($fetchedData["response"]) === 22 ? 0 : 1;
-
-            $ships = $this->findShipCoordinates($startCoord, $direction, $ships);
+        if(!is_null($startCoord)){
+            $ships = $this->generateShipCoordinates($startCoord, intval($fetchedData["response"])%20, $length);
         }
+
         return [$fetchedData["response"], $ships];
     }
 
-    public function findShipCoordinates($startCoord, $direction, $lineCoordinates): array
+    public function generateShipCoordinates($startCoord, $direction, $length): array
     {
-        $shipCoordinates = [];
-        $shipCoordinates[] = $startCoord; // Добавляем стартовую координату в начало корабля
+        $shipCoordinates = [$startCoord]; // Начальная координата
 
-        // Сортируем массив координат для обеспечения правильного порядка
-        if ($direction) {
-            sort($lineCoordinates);
-        } else {
-            rsort($lineCoordinates);
+        // Определите смещения для каждого направления
+        $dx = 0;
+        $dy = 0;
+
+        if ($direction == 1) {
+            $dx = -1; // Вправо
+        } elseif ($direction == 2) {
+            $dy = -1; // Вниз
+        } elseif ($direction == 3) {
+            $dx = 1; // Влево
+        } elseif ($direction == 4) {
+            $dy = 1; // Вверх
         }
 
-        foreach ($lineCoordinates as $coord) {
-            $coordLetter = ord(substr($coord, 0, 1));
-            $coordNumber = intval(substr($coord, 1));
-
-            foreach ($shipCoordinates as $outputCoordinate) {
-                $outputLetter = ord(substr($outputCoordinate, 0, 1));
-                $outputNumber = intval(substr($outputCoordinate, 1));
-
-                if (
-                    ($outputLetter === $coordLetter && abs($outputNumber - $coordNumber) <= 1) ||
-                    ($outputNumber === $coordNumber && abs($outputLetter - $coordLetter) <= 1)
-                ) {
-                    $shipCoordinates[] = $coord;
-                }
-            }
-        }
-
-        sort($shipCoordinates);
-
-        $shipCoordinates = array_values(array_unique($shipCoordinates));
-
-        if (preg_match('/^\w{1}10$/', $shipCoordinates[0]) === 1 && preg_match('/^\w{1}10$/', $shipCoordinates[1]) !== 1) {
-            $firstCoordinate = array_shift($shipCoordinates);
-            $shipCoordinates[] = $firstCoordinate;
+        // Добавляем остальные координаты корабля
+        for ($i = 1; $i < $length; $i++) {
+            $x = ord($startCoord[0]) + $i * $dx;
+            $y = intval(substr($startCoord, 1)) + $i * $dy;
+            $newCoord = chr($x) . $y;
+            $shipCoordinates[] = $newCoord;
         }
 
         return $shipCoordinates;
@@ -427,20 +410,22 @@ class Model
             $connection = $this->db->getConnection();
             $statement = $connection->prepare("UPDATE ShipsKorotkyi SET is_destroyed = true WHERE id = ?");
             $statement->execute([$hitShipId]);
-            $statement = $connection->prepare("SELECT direction FROM ShipsKorotkyi WHERE id = ?");
+            $statement = $connection->prepare("SELECT direction, ship_type FROM ShipsKorotkyi WHERE id = ?");
             $statement->execute([$hitShipId]);
-            $direction = $statement->fetchAll()[0]["direction"];
+            $fetchData = $statement->fetchAll()[0];
+            $direction = $fetchData["direction"];
+            $length = $fetchData["ship_type"];
             if ($direction === "right") {
-                $this->insertResponseToShots($userId, $gameId, $target, 21, array_keys($outputArray)[count($outputArray) - 1]);
+                $this->insertResponseToShots($userId, $gameId, $target, 21, array_keys($outputArray)[count($outputArray) - 1], $length);
                 return 21;
             } else if ($direction === "down") {
-                $this->insertResponseToShots($userId, $gameId, $target, 22, array_keys($outputArray)[count($outputArray) - 1]);
+                $this->insertResponseToShots($userId, $gameId, $target, 22, array_keys($outputArray)[count($outputArray) - 1], $length);
                 return 22;
             } else if ($direction === "left") {
-                $this->insertResponseToShots($userId, $gameId, $target, 23, array_keys($outputArray)[0]);
+                $this->insertResponseToShots($userId, $gameId, $target, 23, array_keys($outputArray)[0], $length);
                 return 23;
             } else if ($direction === "up") {
-                $this->insertResponseToShots($userId, $gameId, $target, 24, array_keys($outputArray)[0]);
+                $this->insertResponseToShots($userId, $gameId, $target, 24, array_keys($outputArray)[0], $length);
                 return 24;
             }
         }
@@ -449,11 +434,11 @@ class Model
         return 1;
     }
 
-    private function insertResponseToShots(int $userId, $gameId, string $target, int $response, $startCoord = NULL): void
+    private function insertResponseToShots(int $userId, $gameId, string $target, int $response, $startCoord = NULL, $ship_length = NULL): void
     {
         $connection = $this->db->getConnection();
-        $statement = $connection->prepare("INSERT INTO Shots (player_id, game_id, target, request, response, turn_number, shot_time, start_coord) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        $statement->execute([$userId, $gameId, $target, 0, $response, $this->countTurns($gameId), date('Y-m-d H:i:s'), $startCoord]);
+        $statement = $connection->prepare("INSERT INTO Shots (player_id, game_id, target, request, response, turn_number, shot_time, start_coord, ship_length) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $statement->execute([$userId, $gameId, $target, 0, $response, $this->countTurns($gameId), date('Y-m-d H:i:s'), $startCoord, $ship_length]);
     }
 
     public function getWinnerFromGamesIfGameIsEnd($gameId, $login, $opponent): int
