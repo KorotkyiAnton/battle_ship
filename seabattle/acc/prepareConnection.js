@@ -72,6 +72,17 @@ export function startTimer(timerElement, otherElementsToDisable, readyButton, sq
 export function stopTimer(timerElement, otherElementsToDisable, readyButton) {
     clearInterval(countdownTimer);
     isTimerRunning = false;
+    requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php",
+        {
+            messageId: 9,
+            messageType: "requestIsUsersInQueue",
+            createDate: new Date(),
+            login: localStorage.getItem("login"),
+            continueSearch: false,
+            shipCoordinates: JSON.parse(localStorage.getItem("shipCoords"))
+        }).then(data => {
+            console.log(data)
+    });
     timerSeconds = 90;
     timerElement.textContent = `${timerSeconds} сек`;
     disableOtherElements(otherElementsToDisable, false);

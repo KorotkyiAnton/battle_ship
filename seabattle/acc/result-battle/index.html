@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sea Battle</title>
+    <link rel="stylesheet" type="text/css" href="../../../reset.css">
+    <link rel="stylesheet" type="text/css" href="../battle/style.css">
+</head>
+<body>
+<header>
+    <img src="../../src/u167.svg" alt="" class="previous-page">
+    <div class="main-label"><img src="../../src/u6.svg" alt="Зображення корабля">
+        <div>Морський Бій</div>
+    </div>
+    <img src="../../src/u166.svg" alt="" class="close">
+</header>
+<main>
+    <div class="u-lose" style="display: none">
+        <div class="loc-nick">
+            anton23,
+        </div>
+        <div>
+            Ви програли!
+        </div>
+    </div>
+    <div class="u-win" style="display: none">
+        <div class="loc-nick">
+            anton23,
+        </div>
+        <div>
+            Ви перемогли!
+        </div>
+    </div>
+
+    <div class="player-nick">
+        <div>
+            <span class="mine-nick">nickName</span>
+        </div>
+        <div>
+            <span class="opponent-nick">nickName</span>
+        </div>
+    </div>
+    <div class="battle-fields">
+        <div class="field mine-field">
+            <div class="ships"></div>
+        </div>
+        <div class="field opponent-field">
+            <div class="game-search-spinner" style="visibility: hidden">
+                <div class="spinner-anc">
+                    <img src="../img/anchor.png" alt="Якорь">
+                </div>
+            </div>
+            <div class="ships"></div>
+        </div>
+    </div>
+    <div class="exit-after-game" >Вийти в головне меню</div>
+    <div class="play-again" >Грати ще</div>
+</main>
+</body>
+<script src="handler.js" type="module"></script>
+</html>

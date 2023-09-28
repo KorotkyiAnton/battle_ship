@@ -220,7 +220,7 @@ class Placement {
         const el = e.target.closest('.ship');
 
         if (!el) return;
-        if(el.parentElement.classList.contains("ships")) {
+        if (el.parentElement.classList.contains("ships")) {
             el.classList.add("selected");
         }
 
@@ -306,7 +306,7 @@ class Placement {
 
     rotationShip(e, el) {
         const name = Placement.getShipName(el);
-        if(name===null) return;
+        if (name === null) return;
 
         if (human.squadron[name].decks === 1) return;
         const decks = human.squadron[name].arrDecks.length;
@@ -414,9 +414,9 @@ class Placement {
 
         let result = human.checkLocationShip(options, options.decks);
 
-        if(!result) {
-            options.x = this.dragObject.top/25;
-            options.y = this.dragObject.left/25;
+        if (!result) {
+            options.x = this.dragObject.top / 25;
+            options.y = this.dragObject.left / 25;
         }
 
         const ship = new Ships(human, options);
@@ -507,7 +507,7 @@ readyButton.addEventListener('click', function () {
         readyButton.value = 'Готовий';
         stopTimer(timerElement, otherElementsToDisable, readyButton);
     }
-});
+})
 
 document.querySelector(".clear-field").addEventListener('click', function (e) {
     human.cleanField();

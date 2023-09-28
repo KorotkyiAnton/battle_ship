@@ -1,3 +1,5 @@
+import {requestToDB} from "../prepareConnection.js";
+
 window.onload = () => {
     if(localStorage.getItem("login")===null) {
         window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/seabattle/";
@@ -8,6 +10,13 @@ window.onload = () => {
     }
 
     function exitFromBattlePage() {
+        requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php",
+            {
+                messageId: 9,
+                messageType: "userCancelPage",
+                createDate: new Date(),
+                login: localStorage.getItem("login"),
+            }).then(data => {});
         window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/seabattle/";
         localStorage.removeItem("login");
         localStorage.removeItem("shipCoords");
@@ -15,6 +24,13 @@ window.onload = () => {
 
     function previousPage() {
         history.back();
+        requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php",
+            {
+                messageId: 9,
+                messageType: "userEnterPreviousPage",
+                createDate: new Date(),
+                login: localStorage.getItem("login"),
+            }).then(data => {});
     }
 
     const confirmationOverlay = document.getElementById('confirmationOverlay');

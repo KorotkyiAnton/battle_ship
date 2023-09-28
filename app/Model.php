@@ -31,7 +31,8 @@ class Model
         $connection = $this->db->getConnection();
         $statement = $connection->prepare("SELECT COUNT(LOWER(login)) 'login'  FROM Users  WHERE login = LOWER(?)");
         $statement->execute([$param]);
-        return !($statement->fetchAll()[0]["login"]);
+        $fetchData = $statement->fetchAll()[0];
+        return !($fetchData["login"]);
     }
 
     public function addLoginToDB($login): bool
@@ -57,7 +58,7 @@ class Model
         $isOnline = $fetchData[0]["is_online"];
         $userStatus = 0;
 
-        if (!is_null($userId) && !$isOnline) {
+        if (!is_null($userId) || !$isOnline) {
             $statement = $connection->prepare(
                 "SELECT status FROM Queues WHERE user_id = ?"
             );
@@ -65,7 +66,7 @@ class Model
             $userStatus = $statement->fetchAll()[0]["status"];
         }
 
-        if ($userStatus === 0) {
+        if (is_null($userStatus)) {
             $statement = $connection->prepare("INSERT INTO Queues (user_id, status) VALUES (?, ?)");
             $statement->execute([$userId, 0]);
         }
@@ -169,8 +170,8 @@ class Model
             $direction = $shipData['orientation'];
             $is_destroyed = false; // При добавлении кораблей предполагаем, что они не разрушены
             $startCoordinate = $shipData['coords'][0];
-            if($direction === "right" || $direction === "down") {
-                $startCoordinate = $shipData['coords'][$shipType-1];
+            if ($direction === "right" || $direction === "down") {
+                $startCoordinate = $shipData['coords'][$shipType - 1];
             }
             $statement = $connection->prepare("INSERT INTO ShipsKorotkyi (game_id, ship_type, direction, is_destroyed, start_coordinate, user_id) VALUES (?, ?, ?, ?, ?, ?)");
             $statement->execute([$gameId, $shipType, $direction, $is_destroyed, $startCoordinate, $this->getUserIdFromLogin($login)]);
@@ -199,6 +200,8 @@ class Model
     public function deleteUserFromUsers($login)
     {
         $connection = $this->db->getConnection();
+        $statement = $connection->prepare("UPDATE Users SET is_online=0 WHERE LOWER(login) = LOWER(?)");
+        $statement->execute([$login]);
         $statement = $connection->prepare("DELETE FROM Users WHERE LOWER(login) = LOWER(?)");
         $statement->execute([$login]);
     }
@@ -313,13 +316,13 @@ class Model
         return [$fetchedData["response"], $ships];
     }
 
-    public function findShipCoordinates($startCoord, $direction,  $lineCoordinates): array
+    public function findShipCoordinates($startCoord, $direction, $lineCoordinates): array
     {
         $shipCoordinates = [];
         $shipCoordinates[] = $startCoord; // Добавляем стартовую координату в начало корабля
 
         // Сортируем массив координат для обеспечения правильного порядка
-        if($direction) {
+        if ($direction) {
             sort($lineCoordinates);
         } else {
             rsort($lineCoordinates);
@@ -344,7 +347,14 @@ class Model
 
         sort($shipCoordinates);
 
-        return array_values(array_unique($shipCoordinates));
+        $shipCoordinates = array_values(array_unique($shipCoordinates));
+
+        if (preg_match('/^\w{1}10$/', $shipCoordinates[0]) === 1 && preg_match('/^\w{1}10$/', $shipCoordinates[1]) !== 1) {
+            $firstCoordinate = array_shift($shipCoordinates);
+            $shipCoordinates[] = $firstCoordinate;
+        }
+
+        return $shipCoordinates;
     }
 
     public function getUserOnlineStatusFromUsers(int $opponentId): bool
@@ -488,7 +498,7 @@ class Model
             return $winner;
         }
 
-        $statement = $connection->prepare("SELECT COUNT(id) 'destroyed_count' FROM Shots WHERE game_id = ? AND player_id = ? AND response LIKE '2_'");
+        $statement = $connection->prepare("SELECT COUNT(id) 'destroyed_count' FROM Shots WHERE game_id = ? AND player_id = ? AND start_coord IS NOT NULL");
         $statement->execute([$gameId, $this->getUserIdFromLogin($opponent)]);
         $destroyedCount = intval($statement->fetchAll()[0]["destroyed_count"]);
 
@@ -505,8 +515,9 @@ class Model
             $statement = $connection->prepare("UPDATE Games SET winner = ? WHERE id = ?");
             $statement->execute([$this->getUserIdFromLogin($opponent), $gameId]);
             return $this->getUserIdFromLogin($opponent);
+        } else {
+            return 0;
         }
-        return 0;
     }
 
     public function updateWinnerInGames($gameId, $login)
@@ -527,5 +538,19 @@ class Model
         $statement->execute([$this->getUserIdFromLogin($login), $gameId, $target, $gameId]);
         $destroyedShipCoordinates = $statement->fetchAll()[0]["coords"];
         return explode(",", $destroyedShipCoordinates);
+    }
+
+    public function updateOnlineStatus($login)
+    {
+        $connection = $this->db->getConnection();
+        $statement = $connection->prepare("UPDATE Users SET is_online=1 WHERE login = LOWER(?)");
+        $statement->execute([$login]);
+        $statement = $connection->prepare("SELECT user_id FROM Queues WHERE user_id = ?");
+        $statement->execute([$this->getUserIdFromLogin($login)]);
+        $userId = $statement->fetchAll()[0]["user_id"];
+        if(!is_null($userId)) {
+            $statement = $connection->prepare("INSERT INTO Queues (user_id, status) VALUES (?, 0)");
+            $statement->execute([$this->getUserIdFromLogin($login)]);
+        }
     }
 }

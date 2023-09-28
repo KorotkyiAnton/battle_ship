@@ -16,6 +16,7 @@ class Controller
     public function validateLogin($login): string
     {
         $errorMsg = "";
+        $loginUnique = $this->checkUnique($login);
 
         // Проверка длины логина
         if (strlen($login) < 3 || strlen($login) > 10) {
@@ -37,7 +38,7 @@ class Controller
             $errorMsg .= "Нікнейм повинен закінчуватися на літеру чи цифру;<br>";
         }
 
-        if (!$this->checkUnique($login)) {
+        if (!$loginUnique) {
             $errorMsg .= "На жаль, помилка - данний нікнейм вже зайнятий, спробуйте інший.<br>";
         }
 
@@ -174,5 +175,10 @@ class Controller
     public function getDestroyedShip($gameId, $target, $login): array
     {
         return $this->model->getShipWithTargetAndWithDestroyed($gameId, $target, $login);
+    }
+
+    public function updateOnlineStatus($login)
+    {
+        $this->model->updateOnlineStatus($login);
     }
 }

@@ -1,3 +1,5 @@
+import {requestToDB} from "./prepareConnection.js";
+
 window.onload = () => {
     if(localStorage.getItem("login")===null) {
         window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/seabattle/";
@@ -8,6 +10,13 @@ window.onload = () => {
 
     function exitFromPreparePage() {
         window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/seabattle/";
+        requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php",
+            {
+                messageId: 9,
+                messageType: "exitFromPage",
+                createDate: new Date(),
+                login: localStorage.getItem("login"),
+            }).then(data => {});
         localStorage.removeItem("login");
         localStorage.removeItem("shipCoords");
     }

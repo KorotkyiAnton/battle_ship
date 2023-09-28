@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($postData["login"]) && $postData["messageType"] === "isLoginUnique") {
         $validationResult = "";
         $validationResult = $controller->validateLogin($postData["login"]);
+        $controller->updateOnlineStatus($postData["login"]);
         $logger->log("User {$postData["login"]} validate login in server with result: $validationResult");
         $status = 0;
         $status = $controller->checkUserStatusOnQueue($postData["login"]);
@@ -56,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $logger->log("User {$postData["login"]} leave Queue");
             }
 
-            for ($i; $i < 90; $i++) {
+            for ($i; $i < 450; $i++) {
                 $userIdInSearch = $controller->checkSecondUserConnect($newGame);
                 if ($userIdInSearch) {
                     $firstPlayerId = $model->getUserIdFromLogin($postData["login"]);
@@ -79,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     break;
                 }
 
-                sleep(1);
+                usleep(200000);
             }
             if ($i === 90) {
                 $logger->log("User {$postData["login"]} cant find opponents");
@@ -158,8 +159,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $shotResponse = $controller->getApprovalStatusFromOpponent($postData["gameId"], $postData["shotCoords"], $postData["login"]);
 //        }
         $winner= 0;
+        $response = intval($shotResponse[0]);
 
-        if($shotResponse[0] === 0 || $shotResponse[0] === 21 || $shotResponse[0] === 22 || $shotResponse[0] === 23 || $shotResponse[0] === 24) {
+        if($response === 0 || $response === 21 || $response === 22 || $response === 23 || $response === 24) {
             $winner = $controller->getWinnerForRequester($postData["gameId"], $postData["login"], $postData["opponent"]);
         }
 
@@ -177,7 +179,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             "shotResponse" => $shotResponse[0],
             "shotCoords" => $postData["shotCoords"],
             "ships" => $shotResponse[1],
-            "winner" => $winner,
+            "winner" => $controller->getSecondUserLogin($winner),
             "yourTurn" => $yourTurn
         ]);
     } else if ($postData["messageType"] === "shotResponseCoords") {
@@ -201,7 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             "shotResponse" => $shotResponse[1],
             "shotCoords" => $shotResponse[0],
             "ships"=> $destroyedShip,
-            "winner" => $endOfTheGame,
+            "winner" => $controller->getSecondUserLogin($endOfTheGame),
             "yourTurn" => $yourTurn
         ]);
     } else if ($postData["messageType"] === "userCancelPage") {
@@ -211,6 +213,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else if ($postData["messageType"] === "userEnterPreviousPage") {
         $logger->log("User {$postData["login"]} exit games. All info is removed.");
         $controller->updateWinner($postData["gameId"], $postData["login"]);
-        $controller->removePlayerFromQueue($postData["login"]);
+        $controller->updateUserStatusInQueues($postData["login"], 0);
     }
 }
