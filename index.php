@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $userStatusInSearch = $controller->updateUserStatusInQueues($postData["login"], 1);
         $logger->log("User {$postData["login"]} stand in Queue with status $userStatusInSearch");
         $userIdInSearch = $controller->findUsersThatSearchForGame($postData["login"]);
-        $randNumber = rand(1, 100);
+        $randNumber = rand(1, 1000);
         $logger->log("User {$postData["login"]} gets $randNumber on randomizer");
         if (!$userIdInSearch) { //SELECT user_id FROM Queues WHERE status=1 LIMIT=1
             $newGame = 0;
@@ -108,7 +108,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
              * ToDo: uncomment controller method when I start test app with real people
              */
             $controller->addShipsAndCoordinates($postData["shipCoordinates"], $connectGameId, $postData["login"]);
-            $controller->addShipsAndCoordinates($postData["shipCoordinates"], $connectGameId, $postData["login"]);
             $controller->updateUserStatusInQueues($postData["login"], 2);
             $firstTurn = $connectToGame[1];
 
@@ -147,17 +146,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else if ($postData["messageType"] === "shotRequestCoords") {
         $controller->sendShotToOpponent($postData["gameId"], $postData["shotCoords"], $postData["login"]);
         $userOnline = $controller->userOnline($model->getUserIdFromLogin($postData["opponent"]));
-//        if(!$userOnline) {
-//            for ($i=0; $i < 90; $i++) {
-//                $userOnline = $controller->userOnline($model->getUserIdFromLogin($postData["opponent"]));
-//                if($userOnline) {
-//                    $shotResponse = $controller->getApprovalStatusFromOpponent($postData["gameId"], $postData["shotCoords"], $postData["login"]);
-//                    break;
-//                }
-//            }
-//        } else {
+        if($userOnline > 5) {
+            for ($i=0; $i < 90; $i++) {
+                $userOnline = $controller->userOnline($model->getUserIdFromLogin($postData["opponent"]));
+                if($userOnline < 5) {
+                    $shotResponse = $controller->getApprovalStatusFromOpponent($postData["gameId"], $postData["shotCoords"], $postData["login"]);
+                    break;
+                }
+                sleep(1);
+            }
+        } else {
         $shotResponse = $controller->getApprovalStatusFromOpponent($postData["gameId"], $postData["shotCoords"], $postData["login"]);
-//        }
+        }
         $winner= 0;
         $response = intval($shotResponse[0]);
 
@@ -209,10 +209,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else if ($postData["messageType"] === "userCancelPage") {
         $logger->log("User {$postData["login"]} exit games. All info is removed.");
         $controller->updateWinner($postData["gameId"], $postData["login"]);
+        $controller->sendShotToOpponent($postData["gameId"], "afk", $postData["login"]);
         $controller->removePlayerFromQueue($postData["login"]);
     } else if ($postData["messageType"] === "userEnterPreviousPage") {
         $logger->log("User {$postData["login"]} exit games. All info is removed.");
         $controller->updateWinner($postData["gameId"], $postData["login"]);
         $controller->updateUserStatusInQueues($postData["login"], 0);
+    } else if($postData["messageType"] === "lastUpdate") {
+        $controller->updateLastTime($postData["login"]);
+        echo json_encode([
+            "messageId" => 21,
+            "messageType" => "lastUpdate",
+            "createDate" => new DateTime()
+        ]);
     }
 }

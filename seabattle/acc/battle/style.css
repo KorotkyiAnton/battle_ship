@@ -326,7 +326,7 @@ main {
     background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон */
     justify-content: center;
     align-items: center;
-    z-index: 3000;
+    z-index: 5000;
 }
 
 .confirmation-box {
@@ -342,6 +342,7 @@ main {
     border: 1px solid #797979;
     background: white;
     text-align: center;
+    z-index: 6000;
 }
 
 #confirmButton, #cancelButton {

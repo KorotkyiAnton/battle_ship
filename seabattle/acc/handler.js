@@ -24,3 +24,8 @@ window.onload = () => {
     document.querySelector(".previous-page").addEventListener("click", exitFromPreparePage);
     document.querySelector(".close").addEventListener("click", exitFromPreparePage);
 }
+
+window.onbeforeunload = () => {
+    localStorage.removeItem("mine-field");
+    localStorage.removeItem("opponent-field");
+}

@@ -1,5 +1,5 @@
-export function placeShipsOnField(shipData) {
-    let mineField = document.querySelector('.mine-field .ships');
+export function placeShipsOnField(shipData, field) {
+    let mineField = document.querySelector(field+' .ships');
     for (let shipId in shipData) {
         if (shipId !== 'messageId' && shipId !== 'messageType' && shipId !== 'createDate') {
             let shipInfo = shipData[shipId];
@@ -28,7 +28,7 @@ export function placeShipsOnField(shipData) {
                 shipElement.classList.add('right');
             } else if (shipInfo.orientation === 'up') {
                 shipElement.classList.add('up');
-                shipElement.style.top = ((parseInt(shipInfo.shipStart.slice(1))) * 25).toString() + "px";
+                shipElement.style.top = ((parseInt(shipInfo.shipStart.slice(1))-2+shipInfo.coords.length) * 25).toString() + "px";
             } else if (shipInfo.orientation === 'down') {
                 shipElement.classList.add('down');
             }
@@ -40,4 +40,4 @@ export function placeShipsOnField(shipData) {
     }
 }
 
-placeShipsOnField(JSON.parse(localStorage.getItem("shipCoords")));
+placeShipsOnField(JSON.parse(localStorage.getItem("shipCoords")), '.mine-field');

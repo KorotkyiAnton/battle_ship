@@ -181,4 +181,9 @@ class Controller
     {
         $this->model->updateOnlineStatus($login);
     }
+
+    public function updateLastTime($login)
+    {
+        $this->model->updateTimeInUsers($login);
+    }
 }

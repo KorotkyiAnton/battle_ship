@@ -50,6 +50,7 @@ export function startTimer(timerElement, otherElementsToDisable, readyButton, sq
         if (data.messageType === "gameCreateInfo" || data.messageType === "gameConnectInfo") {
             data.shipCoordinates = JSON.parse(localStorage.getItem("shipCoords"));
             localStorage.setItem("gameInfo", JSON.stringify(data));
+            localStorage.setItem("yourTurn", data.your_turn);
             window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/seabattle/acc/battle";
             document.querySelector(".in-game").style.visibility = "visible";
         }

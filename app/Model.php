@@ -3,6 +3,7 @@
 namespace app;
 
 use Elastic\Apm\SpanContextHttpInterface;
+use Exception;
 use PDO;
 
 require_once __DIR__ . "/SingletonDB.php";
@@ -169,9 +170,10 @@ class Model
             $shipType = count($shipData['coords']); // Определяем тип корабля по количеству координат
             $direction = $shipData['orientation'];
             $is_destroyed = false; // При добавлении кораблей предполагаем, что они не разрушены
-            $startCoordinate = $shipData['coords'][0];
             if ($direction === "right" || $direction === "down") {
                 $startCoordinate = $shipData['coords'][$shipType - 1];
+            } else {
+                $startCoordinate = $shipData["shipStart"];
             }
             $statement = $connection->prepare("INSERT INTO ShipsKorotkyi (game_id, ship_type, direction, is_destroyed, start_coordinate, user_id) VALUES (?, ?, ?, ?, ?, ?)");
             $statement->execute([$gameId, $shipType, $direction, $is_destroyed, $startCoordinate, $this->getUserIdFromLogin($login)]);
@@ -242,6 +244,10 @@ class Model
             // Добавление координаты в запись корабля
             $shipData[$shipKey]["coords"][] = $coordinate;
 
+            if ($direction === "right" || $direction === "down") {
+                $shipData[$shipKey]["shipStart"] = $shipData[$shipKey]["coords"][count($coordinate) - 1];
+            }
+
             // Увеличение счетчика попаданий, если есть попадание
             if ($isHit) {
                 $shipData[$shipKey]["hits"]++;
@@ -261,12 +267,15 @@ class Model
                                                    WHERE (first_player = ? OR second_player = ?) AND winner IS NULL ORDER BY id DESC LIMIT 1");
         $statement->execute([$userId, $userId]);
         $fetchData = $statement->fetchAll()[0];
-        $secondPlayerLogin = intval($fetchData["first_player"]) === $userId ?
-            $this->getSecondUserLoginFromUsers($fetchData["second_player"]) :
-            $this->getSecondUserLoginFromUsers($fetchData["first_player"]);
-        $firstTurn = intval($fetchData["first_player"]) === $userId ?
-            intval($fetchData["first_player_roll"]) > intval($fetchData["second_player_roll"]) :
-            intval($fetchData["second_player_roll"]) > intval($fetchData["first_player_roll"]);
+        if (!is_null($fetchData["first_player"])) {
+            $secondPlayerLogin = intval($fetchData["first_player"]) === $userId ?
+                $this->getSecondUserLoginFromUsers($fetchData["second_player"]) :
+                $this->getSecondUserLoginFromUsers($fetchData["first_player"]);
+            $firstTurn = intval($fetchData["first_player"]) === $userId ?
+                intval($fetchData["first_player_roll"]) > intval($fetchData["second_player_roll"]) :
+                intval($fetchData["second_player_roll"]) > intval($fetchData["first_player_roll"]);
+        }
+
 
         return [$fetchData["id"], $userId, $secondPlayerLogin, $firstTurn];
     }
@@ -304,8 +313,15 @@ class Model
         $length = intval($fetchedData["ship_length"]);
         $ships = null;
 
-        if(!is_null($startCoord)){
-            $ships = $this->generateShipCoordinates($startCoord, intval($fetchedData["response"])%20, $length);
+        if (!is_null($startCoord)) {
+            $ships = $this->generateShipCoordinates($startCoord, intval($fetchedData["response"]) % 20, $length);
+        }
+
+        sort($ships);
+
+        if (preg_match('/^\w{1}10$/', $ships[0]) === 1 && preg_match('/^\w{1}10$/', $ships[1]) !== 1) {
+            $firstCoordinate = array_shift($ships);
+            $ships[] = $firstCoordinate;
         }
 
         return [$fetchedData["response"], $ships];
@@ -340,14 +356,21 @@ class Model
         return $shipCoordinates;
     }
 
+    /**
+     * @throws Exception
+     */
     public function getUserOnlineStatusFromUsers(int $opponentId): bool
     {
         $connection = $this->db->getConnection();
         $statement = $connection->prepare(
-            "SELECT is_online FROM Users WHERE id = ?");
+            "SELECT last_update FROM Users WHERE id = ?");
         $statement->execute([$opponentId]);
 
-        return boolval($statement->fetchAll()[0]["is_online"]);
+        $currentDateTime = new \DateTime();
+
+        $tableDateTime = new \DateTime(strval($statement->fetchAll()[0]["last_update"]));
+
+        return abs($currentDateTime->getTimestamp() - $tableDateTime->getTimestamp());
     }
 
     public function checkResponse(int $gameId): int
@@ -533,9 +556,16 @@ class Model
         $statement = $connection->prepare("SELECT user_id FROM Queues WHERE user_id = ?");
         $statement->execute([$this->getUserIdFromLogin($login)]);
         $userId = $statement->fetchAll()[0]["user_id"];
-        if(!is_null($userId)) {
+        if (!is_null($userId)) {
             $statement = $connection->prepare("INSERT INTO Queues (user_id, status) VALUES (?, 0)");
             $statement->execute([$this->getUserIdFromLogin($login)]);
         }
+    }
+
+    public function updateTimeInUsers($login)
+    {
+        $connection = $this->db->getConnection();
+        $statement = $connection->prepare("UPDATE Users SET last_update=? WHERE login = LOWER(?)");
+        $statement->execute([date("Y-m-d H:i:s"), $login]);
     }
 }

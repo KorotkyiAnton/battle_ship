@@ -62,19 +62,20 @@ function getSurroundingCoordinates(coords, shotResponse, selector) {
         shipElement.classList.add('singledeck');
     }
 
+    // Устанавливаем координаты и ориентацию корабля
+    shipElement.style.top = ((parseInt(coords[0].slice(1)) - 1) * 25).toString() + "px";
+    shipElement.style.left = (((coords[0][0]).charCodeAt(0) - 97) * 25).toString() + "px";
+
     if (shotResponse === "21") {
         shipElement.classList.add('right');
     } else if (shotResponse === "22") {
         shipElement.classList.add('down');
     } else if (shotResponse === "23") {
         shipElement.classList.add('left');
-    } else {
+    } else if (shotResponse === "24") {
         shipElement.classList.add('up');
+        shipElement.style.top = ((parseInt(coords[0].slice(1)) - 2 + coords.length) * 25).toString() + "px";
     }
-
-    // Устанавливаем координаты и ориентацию корабля
-    shipElement.style.top = ((parseInt(coords[0].slice(1)) - 1) * 25).toString() + "px";
-    shipElement.style.left = (((coords[0][0]).charCodeAt(0) - 97) * 25).toString() + "px";
 
     for (const coord of coords) {
         const col = coord[0];
@@ -112,6 +113,11 @@ function getSurroundingCoordinates(coords, shotResponse, selector) {
 opponentField.addEventListener("click", clickOnField);
 
 const gameInfo = JSON.parse(localStorage.getItem("gameInfo"));
+if(localStorage.getItem("mine-field") && localStorage.getItem("opponent-field")) {
+    document.querySelector(".mine-field .ships").innerHTML = JSON.parse(localStorage.getItem("mine-field"));
+    document.querySelector(".opponent-field .ships").innerHTML = JSON.parse(localStorage.getItem("opponent-field"));
+}
+
 console.log(gameInfo.your_turn)
 if (gameInfo.your_turn === true) {
     startTimer(true);
@@ -152,6 +158,8 @@ function handlerOfOpponentTurn(gameInfo) {
             login: login,
             opponent: gameInfo.opponent_login
         }).then(data => {
+        localStorage.setItem("mine-field", JSON.stringify(document.querySelector(".mine-field .ships").innerHTML));
+        localStorage.setItem("opponent-field", JSON.stringify(document.querySelector(".opponent-field .ships").innerHTML));
         if (data.messageType === "shotResponseCoords" && data.yourTurn === 1) {
             localStorage.setItem("yourTurn", "1");
             if (data.shotCoords !== "afk") {
@@ -185,8 +193,10 @@ function handlerOfOpponentTurn(gameInfo) {
                 const parentElement = document.querySelector('.mine-field .ships');
                 parentElement.appendChild(newChildElement);
                 getSurroundingCoordinates(data.ships, data.shotResponse, '.mine-field .ships');
-                if(data.winner !== "") {
-                    localStorage.setItem("isWinner", JSON.stringify(data.winner===localStorage.getItem("login")));
+                if (data.winner !== "") {
+                    localStorage.setItem("isWinner", JSON.stringify(data.winner === localStorage.getItem("login")));
+                    localStorage.setItem("mine-field", JSON.stringify(document.querySelector(".mine-field .ships").innerHTML));
+                    localStorage.setItem("opponent-field", JSON.stringify(document.querySelector(".opponent-field .ships").innerHTML));
                     window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/seabattle/acc/result-battle/";
                 }
             }
@@ -199,6 +209,8 @@ function handlerOfOpponentTurn(gameInfo) {
 
 function handlerOfYourTurn(cellY, cellX, coordinate, gameInfo) {
     const login = localStorage.getItem("login");
+    localStorage.setItem("mine-field", JSON.stringify(document.querySelector(".mine-field .ships").innerHTML));
+    localStorage.setItem("opponent-field", JSON.stringify(document.querySelector(".opponent-field .ships").innerHTML));
 
     requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php",
         {
@@ -228,8 +240,10 @@ function handlerOfYourTurn(cellY, cellX, coordinate, gameInfo) {
                 const parentElement = document.querySelector('.opponent-field .ships');
                 parentElement.appendChild(newChildElement);
                 getSurroundingCoordinates(data.ships, data.shotResponse, '.opponent-field .ships');
-                if(data.winner !== "") {
-                    localStorage.setItem("isWinner", JSON.stringify(data.winner===localStorage.getItem("login")));
+                if (data.winner !== "") {
+                    localStorage.setItem("isWinner", JSON.stringify(data.winner === localStorage.getItem("login")));
+                    localStorage.setItem("mine-field", JSON.stringify(document.querySelector(".mine-field .ships").innerHTML));
+                    localStorage.setItem("opponent-field", JSON.stringify(document.querySelector(".opponent-field .ships").innerHTML));
                     window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/seabattle/acc/result-battle/";
                 }
             }
