@@ -23,7 +23,8 @@ function checkLoginUnique(login) {
 
     const requestBody = JSON.stringify(requestData);
 
-    const url = "https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php";
+    //ToDo: https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php
+    const url = "http://localhost/alpha-battle/";
 
     const requestOptions = {
         method: "POST",

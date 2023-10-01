@@ -309,6 +309,10 @@ main {
     box-shadow: 0 0 10px #0072ff;
 }
 
+.ships .ship {
+    z-index: 100;
+}
+
 .ships .ship:active::after {
     content: "";
     position: absolute;
@@ -442,4 +446,22 @@ main {
 
 .initial-ships .singledeck4 {
     left: 90px;
+}
+
+.green-cell {
+    z-index: 0;
+    padding: 0.5px;
+    width: 24px;
+    height: 24px;
+    background: #97F10A;
+    position: absolute;
+}
+
+.red-cell {
+    z-index: 0;
+    padding: 0.5px;
+    width: 24px;
+    height: 24px;
+    background: #E8828F;
+    position: absolute;
 }

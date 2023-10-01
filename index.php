@@ -7,6 +7,14 @@ require_once __DIR__ . "/app/Model.php";
 require_once __DIR__ . "/app/Logger.php";
 require_once __DIR__ . "/vendor/autoload.php";
 
+error_reporting(E_ERROR);
+ini_set('max_execution_time', '300');
+
+header('Content-Type: application/json; charset=utf-8');
+header('Access-Control-Allow-Origin', 'http://localhost:63342');
+header('Access-Control-Allow-Credentials', 'true');
+
+
 header('Content-Type: application/json; charset=utf-8');
 
 // Load environment variables from .env file
@@ -217,10 +225,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $controller->updateUserStatusInQueues($postData["login"], 0);
     } else if($postData["messageType"] === "lastUpdate") {
         $controller->updateLastTime($postData["login"]);
+        $userOnline = $controller->userOnline($model->getUserIdFromLogin($postData["opponent"]));
         echo json_encode([
             "messageId" => 21,
             "messageType" => "lastUpdate",
-            "createDate" => new DateTime()
+            "createDate" => new DateTime(),
+            "userOnline" => $userOnline
+        ]);
+    } else if($postData["messageType"] === "updateWinner") {
+        $controller->updateWinner($postData["gameId"], $postData["login"]);
+    } else if($postData["messageType"] === "getWinner") {
+        $winner = $controller->getWinner($postData["gameId"], $postData["login"], $postData["opponent"]);
+        echo json_encode([
+            "messageId" => 22,
+            "messageType" => "getWinner",
+            "createDate" => new DateTime(),
+            "winner" => $controller->getSecondUserLogin($winner)
         ]);
     }
 }

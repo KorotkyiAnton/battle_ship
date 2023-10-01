@@ -38,7 +38,8 @@ export function startTimer(timerElement, otherElementsToDisable, readyButton, sq
 
     console.log(JSON.parse(localStorage.getItem("shipCoords")));
 
-    requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php",
+    //ToDo: https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php
+    requestToDB("http://localhost/alpha-battle/",
         {
             messageId: 9,
             messageType: "requestIsUsersInQueue",
@@ -51,7 +52,7 @@ export function startTimer(timerElement, otherElementsToDisable, readyButton, sq
             data.shipCoordinates = JSON.parse(localStorage.getItem("shipCoords"));
             localStorage.setItem("gameInfo", JSON.stringify(data));
             localStorage.setItem("yourTurn", data.your_turn);
-            window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/seabattle/acc/battle";
+            window.location.href = "battle";
             document.querySelector(".in-game").style.visibility = "visible";
         }
     });
@@ -73,7 +74,8 @@ export function startTimer(timerElement, otherElementsToDisable, readyButton, sq
 export function stopTimer(timerElement, otherElementsToDisable, readyButton) {
     clearInterval(countdownTimer);
     isTimerRunning = false;
-    requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php",
+    //ToDo:
+    requestToDB("http://localhost/alpha-battle/",
         {
             messageId: 9,
             messageType: "requestIsUsersInQueue",

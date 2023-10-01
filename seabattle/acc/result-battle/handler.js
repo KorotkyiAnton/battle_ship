@@ -22,7 +22,8 @@ window.onload = () => {
     localStorage.removeItem("opponent-field");
 
     console.log(JSON.parse(localStorage.getItem("gameInfo")).opponent_login)
-    requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php",
+    //ToDO:
+    requestToDB("http://localhost/alpha-battle/",
         {
             messageId: 11,
             messageType: "localShipStoreEmpty",
@@ -44,6 +45,8 @@ window.onload = () => {
         localStorage.removeItem("shipCoords");
     }
 
+    document.querySelector(".close").addEventListener("click", exitFromPreparePage);
     document.querySelector(".exit-after-game").addEventListener("click", exitFromPreparePage);
+    document.querySelector(".previous-page").addEventListener("click", playAgain);
     document.querySelector(".play-again").addEventListener("click", playAgain);
 }

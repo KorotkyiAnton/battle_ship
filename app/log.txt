@@ -101,3 +101,1538 @@
 [2023-09-24 09:45:59] User antor stand in Queue with status 1
 [2023-09-24 09:45:59] User antor gets 59 on randomizer
 [2023-09-24 09:45:59] User antor connect to game with id = 159
+[2023-09-30 06:12:04] User kotlot220 validate login in server with result: 
+[2023-09-30 06:12:04] User kotlot220 check if he reconnects to game. Now user status in Queue is: 0
+[2023-09-30 06:17:34] User kotlot220 validate login in server with result: На жаль, помилка - данний нікнейм вже зайнятий, спробуйте інший.<br>
+[2023-09-30 06:17:34] User kotlot220 check if he reconnects to game. Now user status in Queue is: 0
+[2023-09-30 06:18:13] User kotlot220 validate login in server with result: 
+[2023-09-30 06:18:13] User kotlot220 check if he reconnects to game. Now user status in Queue is: 0
+[2023-09-30 06:18:54] User kotlot220 exit games. All info is removed.
+[2023-09-30 06:32:08] User kotlot220 validate login in server with result: 
+[2023-09-30 06:32:08] User kotlot220 check if he reconnects to game. Now user status in Queue is: 0
+[2023-09-30 06:33:07] User kekW validate login in server with result: 
+[2023-09-30 06:33:07] User kekW check if he reconnects to game. Now user status in Queue is: 0
+[2023-09-30 06:34:55] User kotlot220 stand in Queue with status 1
+[2023-09-30 06:34:55] User kotlot220 gets 224 on randomizer
+[2023-09-30 06:34:55] User kotlot220 create new game with id = 5
+[2023-09-30 06:35:25] User kekW stand in Queue with status 1
+[2023-09-30 06:35:25] User kekW gets 538 on randomizer
+[2023-09-30 06:35:25] User kekW connect to game with id = 5
+[2023-09-30 06:38:13] User kotlot220 stand in Queue with status 1
+[2023-09-30 06:38:13] User kotlot220 gets 568 on randomizer
+[2023-09-30 06:38:13] User kotlot220 create new game with id = 6
+[2023-09-30 06:38:43] User kekW stand in Queue with status 1
+[2023-09-30 06:38:43] User kekW gets 248 on randomizer
+[2023-09-30 06:38:43] User kekW connect to game with id = 6
+[2023-09-30 06:38:43] User kotlot220 stand in Queue with status 1
+[2023-09-30 06:38:43] User kotlot220 gets 263 on randomizer
+[2023-09-30 06:38:43] User kotlot220 leave Queue
+[2023-09-30 06:39:43] User kotlot220 stand in Queue with status 1
+[2023-09-30 06:39:43] User kotlot220 gets 11 on randomizer
+[2023-09-30 06:39:43] User kotlot220 create new game with id = 7
+[2023-09-30 06:40:13] User kotlot220 stand in Queue with status 1
+[2023-09-30 06:40:13] User kotlot220 gets 182 on randomizer
+[2023-09-30 06:40:13] User kotlot220 leave Queue
+[2023-09-30 06:42:00] User kekW stand in Queue with status 1
+[2023-09-30 06:42:00] User kekW gets 732 on randomizer
+[2023-09-30 06:42:00] User kekW create new game with id = 8
+[2023-09-30 06:42:30] User kotlot220 stand in Queue with status 1
+[2023-09-30 06:42:30] User kotlot220 gets 140 on randomizer
+[2023-09-30 06:42:30] User kotlot220 connect to game with id = 8
+[2023-09-30 06:43:00] User kekW stand in Queue with status 1
+[2023-09-30 06:43:00] User kekW gets 188 on randomizer
+[2023-09-30 06:43:00] User kekW leave Queue
+[2023-09-30 09:16:43] User kotlot220 stand in Queue with status 1
+[2023-09-30 09:16:43] User kotlot220 gets 938 on randomizer
+[2023-09-30 09:16:43] User kotlot220 connect to game with id = 16
+[2023-09-30 09:16:46] User kekW stand in Queue with status 1
+[2023-09-30 09:16:46] User kekW gets 631 on randomizer
+[2023-09-30 09:16:46] User kekW connect to game with id = 17
+[2023-09-30 09:17:08] User kekW stand in Queue with status 1
+[2023-09-30 09:17:08] User kekW gets 871 on randomizer
+[2023-09-30 09:17:08] User kekW create new game with id = 19
+[2023-09-30 09:17:10] User kotlot220 stand in Queue with status 1
+[2023-09-30 09:17:10] User kotlot220 gets 146 on randomizer
+[2023-09-30 09:17:10] User kotlot220 connect to game with id = 19
+[2023-09-30 09:17:11] User kekW find opponent with name kotlot220. User turn second
+[2023-09-30 09:50:06] User gch validate login in server with result: 
+[2023-09-30 09:50:06] User gch check if he reconnects to game. Now user status in Queue is: 0
+[2023-09-30 09:50:52] User hello validate login in server with result: 
+[2023-09-30 09:50:52] User hello check if he reconnects to game. Now user status in Queue is: 0
+[2023-09-30 09:51:06] User hello stand in Queue with status 1
+[2023-09-30 09:51:06] User hello gets 299 on randomizer
+[2023-09-30 09:51:06] User hello create new game with id = 22
+[2023-09-30 09:51:07] User gch stand in Queue with status 1
+[2023-09-30 09:51:07] User gch gets 489 on randomizer
+[2023-09-30 09:51:07] User gch connect to game with id = 22
+[2023-09-30 09:51:07] User hello find opponent with name gch. User turn second
+[2023-09-30 09:51:13] User gch strike cell d1 with result 1
+[2023-09-30 09:51:36] User gch strike cell afk with result 0
+[2023-09-30 09:55:05] User hello stand in Queue with status 1
+[2023-09-30 09:55:05] User hello gets 567 on randomizer
+[2023-09-30 09:55:05] User hello create new game with id = 23
+[2023-09-30 09:55:06] User gch stand in Queue with status 1
+[2023-09-30 09:55:06] User gch gets 483 on randomizer
+[2023-09-30 09:55:06] User gch connect to game with id = 23
+[2023-09-30 09:55:06] User hello find opponent with name gch. User turn second
+[2023-09-30 09:55:10] User hello strike cell d1 with result 1
+[2023-09-30 09:55:10] User hello strike cell d1 with result 1
+[2023-09-30 09:55:11] User hello strike cell e1 with result 21
+[2023-09-30 09:55:11] User hello strike cell e1 with result 21
+[2023-09-30 09:55:14] User hello strike cell h2 with result 22
+[2023-09-30 09:55:14] User hello strike cell h2 with result 22
+[2023-09-30 09:55:16] User hello strike cell j4 with result 21
+[2023-09-30 09:55:16] User hello strike cell j4 with result 21
+[2023-09-30 09:55:18] User hello strike cell h4 with result 1
+[2023-09-30 09:55:18] User hello strike cell h4 with result 1
+[2023-09-30 09:55:19] User hello strike cell h5 with result 1
+[2023-09-30 09:55:19] User hello strike cell h5 with result 1
+[2023-09-30 09:55:20] User hello strike cell h6 with result 1
+[2023-09-30 09:55:20] User hello strike cell h6 with result 1
+[2023-09-30 09:55:21] User hello strike cell h7 with result 22
+[2023-09-30 09:55:21] User hello strike cell h7 with result 22
+[2023-09-30 09:55:22] User hello strike cell i9 with result 1
+[2023-09-30 09:55:22] User hello strike cell i9 with result 1
+[2023-09-30 09:55:23] User hello strike cell i10 with result 22
+[2023-09-30 09:55:23] User hello strike cell i10 with result 22
+[2023-09-30 09:55:26] User hello strike cell f7 with result 1
+[2023-09-30 09:55:26] User hello strike cell f7 with result 1
+[2023-09-30 09:55:26] User hello strike cell f8 with result 1
+[2023-09-30 09:55:26] User hello strike cell f8 with result 1
+[2023-09-30 09:55:27] User hello strike cell f9 with result 22
+[2023-09-30 09:55:27] User hello strike cell f9 with result 22
+[2023-09-30 09:55:30] User hello strike cell a7 with result 1
+[2023-09-30 09:55:30] User hello strike cell a7 with result 1
+[2023-09-30 09:55:30] User hello strike cell b7 with result 1
+[2023-09-30 09:55:31] User hello strike cell b7 with result 1
+[2023-09-30 09:55:31] User hello strike cell c7 with result 21
+[2023-09-30 09:55:31] User hello strike cell c7 with result 21
+[2023-09-30 09:55:35] User hello strike cell a4 with result 1
+[2023-09-30 09:55:35] User hello strike cell a4 with result 1
+[2023-09-30 09:55:36] User hello strike cell b4 with result 21
+[2023-09-30 09:55:36] User hello strike cell b4 with result 21
+[2023-09-30 09:55:44] User hello strike cell d4 with result 22
+[2023-09-30 09:55:44] User hello strike cell d4 with result 22
+[2023-09-30 09:55:47] User hello strike cell a2 with result 22
+[2023-09-30 09:55:47] User hello strike cell a2 with result 22
+[2023-09-30 09:56:18] User hello strike cell  with result 
+[2023-09-30 09:56:36] User hello stand in Queue with status 1
+[2023-09-30 09:56:36] User hello gets 875 on randomizer
+[2023-09-30 09:56:36] User hello create new game with id = 24
+[2023-09-30 09:56:37] User gch stand in Queue with status 1
+[2023-09-30 09:56:37] User gch gets 491 on randomizer
+[2023-09-30 09:56:37] User gch connect to game with id = 24
+[2023-09-30 09:56:37] User hello find opponent with name gch. User turn second
+[2023-09-30 09:56:43] User hello strike cell  with result 
+[2023-09-30 09:56:46] User hello strike cell c2 with result 1
+[2023-09-30 09:56:46] User hello strike cell c2 with result 1
+[2023-09-30 09:56:46] User hello strike cell c3 with result 1
+[2023-09-30 09:56:46] User hello strike cell c3 with result 1
+[2023-09-30 09:56:47] User hello strike cell c4 with result 22
+[2023-09-30 09:56:47] User hello strike cell c4 with result 22
+[2023-09-30 09:57:16] User hello strike cell afk with result 0
+[2023-09-30 09:57:16] User hello strike cell afk with result 0
+[2023-09-30 09:57:37] User gch strike cell d4 with result 0
+[2023-09-30 09:57:37] User gch strike cell d4 with result 0
+[2023-09-30 09:58:07] User hello strike cell afk with result 0
+[2023-09-30 09:58:07] User hello strike cell afk with result 0
+[2023-09-30 09:58:39] User gch strike cell  with result 
+[2023-09-30 09:59:07] User gch strike cell afk with result 
+[2023-09-30 09:59:25] User hello strike cell afk with result 
+[2023-09-30 09:59:39] User hello strike cell  with result 
+[2023-09-30 10:05:01] User hello stand in Queue with status 1
+[2023-09-30 10:05:01] User hello gets 948 on randomizer
+[2023-09-30 10:05:01] User hello create new game with id = 25
+[2023-09-30 10:05:01] User gch stand in Queue with status 1
+[2023-09-30 10:05:01] User gch gets 747 on randomizer
+[2023-09-30 10:05:01] User gch connect to game with id = 25
+[2023-09-30 10:05:01] User hello find opponent with name gch. User turn second
+[2023-09-30 10:05:32] User hello strike cell  with result 
+[2023-09-30 10:07:03] User hello stand in Queue with status 1
+[2023-09-30 10:07:03] User hello gets 278 on randomizer
+[2023-09-30 10:07:03] User hello create new game with id = 26
+[2023-09-30 10:07:04] User gch stand in Queue with status 1
+[2023-09-30 10:07:04] User gch gets 952 on randomizer
+[2023-09-30 10:07:04] User gch connect to game with id = 26
+[2023-09-30 10:07:04] User hello find opponent with name gch. User turn second
+[2023-09-30 10:07:07] User gch strike cell a1 with result 21
+[2023-09-30 10:07:07] User gch strike cell a1 with result 21
+[2023-09-30 10:07:10] User gch strike cell e3 with result 0
+[2023-09-30 10:07:10] User gch strike cell e3 with result 0
+[2023-09-30 10:07:13] User hello strike cell e3 with result 0
+[2023-09-30 10:07:13] User hello strike cell e3 with result 0
+[2023-09-30 10:07:15] User gch strike cell e2 with result 1
+[2023-09-30 10:07:15] User gch strike cell e2 with result 1
+[2023-09-30 10:07:16] User gch strike cell g2 with result 1
+[2023-09-30 10:07:16] User gch strike cell g2 with result 1
+[2023-09-30 10:07:17] User gch strike cell f2 with result 1
+[2023-09-30 10:07:17] User gch strike cell f2 with result 1
+[2023-09-30 10:07:18] User gch strike cell h2 with result 21
+[2023-09-30 10:07:18] User gch strike cell h2 with result 21
+[2023-09-30 10:07:20] User gch strike cell j2 with result 21
+[2023-09-30 10:07:20] User gch strike cell j2 with result 21
+[2023-09-30 10:07:22] User gch strike cell i4 with result 1
+[2023-09-30 10:07:22] User gch strike cell i4 with result 1
+[2023-09-30 10:07:23] User gch strike cell j4 with result 21
+[2023-09-30 10:07:23] User gch strike cell j4 with result 21
+[2023-09-30 10:07:25] User gch strike cell h7 with result 0
+[2023-09-30 10:07:25] User gch strike cell h7 with result 0
+[2023-09-30 10:07:27] User hello strike cell g6 with result 0
+[2023-09-30 10:07:27] User hello strike cell g6 with result 0
+[2023-09-30 10:07:28] User gch strike cell i7 with result 22
+[2023-09-30 10:07:28] User gch strike cell i7 with result 22
+[2023-09-30 10:07:31] User gch strike cell e5 with result 1
+[2023-09-30 10:07:31] User gch strike cell e5 with result 1
+[2023-09-30 10:07:32] User gch strike cell g5 with result 1
+[2023-09-30 10:07:32] User gch strike cell g5 with result 1
+[2023-09-30 10:07:33] User gch strike cell f5 with result 21
+[2023-09-30 10:07:33] User gch strike cell f5 with result 21
+[2023-09-30 10:07:35] User gch strike cell c4 with result 1
+[2023-09-30 10:07:35] User gch strike cell c4 with result 1
+[2023-09-30 10:07:36] User gch strike cell c6 with result 1
+[2023-09-30 10:07:36] User gch strike cell c6 with result 1
+[2023-09-30 10:07:37] User gch strike cell c5 with result 22
+[2023-09-30 10:07:37] User gch strike cell c5 with result 22
+[2023-09-30 10:08:06] User gch strike cell afk with result 0
+[2023-09-30 10:08:06] User gch strike cell afk with result 0
+[2023-09-30 10:08:35] User hello strike cell afk with result 0
+[2023-09-30 10:08:36] User hello strike cell afk with result 0
+[2023-09-30 10:09:05] User gch strike cell afk with result 0
+[2023-09-30 10:09:05] User gch strike cell afk with result 0
+[2023-09-30 10:09:34] User hello strike cell afk with result 0
+[2023-09-30 10:09:34] User hello strike cell afk with result 0
+[2023-09-30 10:10:04] User gch strike cell afk with result 0
+[2023-09-30 10:10:04] User gch strike cell afk with result 0
+[2023-09-30 10:10:36] User hello strike cell  with result 
+[2023-09-30 10:11:00] User gch strike cell  with result 
+[2023-09-30 10:11:18] User hello stand in Queue with status 1
+[2023-09-30 10:11:18] User hello gets 403 on randomizer
+[2023-09-30 10:11:18] User hello create new game with id = 27
+[2023-09-30 10:11:18] User gch stand in Queue with status 1
+[2023-09-30 10:11:18] User gch gets 258 on randomizer
+[2023-09-30 10:11:18] User gch connect to game with id = 27
+[2023-09-30 10:11:19] User hello find opponent with name gch. User turn second
+[2023-09-30 10:11:23] User hello strike cell a2 with result 1
+[2023-09-30 10:11:23] User hello strike cell a2 with result 1
+[2023-09-30 10:11:25] User hello strike cell a3 with result 1
+[2023-09-30 10:11:25] User hello strike cell a3 with result 1
+[2023-09-30 10:11:26] User hello strike cell a4 with result 22
+[2023-09-30 10:11:26] User hello strike cell a4 with result 22
+[2023-09-30 10:11:28] User hello strike cell c2 with result 1
+[2023-09-30 10:11:28] User hello strike cell c2 with result 1
+[2023-09-30 10:11:29] User hello strike cell c3 with result 22
+[2023-09-30 10:11:29] User hello strike cell c3 with result 22
+[2023-09-30 10:11:31] User hello strike cell f2 with result 1
+[2023-09-30 10:11:31] User hello strike cell f2 with result 1
+[2023-09-30 10:11:32] User hello strike cell f3 with result 1
+[2023-09-30 10:11:32] User hello strike cell f3 with result 1
+[2023-09-30 10:11:33] User hello strike cell f4 with result 22
+[2023-09-30 10:11:33] User hello strike cell f4 with result 22
+[2023-09-30 10:11:35] User hello strike cell i4 with result 1
+[2023-09-30 10:11:35] User hello strike cell i4 with result 1
+[2023-09-30 10:11:36] User hello strike cell j4 with result 21
+[2023-09-30 10:11:36] User hello strike cell j4 with result 21
+[2023-09-30 10:11:38] User hello strike cell c5 with result 22
+[2023-09-30 10:11:38] User hello strike cell c5 with result 22
+[2023-09-30 10:11:39] User hello strike cell a7 with result 1
+[2023-09-30 10:11:39] User hello strike cell a7 with result 1
+[2023-09-30 10:11:40] User hello strike cell b7 with result 21
+[2023-09-30 10:11:40] User hello strike cell b7 with result 21
+[2023-09-30 10:11:43] User hello strike cell b9 with result 22
+[2023-09-30 10:11:43] User hello strike cell b9 with result 22
+[2023-09-30 10:11:45] User hello strike cell f8 with result 1
+[2023-09-30 10:11:45] User hello strike cell f8 with result 1
+[2023-09-30 10:11:46] User hello strike cell f7 with result 1
+[2023-09-30 10:11:46] User hello strike cell f7 with result 1
+[2023-09-30 10:11:47] User hello strike cell f10 with result 1
+[2023-09-30 10:11:47] User hello strike cell f10 with result 1
+[2023-09-30 10:11:49] User hello strike cell f6 with result 0
+[2023-09-30 10:11:49] User hello strike cell f6 with result 0
+[2023-09-30 10:11:50] User gch strike cell d7 with result 1
+[2023-09-30 10:11:50] User gch strike cell d7 with result 1
+[2023-09-30 10:11:51] User gch strike cell e7 with result 1
+[2023-09-30 10:11:51] User gch strike cell e7 with result 1
+[2023-09-30 10:11:53] User gch strike cell c7 with result 21
+[2023-09-30 10:11:53] User gch strike cell c7 with result 21
+[2023-09-30 10:11:57] User gch strike cell f7 with result 21
+[2023-09-30 10:11:57] User gch strike cell f7 with result 21
+[2023-09-30 10:11:59] User gch strike cell h7 with result 0
+[2023-09-30 10:12:00] User gch strike cell h7 with result 0
+[2023-09-30 10:12:01] User hello strike cell f9 with result 22
+[2023-09-30 10:12:01] User hello strike cell f9 with result 22
+[2023-09-30 10:12:04] User hello strike cell i8 with result 0
+[2023-09-30 10:12:04] User hello strike cell i8 with result 0
+[2023-09-30 10:12:05] User gch strike cell i8 with result 21
+[2023-09-30 10:12:05] User gch strike cell i8 with result 21
+[2023-09-30 10:12:07] User gch strike cell f5 with result 0
+[2023-09-30 10:12:07] User gch strike cell f5 with result 0
+[2023-09-30 10:12:11] User hello strike cell j7 with result 21
+[2023-09-30 10:12:11] User hello strike cell j7 with result 21
+[2023-09-30 10:12:12] User hello strike cell j10 with result 22
+[2023-09-30 10:12:13] User hello strike cell j10 with result 22
+[2023-09-30 10:12:40] User hello strike cell afk with result 0
+[2023-09-30 10:12:40] User hello strike cell afk with result 0
+[2023-09-30 10:13:11] User gch strike cell  with result 
+[2023-09-30 10:13:14] User hello get info from private table
+[2023-09-30 10:13:46] User hello strike cell afk with result 
+[2023-09-30 10:14:18] User gch strike cell  with result 
+[2023-09-30 10:14:51] User hello stand in Queue with status 1
+[2023-09-30 10:14:51] User hello gets 980 on randomizer
+[2023-09-30 10:14:51] User hello create new game with id = 28
+[2023-09-30 10:14:52] User gch stand in Queue with status 1
+[2023-09-30 10:14:52] User gch gets 301 on randomizer
+[2023-09-30 10:14:52] User gch connect to game with id = 28
+[2023-09-30 10:14:53] User hello find opponent with name gch. User turn second
+[2023-09-30 10:14:55] User hello strike cell a1 with result 0
+[2023-09-30 10:14:56] User hello strike cell a1 with result 0
+[2023-09-30 10:14:59] User gch strike cell a1 with result 1
+[2023-09-30 10:14:59] User gch strike cell a1 with result 1
+[2023-09-30 10:15:00] User gch strike cell b1 with result 1
+[2023-09-30 10:15:00] User gch strike cell b1 with result 1
+[2023-09-30 10:15:01] User gch strike cell c1 with result 21
+[2023-09-30 10:15:01] User gch strike cell c1 with result 21
+[2023-09-30 10:15:03] User gch strike cell i1 with result 22
+[2023-09-30 10:15:03] User gch strike cell i1 with result 22
+[2023-09-30 10:15:05] User gch strike cell g2 with result 1
+[2023-09-30 10:15:05] User gch strike cell g2 with result 1
+[2023-09-30 10:15:05] User gch strike cell g3 with result 22
+[2023-09-30 10:15:05] User gch strike cell g3 with result 22
+[2023-09-30 10:15:07] User gch strike cell i3 with result 1
+[2023-09-30 10:15:07] User gch strike cell i3 with result 1
+[2023-09-30 10:15:08] User gch strike cell i4 with result 1
+[2023-09-30 10:15:08] User gch strike cell i4 with result 1
+[2023-09-30 10:15:09] User gch strike cell i5 with result 1
+[2023-09-30 10:15:09] User gch strike cell i5 with result 1
+[2023-09-30 10:15:09] User gch strike cell i6 with result 22
+[2023-09-30 10:15:10] User gch strike cell i6 with result 22
+[2023-09-30 10:15:11] User gch strike cell j9 with result 22
+[2023-09-30 10:15:11] User gch strike cell j9 with result 22
+[2023-09-30 10:15:15] User gch strike cell f8 with result 22
+[2023-09-30 10:15:15] User gch strike cell f8 with result 22
+[2023-09-30 10:15:17] User gch strike cell e5 with result 1
+[2023-09-30 10:15:17] User gch strike cell e5 with result 1
+[2023-09-30 10:15:18] User gch strike cell f5 with result 21
+[2023-09-30 10:15:18] User gch strike cell f5 with result 21
+[2023-09-30 10:15:20] User gch strike cell c5 with result 1
+[2023-09-30 10:15:20] User gch strike cell c5 with result 1
+[2023-09-30 10:15:22] User gch strike cell c6 with result 1
+[2023-09-30 10:15:22] User gch strike cell c6 with result 1
+[2023-09-30 10:15:22] User gch strike cell c7 with result 22
+[2023-09-30 10:15:22] User gch strike cell c7 with result 22
+[2023-09-30 10:15:25] User gch strike cell a3 with result 1
+[2023-09-30 10:15:25] User gch strike cell a3 with result 1
+[2023-09-30 10:15:25] User gch strike cell a4 with result 22
+[2023-09-30 10:15:25] User gch strike cell a4 with result 22
+[2023-09-30 10:15:30] User gch strike cell b10 with result 21
+[2023-09-30 10:15:30] User gch strike cell b10 with result 21
+[2023-09-30 10:15:30] User gch get info from private table
+[2023-09-30 10:15:55] User gch strike cell afk with result 0
+[2023-09-30 10:15:55] User gch strike cell afk with result 0
+[2023-09-30 10:16:26] User hello strike cell  with result 
+[2023-09-30 10:16:47] User hello stand in Queue with status 1
+[2023-09-30 10:16:47] User hello gets 824 on randomizer
+[2023-09-30 10:16:47] User hello create new game with id = 29
+[2023-09-30 10:16:48] User gch stand in Queue with status 1
+[2023-09-30 10:16:48] User gch gets 35 on randomizer
+[2023-09-30 10:16:48] User gch connect to game with id = 29
+[2023-09-30 10:16:48] User hello find opponent with name gch. User turn second
+[2023-09-30 10:16:52] User hello strike cell a1 with result 1
+[2023-09-30 10:16:52] User hello strike cell a1 with result 1
+[2023-09-30 10:16:53] User hello strike cell b1 with result 1
+[2023-09-30 10:16:53] User hello strike cell b1 with result 1
+[2023-09-30 10:16:54] User hello strike cell c1 with result 21
+[2023-09-30 10:16:54] User hello strike cell c1 with result 21
+[2023-09-30 10:16:56] User hello strike cell h1 with result 21
+[2023-09-30 10:16:56] User hello strike cell h1 with result 21
+[2023-09-30 10:16:58] User hello strike cell i3 with result 1
+[2023-09-30 10:16:58] User hello strike cell i3 with result 1
+[2023-09-30 10:16:59] User hello strike cell i5 with result 1
+[2023-09-30 10:16:59] User hello strike cell i5 with result 1
+[2023-09-30 10:17:00] User hello strike cell i4 with result 22
+[2023-09-30 10:17:00] User hello strike cell i4 with result 22
+[2023-09-30 10:17:02] User hello strike cell j7 with result 22
+[2023-09-30 10:17:02] User hello strike cell j7 with result 22
+[2023-09-30 10:17:03] User hello strike cell j10 with result 1
+[2023-09-30 10:17:03] User hello strike cell j10 with result 1
+[2023-09-30 10:17:04] User hello strike cell j9 with result 22
+[2023-09-30 10:17:04] User hello strike cell j9 with result 22
+[2023-09-30 10:17:05] User hello strike cell g7 with result 1
+[2023-09-30 10:17:05] User hello strike cell g7 with result 1
+[2023-09-30 10:17:07] User hello strike cell g6 with result 1
+[2023-09-30 10:17:07] User hello strike cell g6 with result 1
+[2023-09-30 10:17:08] User hello strike cell g9 with result 1
+[2023-09-30 10:17:08] User hello strike cell g9 with result 1
+[2023-09-30 10:17:09] User hello strike cell g8 with result 22
+[2023-09-30 10:17:09] User hello strike cell g8 with result 22
+[2023-09-30 10:17:12] User hello strike cell c5 with result 1
+[2023-09-30 10:17:12] User hello strike cell c5 with result 1
+[2023-09-30 10:17:15] User hello strike cell d5 with result 21
+[2023-09-30 10:17:15] User hello strike cell d5 with result 21
+[2023-09-30 10:17:17] User hello strike cell a8 with result 1
+[2023-09-30 10:17:17] User hello strike cell a8 with result 1
+[2023-09-30 10:17:18] User hello strike cell b8 with result 21
+[2023-09-30 10:17:18] User hello strike cell b8 with result 21
+[2023-09-30 10:17:19] User hello strike cell d10 with result 22
+[2023-09-30 10:17:19] User hello strike cell d10 with result 22
+[2023-09-30 10:17:27] User hello strike cell a4 with result 22
+[2023-09-30 10:17:27] User hello get info from private table
+[2023-09-30 10:17:28] User gch get info from private table
+[2023-09-30 10:17:59] User hello strike cell  with result 
+[2023-09-30 10:20:27] User hello stand in Queue with status 1
+[2023-09-30 10:20:27] User hello gets 681 on randomizer
+[2023-09-30 10:20:27] User hello create new game with id = 30
+[2023-09-30 10:20:28] User gch stand in Queue with status 1
+[2023-09-30 10:20:28] User gch gets 616 on randomizer
+[2023-09-30 10:20:29] User gch connect to game with id = 30
+[2023-09-30 10:20:29] User hello find opponent with name gch. User turn second
+[2023-09-30 10:20:33] User hello strike cell j1 with result 1
+[2023-09-30 10:20:33] User hello strike cell j1 with result 1
+[2023-09-30 10:20:34] User hello strike cell j2 with result 22
+[2023-09-30 10:20:34] User hello strike cell j2 with result 22
+[2023-09-30 10:20:35] User hello strike cell f3 with result 0
+[2023-09-30 10:20:35] User hello strike cell f3 with result 0
+[2023-09-30 10:20:37] User gch strike cell e4 with result 0
+[2023-09-30 10:20:38] User gch strike cell e4 with result 0
+[2023-09-30 10:20:40] User hello strike cell d5 with result 0
+[2023-09-30 10:20:40] User hello strike cell d5 with result 0
+[2023-09-30 10:20:42] User gch strike cell g6 with result 1
+[2023-09-30 10:20:42] User gch strike cell g6 with result 1
+[2023-09-30 10:20:44] User gch strike cell h6 with result 21
+[2023-09-30 10:20:44] User gch strike cell h6 with result 21
+[2023-09-30 10:20:47] User gch strike cell d9 with result 0
+[2023-09-30 10:20:47] User gch strike cell d9 with result 0
+[2023-09-30 10:20:51] User hello strike cell h5 with result 0
+[2023-09-30 10:20:51] User hello strike cell h5 with result 0
+[2023-09-30 10:20:55] User gch strike cell h3 with result 0
+[2023-09-30 10:20:55] User gch strike cell h3 with result 0
+[2023-09-30 10:20:58] User hello strike cell c7 with result 21
+[2023-09-30 10:20:58] User hello strike cell c7 with result 21
+[2023-09-30 10:20:59] User hello strike cell f7 with result 0
+[2023-09-30 10:21:00] User hello strike cell f7 with result 0
+[2023-09-30 10:21:04] User gch strike cell c2 with result 1
+[2023-09-30 10:21:04] User gch strike cell c2 with result 1
+[2023-09-30 10:21:06] User gch strike cell d2 with result 0
+[2023-09-30 10:21:06] User gch strike cell d2 with result 0
+[2023-09-30 10:21:09] User hello strike cell b3 with result 0
+[2023-09-30 10:21:09] User hello strike cell b3 with result 0
+[2023-09-30 10:21:11] User gch strike cell b2 with result 0
+[2023-09-30 10:21:11] User gch strike cell b2 with result 0
+[2023-09-30 10:21:14] User hello strike cell f5 with result 0
+[2023-09-30 10:21:14] User hello strike cell f5 with result 0
+[2023-09-30 10:21:16] User gch strike cell c3 with result 1
+[2023-09-30 10:21:16] User gch strike cell c3 with result 1
+[2023-09-30 10:21:17] User gch strike cell c4 with result 1
+[2023-09-30 10:21:17] User gch strike cell c4 with result 1
+[2023-09-30 10:21:19] User gch strike cell c5 with result 22
+[2023-09-30 10:21:19] User gch strike cell c5 with result 22
+[2023-09-30 10:21:24] User gch strike cell g2 with result 0
+[2023-09-30 10:21:24] User gch strike cell g2 with result 0
+[2023-09-30 10:21:26] User hello strike cell d2 with result 21
+[2023-09-30 10:21:26] User hello strike cell d2 with result 21
+[2023-09-30 10:21:29] User hello strike cell h8 with result 1
+[2023-09-30 10:21:29] User hello strike cell h8 with result 1
+[2023-09-30 10:21:30] User hello strike cell i8 with result 0
+[2023-09-30 10:21:30] User hello strike cell i8 with result 0
+[2023-09-30 10:21:32] User gch strike cell g9 with result 0
+[2023-09-30 10:21:32] User gch strike cell g9 with result 0
+[2023-09-30 10:21:33] User hello strike cell g8 with result 0
+[2023-09-30 10:21:33] User hello strike cell g8 with result 0
+[2023-09-30 10:21:35] User gch strike cell i9 with result 1
+[2023-09-30 10:21:35] User gch strike cell i9 with result 1
+[2023-09-30 10:21:36] User gch strike cell j9 with result 1
+[2023-09-30 10:21:36] User gch strike cell j9 with result 1
+[2023-09-30 10:21:38] User gch strike cell h9 with result 21
+[2023-09-30 10:21:38] User gch strike cell h9 with result 21
+[2023-09-30 10:21:41] User gch strike cell e9 with result 0
+[2023-09-30 10:21:41] User gch strike cell e9 with result 0
+[2023-09-30 10:21:43] User hello strike cell h9 with result 0
+[2023-09-30 10:21:43] User hello strike cell h9 with result 0
+[2023-09-30 10:21:45] User gch strike cell f9 with result 0
+[2023-09-30 10:21:45] User gch strike cell f9 with result 0
+[2023-09-30 10:21:47] User hello strike cell h7 with result 22
+[2023-09-30 10:21:47] User hello strike cell h7 with result 22
+[2023-09-30 10:21:50] User hello strike cell e10 with result 1
+[2023-09-30 10:21:50] User hello strike cell e10 with result 1
+[2023-09-30 10:21:50] User hello strike cell d10 with result 0
+[2023-09-30 10:21:51] User hello strike cell d10 with result 0
+[2023-09-30 10:21:53] User gch strike cell b9 with result 0
+[2023-09-30 10:21:53] User gch strike cell b9 with result 0
+[2023-09-30 10:21:55] User hello strike cell f10 with result 1
+[2023-09-30 10:21:55] User hello strike cell f10 with result 1
+[2023-09-30 10:21:56] User hello strike cell g10 with result 1
+[2023-09-30 10:21:56] User hello strike cell g10 with result 1
+[2023-09-30 10:21:57] User hello strike cell h10 with result 21
+[2023-09-30 10:21:57] User hello strike cell h10 with result 21
+[2023-09-30 10:22:00] User hello strike cell b10 with result 1
+[2023-09-30 10:22:00] User hello strike cell b10 with result 1
+[2023-09-30 10:22:01] User hello strike cell b9 with result 0
+[2023-09-30 10:22:01] User hello strike cell b9 with result 0
+[2023-09-30 10:22:04] User gch strike cell c8 with result 0
+[2023-09-30 10:22:04] User gch strike cell c8 with result 0
+[2023-09-30 10:22:05] User hello strike cell c10 with result 1
+[2023-09-30 10:22:06] User hello strike cell c10 with result 1
+[2023-09-30 10:22:07] User hello strike cell a10 with result 21
+[2023-09-30 10:22:07] User hello strike cell a10 with result 21
+[2023-09-30 10:22:11] User hello strike cell a6 with result 1
+[2023-09-30 10:22:11] User hello strike cell a6 with result 1
+[2023-09-30 10:22:12] User hello strike cell a5 with result 1
+[2023-09-30 10:22:12] User hello strike cell a5 with result 1
+[2023-09-30 10:22:13] User hello strike cell a7 with result 0
+[2023-09-30 10:22:13] User hello strike cell a7 with result 0
+[2023-09-30 10:22:14] User gch strike cell a7 with result 0
+[2023-09-30 10:22:15] User gch strike cell a7 with result 0
+[2023-09-30 10:22:16] User hello strike cell a4 with result 22
+[2023-09-30 10:22:16] User hello strike cell a4 with result 22
+[2023-09-30 10:22:18] User hello strike cell g4 with result 0
+[2023-09-30 10:22:18] User hello strike cell g4 with result 0
+[2023-09-30 10:22:20] User gch strike cell b7 with result 1
+[2023-09-30 10:22:20] User gch strike cell b7 with result 1
+[2023-09-30 10:22:20] User gch strike cell b8 with result 22
+[2023-09-30 10:22:21] User gch strike cell b8 with result 22
+[2023-09-30 10:22:23] User gch strike cell i3 with result 0
+[2023-09-30 10:22:23] User gch strike cell i3 with result 0
+[2023-09-30 10:22:25] User hello strike cell g2 with result 0
+[2023-09-30 10:22:25] User hello strike cell g2 with result 0
+[2023-09-30 10:22:27] User gch strike cell j1 with result 0
+[2023-09-30 10:22:27] User gch strike cell j1 with result 0
+[2023-09-30 10:22:29] User hello strike cell a1 with result 0
+[2023-09-30 10:22:29] User hello strike cell a1 with result 0
+[2023-09-30 10:22:31] User gch strike cell b10 with result 21
+[2023-09-30 10:22:31] User gch strike cell b10 with result 21
+[2023-09-30 10:22:54] User gch strike cell f2 with result 1
+[2023-09-30 10:22:54] User gch strike cell f2 with result 1
+[2023-09-30 10:22:55] User gch strike cell f1 with result 22
+[2023-09-30 10:22:56] User gch strike cell f1 with result 22
+[2023-09-30 10:22:57] User gch strike cell h1 with result 21
+[2023-09-30 10:22:57] User gch strike cell h1 with result 21
+[2023-09-30 10:22:59] User gch strike cell j3 with result 0
+[2023-09-30 10:22:59] User gch strike cell j3 with result 0
+[2023-09-30 10:23:02] User hello strike cell f4 with result 0
+[2023-09-30 10:23:03] User hello strike cell f4 with result 0
+[2023-09-30 10:23:05] User gch strike cell j2 with result 22
+[2023-09-30 10:23:05] User gch strike cell j2 with result 22
+[2023-09-30 10:23:07] User gch strike cell j4 with result 21
+[2023-09-30 10:23:07] User gch strike cell j4 with result 21
+[2023-09-30 10:23:08] User gch strike cell g4 with result 0
+[2023-09-30 10:23:08] User gch strike cell g4 with result 0
+[2023-09-30 10:23:10] User hello strike cell g5 with result 0
+[2023-09-30 10:23:10] User hello strike cell g5 with result 0
+[2023-09-30 10:23:12] User gch strike cell h4 with result 21
+[2023-09-30 10:23:12] User gch strike cell h4 with result 21
+[2023-09-30 10:23:12] User hello get info from private table
+[2023-09-30 10:23:12] User gch get info from private table
+[2023-09-30 10:23:43] User gch strike cell  with result 
+[2023-09-30 10:24:03] User hello strike cell  with result 
+[2023-09-30 10:29:39] User hello stand in Queue with status 1
+[2023-09-30 10:29:39] User hello gets 42 on randomizer
+[2023-09-30 10:29:39] User hello create new game with id = 31
+[2023-09-30 10:29:40] User gch stand in Queue with status 1
+[2023-09-30 10:29:40] User gch gets 425 on randomizer
+[2023-09-30 10:29:40] User gch connect to game with id = 31
+[2023-09-30 10:29:40] User hello find opponent with name gch. User turn second
+[2023-09-30 10:29:43] User gch strike cell a1 with result 1
+[2023-09-30 10:29:43] User gch strike cell a1 with result 1
+[2023-09-30 10:29:44] User gch strike cell c1 with result 1
+[2023-09-30 10:29:45] User gch strike cell c1 with result 1
+[2023-09-30 10:29:47] User gch strike cell e2 with result 1
+[2023-09-30 10:29:47] User gch strike cell e2 with result 1
+[2023-09-30 10:29:49] User gch strike cell g2 with result 1
+[2023-09-30 10:29:49] User gch strike cell g2 with result 1
+[2023-09-30 10:29:50] User gch strike cell h2 with result 1
+[2023-09-30 10:29:50] User gch strike cell h2 with result 1
+[2023-09-30 10:29:51] User gch strike cell h4 with result 0
+[2023-09-30 10:29:51] User gch strike cell h4 with result 0
+[2023-09-30 10:29:56] User hello strike cell c1 with result 1
+[2023-09-30 10:29:56] User hello strike cell c1 with result 1
+[2023-09-30 10:29:57] User hello strike cell c2 with result 22
+[2023-09-30 10:29:57] User hello strike cell c2 with result 22
+[2023-09-30 10:29:59] User hello strike cell e1 with result 22
+[2023-09-30 10:29:59] User hello strike cell e1 with result 22
+[2023-09-30 10:30:02] User hello strike cell h1 with result 22
+[2023-09-30 10:30:02] User hello strike cell h1 with result 22
+[2023-09-30 10:30:04] User hello strike cell a5 with result 1
+[2023-09-30 10:30:04] User hello strike cell a5 with result 1
+[2023-09-30 10:30:05] User hello strike cell b5 with result 21
+[2023-09-30 10:30:05] User hello strike cell b5 with result 21
+[2023-09-30 10:30:07] User hello strike cell h7 with result 0
+[2023-09-30 10:30:07] User hello strike cell h7 with result 0
+[2023-09-30 10:30:09] User gch strike cell b1 with result 21
+[2023-09-30 10:30:10] User gch strike cell b1 with result 21
+[2023-09-30 10:30:12] User gch strike cell f2 with result 21
+[2023-09-30 10:30:12] User gch strike cell f2 with result 21
+[2023-09-30 10:30:16] User gch strike cell a10 with result 1
+[2023-09-30 10:30:16] User gch strike cell a10 with result 1
+[2023-09-30 10:30:17] User gch strike cell b10 with result 21
+[2023-09-30 10:30:17] User gch strike cell b10 with result 21
+[2023-09-30 10:30:48] User gch strike cell  with result 
+[2023-09-30 17:45:28] User hello stand in Queue with status 1
+[2023-09-30 17:45:28] User hello gets 845 on randomizer
+[2023-09-30 17:45:28] User hello create new game with id = 32
+[2023-09-30 17:46:00] User darkness validate login in server with result: 
+[2023-09-30 17:46:00] User darkness check if he reconnects to game. Now user status in Queue is: 0
+[2023-09-30 17:46:02] User darkness stand in Queue with status 1
+[2023-09-30 17:46:02] User darkness gets 657 on randomizer
+[2023-09-30 17:46:02] User darkness connect to game with id = 32
+[2023-09-30 17:46:03] User hello find opponent with name darkness. User turn second
+[2023-09-30 17:46:06] User hello strike cell c1 with result 1
+[2023-09-30 17:46:07] User hello strike cell c1 with result 1
+[2023-09-30 17:46:07] User hello strike cell d1 with result 1
+[2023-09-30 17:46:07] User hello strike cell d1 with result 1
+[2023-09-30 17:46:10] User hello strike cell e1 with result 21
+[2023-09-30 17:46:10] User hello strike cell e1 with result 21
+[2023-09-30 17:46:11] User hello strike cell g4 with result 0
+[2023-09-30 17:46:12] User hello strike cell g4 with result 0
+[2023-09-30 17:46:20] User darkness exit games. All info is removed.
+[2023-09-30 17:46:20] User darkness strike cell afk with result 0
+[2023-09-30 17:46:36] User darkness strike cell b2 with result 
+[2023-09-30 17:46:36] User hello get info from private table
+[2023-09-30 17:46:39] User darkness strike cell d2 with result 
+[2023-09-30 17:46:40] User darkness strike cell e5 with result 
+[2023-09-30 17:46:41] User darkness strike cell e3 with result 
+[2023-09-30 17:46:53] User hello get info from private table
+[2023-09-30 17:46:58] User darkness get info from private table
+[2023-09-30 17:47:07] User hello strike cell  with result 
+[2023-09-30 17:47:12] User darkness get info from private table
+[2023-09-30 17:47:24] User hello strike cell  with result 
+[2023-09-30 17:47:24] User hello strike cell  with result 
+[2023-09-30 17:47:24] User hello strike cell  with result 
+[2023-09-30 17:47:56] User hello_worl validate login in server with result: 
+[2023-09-30 17:47:56] User hello_worl check if he reconnects to game. Now user status in Queue is: 0
+[2023-09-30 17:48:00] User hello_worl stand in Queue with status 1
+[2023-09-30 17:48:00] User hello_worl gets 677 on randomizer
+[2023-09-30 17:48:00] User hello_worl create new game with id = 33
+[2023-09-30 17:48:01] User darkness stand in Queue with status 1
+[2023-09-30 17:48:01] User darkness gets 326 on randomizer
+[2023-09-30 17:48:01] User darkness connect to game with id = 33
+[2023-09-30 17:48:01] User hello_worl find opponent with name darkness. User turn second
+[2023-09-30 17:48:05] User darkness exit games. All info is removed.
+[2023-09-30 17:48:32] User hello_worl strike cell  with result 
+[2023-09-30 17:48:32] User hello_worl get info from private table
+[2023-09-30 17:49:11] User darkness stand in Queue with status 1
+[2023-09-30 17:49:11] User darkness gets 212 on randomizer
+[2023-09-30 17:49:11] User darkness create new game with id = 34
+[2023-09-30 17:49:30] User hello_wor validate login in server with result: 
+[2023-09-30 17:49:30] User hello_wor check if he reconnects to game. Now user status in Queue is: 0
+[2023-09-30 17:49:33] User hello_wor stand in Queue with status 1
+[2023-09-30 17:49:33] User hello_wor gets 873 on randomizer
+[2023-09-30 17:49:33] User hello_wor create new game with id = 35
+[2023-09-30 17:49:43] User darkness exit games. All info is removed.
+[2023-09-30 17:49:45] User hello_wor exit games. All info is removed.
+[2023-09-30 17:49:55] User sdf validate login in server with result: 
+[2023-09-30 17:49:55] User sdf check if he reconnects to game. Now user status in Queue is: 0
+[2023-09-30 17:49:59] User sdfsf validate login in server with result: 
+[2023-09-30 17:49:59] User sdfsf check if he reconnects to game. Now user status in Queue is: 0
+[2023-09-30 17:50:03] User sdf stand in Queue with status 1
+[2023-09-30 17:50:03] User sdf gets 87 on randomizer
+[2023-09-30 17:50:03] User sdf create new game with id = 36
+[2023-09-30 17:50:04] User sdfsf stand in Queue with status 1
+[2023-09-30 17:50:04] User sdfsf gets 525 on randomizer
+[2023-09-30 17:50:04] User sdfsf connect to game with id = 36
+[2023-09-30 17:50:04] User sdf find opponent with name sdfsf. User turn second
+[2023-09-30 17:50:33] User sdfsf strike cell afk with result 0
+[2023-09-30 17:50:33] User sdfsf strike cell afk with result 0
+[2023-09-30 17:50:34] User sdf strike cell f6 with result 0
+[2023-09-30 17:50:34] User sdf strike cell f6 with result 0
+[2023-09-30 17:51:04] User sdfsf strike cell afk with result 0
+[2023-09-30 17:51:04] User sdfsf strike cell afk with result 0
+[2023-09-30 17:51:08] User sdf strike cell c8 with result 0
+[2023-09-30 17:51:08] User sdf strike cell c8 with result 0
+[2023-09-30 17:51:37] User sdfsf strike cell afk with result 0
+[2023-09-30 17:51:37] User sdfsf strike cell afk with result 0
+[2023-09-30 17:51:37] User sdfsf get info from private table
+[2023-09-30 17:51:37] User sdf get info from private table
+[2023-09-30 17:52:08] User sdf strike cell  with result 
+[2023-10-01 08:49:27] User sdf stand in Queue with status 1
+[2023-10-01 08:49:27] User sdf gets 468 on randomizer
+[2023-10-01 08:49:27] User sdf create new game with id = 37
+[2023-10-01 08:49:31] User sdfsf stand in Queue with status 1
+[2023-10-01 08:49:31] User sdfsf gets 953 on randomizer
+[2023-10-01 08:49:31] User sdfsf connect to game with id = 37
+[2023-10-01 08:49:31] User sdf find opponent with name sdfsf. User turn second
+[2023-10-01 08:49:45] User sdfsf strike cell  with result 
+[2023-10-01 08:50:00] User sdfsf strike cell afk with result 0
+[2023-10-01 08:50:01] User sdfsf strike cell afk with result 0
+[2023-10-01 08:50:02] User sdfsf strike cell  with result 
+[2023-10-01 08:50:09] User sdfsf strike cell  with result 
+[2023-10-01 08:50:31] User sdf strike cell  with result 
+[2023-10-01 08:50:34] User sdfsf strike cell g5 with result 0
+[2023-10-01 08:50:34] User sdfsf strike cell g5 with result 0
+[2023-10-01 08:50:35] User sdf strike cell d5 with result 0
+[2023-10-01 08:50:35] User sdf strike cell d5 with result 0
+[2023-10-01 08:50:37] User sdfsf strike cell d3 with result 0
+[2023-10-01 08:50:37] User sdfsf strike cell d3 with result 0
+[2023-10-01 08:50:39] User sdf strike cell h5 with result 0
+[2023-10-01 08:50:39] User sdf strike cell h5 with result 0
+[2023-10-01 08:50:40] User sdfsf strike cell h2 with result 0
+[2023-10-01 08:50:40] User sdfsf strike cell h2 with result 0
+[2023-10-01 08:50:42] User sdf strike cell f8 with result 1
+[2023-10-01 08:50:42] User sdf strike cell f8 with result 1
+[2023-10-01 08:50:44] User sdf strike cell g8 with result 1
+[2023-10-01 08:50:44] User sdf strike cell g8 with result 1
+[2023-10-01 08:50:45] User sdf strike cell h8 with result 21
+[2023-10-01 08:50:45] User sdf strike cell h8 with result 21
+[2023-10-01 08:50:49] User sdf strike cell b6 with result 1
+[2023-10-01 08:50:49] User sdf strike cell b6 with result 1
+[2023-10-01 08:50:50] User sdf strike cell c6 with result 1
+[2023-10-01 08:50:50] User sdf strike cell c6 with result 1
+[2023-10-01 08:50:51] User sdf strike cell d6 with result 21
+[2023-10-01 08:50:51] User sdf strike cell d6 with result 21
+[2023-10-01 08:50:54] User sdf strike cell a3 with result 1
+[2023-10-01 08:50:54] User sdf strike cell a3 with result 1
+[2023-10-01 08:50:55] User sdf strike cell a4 with result 22
+[2023-10-01 08:50:55] User sdf strike cell a4 with result 22
+[2023-10-01 08:51:26] User sdf strike cell  with result 
+[2023-10-01 08:51:31] User sdfsf strike cell  with result 
+[2023-10-01 08:52:30] User sdf stand in Queue with status 1
+[2023-10-01 08:52:30] User sdf gets 791 on randomizer
+[2023-10-01 08:52:30] User sdf create new game with id = 38
+[2023-10-01 08:52:32] User sdfsf stand in Queue with status 1
+[2023-10-01 08:52:32] User sdfsf gets 951 on randomizer
+[2023-10-01 08:52:32] User sdfsf connect to game with id = 38
+[2023-10-01 08:52:32] User sdf find opponent with name sdfsf. User turn second
+[2023-10-01 08:52:37] User sdfsf strike cell f1 with result 1
+[2023-10-01 08:52:37] User sdfsf strike cell f1 with result 1
+[2023-10-01 08:52:38] User sdfsf strike cell f2 with result 22
+[2023-10-01 08:52:38] User sdfsf strike cell f2 with result 22
+[2023-10-01 08:52:44] User sdfsf strike cell d3 with result 0
+[2023-10-01 08:52:44] User sdfsf strike cell d3 with result 0
+[2023-10-01 08:52:46] User sdf strike cell e4 with result 0
+[2023-10-01 08:52:46] User sdf strike cell e4 with result 0
+[2023-10-01 08:52:48] User sdfsf strike cell f7 with result 0
+[2023-10-01 08:52:48] User sdfsf strike cell f7 with result 0
+[2023-10-01 08:52:50] User sdf strike cell h5 with result 0
+[2023-10-01 08:52:50] User sdf strike cell h5 with result 0
+[2023-10-01 08:53:21] User sdfsf strike cell  with result 
+[2023-10-01 08:53:38] User sdfsf strike cell  with result 
+[2023-10-01 08:56:19] User sdfsf stand in Queue with status 1
+[2023-10-01 08:56:19] User sdfsf gets 13 on randomizer
+[2023-10-01 08:56:19] User sdfsf create new game with id = 39
+[2023-10-01 08:56:30] User sdf stand in Queue with status 1
+[2023-10-01 08:56:30] User sdf gets 84 on randomizer
+[2023-10-01 08:56:30] User sdf connect to game with id = 39
+[2023-10-01 08:56:31] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 08:57:02] User sdf strike cell  with result 
+[2023-10-01 09:00:34] User sdf stand in Queue with status 1
+[2023-10-01 09:00:34] User sdf gets 121 on randomizer
+[2023-10-01 09:00:34] User sdf create new game with id = 40
+[2023-10-01 09:00:35] User sdfsf stand in Queue with status 1
+[2023-10-01 09:00:35] User sdfsf gets 816 on randomizer
+[2023-10-01 09:00:35] User sdfsf connect to game with id = 40
+[2023-10-01 09:00:36] User sdf find opponent with name sdfsf. User turn second
+[2023-10-01 09:00:43] User sdfsf strike cell d3 with result 0
+[2023-10-01 09:00:43] User sdfsf strike cell d3 with result 0
+[2023-10-01 09:00:44] User sdf strike cell e3 with result 0
+[2023-10-01 09:00:45] User sdf strike cell e3 with result 0
+[2023-10-01 09:00:46] User sdfsf strike cell e4 with result 0
+[2023-10-01 09:00:47] User sdfsf strike cell e4 with result 0
+[2023-10-01 09:00:48] User sdf strike cell f4 with result 0
+[2023-10-01 09:00:49] User sdf strike cell f4 with result 0
+[2023-10-01 09:00:50] User sdfsf strike cell c2 with result 1
+[2023-10-01 09:00:50] User sdfsf strike cell c2 with result 1
+[2023-10-01 09:00:53] User sdfsf strike cell e2 with result 0
+[2023-10-01 09:00:53] User sdfsf strike cell e2 with result 0
+[2023-10-01 09:00:56] User sdf strike cell g3 with result 0
+[2023-10-01 09:00:56] User sdf strike cell g3 with result 0
+[2023-10-01 09:00:59] User sdfsf strike cell c4 with result 0
+[2023-10-01 09:00:59] User sdfsf strike cell c4 with result 0
+[2023-10-01 09:01:01] User sdf strike cell e5 with result 0
+[2023-10-01 09:01:01] User sdf strike cell e5 with result 0
+[2023-10-01 09:01:03] User sdfsf strike cell c1 with result 0
+[2023-10-01 09:01:03] User sdfsf strike cell c1 with result 0
+[2023-10-01 09:01:05] User sdf strike cell g5 with result 1
+[2023-10-01 09:01:05] User sdf strike cell g5 with result 1
+[2023-10-01 09:01:09] User sdf strike cell g6 with result 0
+[2023-10-01 09:01:09] User sdf strike cell g6 with result 0
+[2023-10-01 09:01:25] User sdfsf strike cell f5 with result 21
+[2023-10-01 09:01:25] User sdfsf strike cell f5 with result 21
+[2023-10-01 09:01:36] User sdfsf strike cell i5 with result 0
+[2023-10-01 09:01:36] User sdfsf strike cell i5 with result 0
+[2023-10-01 09:01:39] User sdf strike cell f5 with result 21
+[2023-10-01 09:01:40] User sdf strike cell f5 with result 21
+[2023-10-01 09:01:44] User sdf strike cell d5 with result 0
+[2023-10-01 09:01:45] User sdf strike cell d5 with result 0
+[2023-10-01 09:01:46] User sdfsf strike cell c5 with result 0
+[2023-10-01 09:01:46] User sdfsf strike cell c5 with result 0
+[2023-10-01 09:02:17] User sdf strike cell  with result 
+[2023-10-01 09:34:18] User sdf stand in Queue with status 1
+[2023-10-01 09:34:18] User sdf gets 569 on randomizer
+[2023-10-01 09:34:18] User sdf create new game with id = 41
+[2023-10-01 09:34:19] User sdfsf stand in Queue with status 1
+[2023-10-01 09:34:19] User sdfsf gets 707 on randomizer
+[2023-10-01 09:34:19] User sdfsf connect to game with id = 41
+[2023-10-01 09:34:19] User sdf find opponent with name sdfsf. User turn second
+[2023-10-01 09:35:33] User sdf stand in Queue with status 1
+[2023-10-01 09:35:33] User sdf gets 64 on randomizer
+[2023-10-01 09:35:33] User sdf create new game with id = 42
+[2023-10-01 09:35:34] User sdfsf stand in Queue with status 1
+[2023-10-01 09:35:34] User sdfsf gets 73 on randomizer
+[2023-10-01 09:35:34] User sdfsf connect to game with id = 42
+[2023-10-01 09:35:35] User sdf find opponent with name sdfsf. User turn second
+[2023-10-01 09:36:11] User sdf stand in Queue with status 1
+[2023-10-01 09:36:11] User sdf gets 961 on randomizer
+[2023-10-01 09:36:11] User sdf create new game with id = 43
+[2023-10-01 09:36:14] User sdfsf stand in Queue with status 1
+[2023-10-01 09:36:14] User sdfsf gets 293 on randomizer
+[2023-10-01 09:36:14] User sdfsf connect to game with id = 43
+[2023-10-01 09:36:14] User sdf find opponent with name sdfsf. User turn second
+[2023-10-01 09:37:09] User sdf stand in Queue with status 1
+[2023-10-01 09:37:09] User sdf gets 867 on randomizer
+[2023-10-01 09:37:09] User sdf create new game with id = 44
+[2023-10-01 09:37:10] User sdfsf stand in Queue with status 1
+[2023-10-01 09:37:10] User sdfsf gets 186 on randomizer
+[2023-10-01 09:37:10] User sdfsf connect to game with id = 44
+[2023-10-01 09:37:10] User sdf find opponent with name sdfsf. User turn second
+[2023-10-01 09:38:01] User sdfsf stand in Queue with status 1
+[2023-10-01 09:38:01] User sdfsf gets 178 on randomizer
+[2023-10-01 09:38:01] User sdfsf create new game with id = 45
+[2023-10-01 09:38:02] User sdf stand in Queue with status 1
+[2023-10-01 09:38:02] User sdf gets 58 on randomizer
+[2023-10-01 09:38:02] User sdf connect to game with id = 45
+[2023-10-01 09:38:02] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 09:38:33] User sdfsf strike cell  with result 
+[2023-10-01 09:39:22] User sdf stand in Queue with status 1
+[2023-10-01 09:39:22] User sdf gets 607 on randomizer
+[2023-10-01 09:39:22] User sdf create new game with id = 46
+[2023-10-01 09:39:23] User sdfsf stand in Queue with status 1
+[2023-10-01 09:39:23] User sdfsf gets 897 on randomizer
+[2023-10-01 09:39:23] User sdfsf connect to game with id = 46
+[2023-10-01 09:39:23] User sdf find opponent with name sdfsf. User turn second
+[2023-10-01 09:39:28] User sdfsf strike cell d2 with result 0
+[2023-10-01 09:39:28] User sdfsf strike cell d2 with result 0
+[2023-10-01 09:39:30] User sdf strike cell e3 with result 0
+[2023-10-01 09:39:30] User sdf strike cell e3 with result 0
+[2023-10-01 09:39:32] User sdfsf strike cell f5 with result 22
+[2023-10-01 09:39:32] User sdfsf strike cell f5 with result 22
+[2023-10-01 09:39:34] User sdfsf strike cell c5 with result 1
+[2023-10-01 09:39:34] User sdfsf strike cell c5 with result 1
+[2023-10-01 09:39:35] User sdfsf strike cell d5 with result 0
+[2023-10-01 09:39:35] User sdfsf strike cell d5 with result 0
+[2023-10-01 09:39:37] User sdf strike cell d5 with result 0
+[2023-10-01 09:39:37] User sdf strike cell d5 with result 0
+[2023-10-01 09:39:39] User sdfsf strike cell h5 with result 1
+[2023-10-01 09:39:39] User sdfsf strike cell h5 with result 1
+[2023-10-01 09:39:40] User sdfsf strike cell i5 with result 21
+[2023-10-01 09:39:40] User sdfsf strike cell i5 with result 21
+[2023-10-01 09:39:42] User sdfsf strike cell b5 with result 0
+[2023-10-01 09:39:42] User sdfsf strike cell b5 with result 0
+[2023-10-01 09:39:44] User sdf strike cell e6 with result 21
+[2023-10-01 09:39:44] User sdf strike cell e6 with result 21
+[2023-10-01 09:39:45] User sdf strike cell c6 with result 0
+[2023-10-01 09:39:46] User sdf strike cell c6 with result 0
+[2023-10-01 09:39:47] User sdfsf strike cell c6 with result 1
+[2023-10-01 09:39:47] User sdfsf strike cell c6 with result 1
+[2023-10-01 09:39:48] User sdfsf strike cell c4 with result 1
+[2023-10-01 09:39:48] User sdfsf strike cell c4 with result 1
+[2023-10-01 09:39:49] User sdfsf strike cell c3 with result 22
+[2023-10-01 09:39:49] User sdfsf strike cell c3 with result 22
+[2023-10-01 09:39:51] User sdfsf strike cell h2 with result 0
+[2023-10-01 09:39:51] User sdfsf strike cell h2 with result 0
+[2023-10-01 09:40:04] User sdf strike cell i4 with result 0
+[2023-10-01 09:40:04] User sdf strike cell i4 with result 0
+[2023-10-01 09:40:06] User sdfsf strike cell j2 with result 0
+[2023-10-01 09:40:06] User sdfsf strike cell j2 with result 0
+[2023-10-01 09:40:22] User sdf strike cell  with result 
+[2023-10-01 09:40:25] User sdf strike cell  with result 
+[2023-10-01 09:40:27] User sdf strike cell  with result 
+[2023-10-01 09:40:28] User sdf strike cell  with result 
+[2023-10-01 09:40:37] User sdf strike cell  with result 
+[2023-10-01 09:40:56] User sdfsf strike cell f9 with result 
+[2023-10-01 09:40:59] User sdfsf strike cell g3 with result 
+[2023-10-01 09:41:00] User sdfsf strike cell f2 with result 
+[2023-10-01 09:41:01] User sdfsf strike cell g2 with result 
+[2023-10-01 09:41:08] User sdf strike cell c3 with result 
+[2023-10-01 09:41:09] User sdf strike cell c2 with result 
+[2023-10-01 09:41:09] User sdfsf strike cell f9 with result 0
+[2023-10-01 09:41:09] User sdf strike cell e9 with result 
+[2023-10-01 09:41:10] User sdf strike cell h7 with result 
+[2023-10-01 09:41:12] User sdf strike cell h3 with result 
+[2023-10-01 09:41:12] User sdf strike cell h2 with result 
+[2023-10-01 09:41:13] User sdf strike cell h2 with result 
+[2023-10-01 09:41:28] User sdf strike cell  with result 
+[2023-10-01 09:41:30] User sdf strike cell  with result 
+[2023-10-01 09:41:31] User sdf strike cell  with result 
+[2023-10-01 09:41:32] User sdf strike cell  with result 
+[2023-10-01 09:41:40] User sdfsf strike cell  with result 
+[2023-10-01 09:41:40] User sdfsf strike cell  with result 
+[2023-10-01 09:41:41] User sdfsf strike cell  with result 
+[2023-10-01 09:41:41] User sdf strike cell  with result 
+[2023-10-01 09:41:43] User sdfsf strike cell  with result 
+[2023-10-01 09:41:43] User sdfsf strike cell  with result 
+[2023-10-01 09:41:45] User sdfsf strike cell  with result 
+[2023-10-01 09:41:47] User sdf strike cell  with result 
+[2023-10-01 09:48:36] User sdf stand in Queue with status 1
+[2023-10-01 09:48:36] User sdf gets 82 on randomizer
+[2023-10-01 09:48:36] User sdf create new game with id = 47
+[2023-10-01 09:48:37] User sdfsf stand in Queue with status 1
+[2023-10-01 09:48:37] User sdfsf gets 920 on randomizer
+[2023-10-01 09:48:37] User sdfsf connect to game with id = 47
+[2023-10-01 09:48:37] User sdf find opponent with name sdfsf. User turn second
+[2023-10-01 09:49:08] User sdfsf strike cell  with result 
+[2023-10-01 09:49:20] User sdfsf stand in Queue with status 1
+[2023-10-01 09:49:20] User sdfsf gets 840 on randomizer
+[2023-10-01 09:49:20] User sdfsf create new game with id = 48
+[2023-10-01 09:49:20] User sdf stand in Queue with status 1
+[2023-10-01 09:49:20] User sdf gets 310 on randomizer
+[2023-10-01 09:49:20] User sdf connect to game with id = 48
+[2023-10-01 09:49:21] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 09:49:34] User sdfsf strike cell e5 with result 0
+[2023-10-01 09:49:34] User sdfsf strike cell e5 with result 0
+[2023-10-01 09:49:58] User sdfsf strike cell  with result 
+[2023-10-01 09:50:05] User sdf strike cell  with result 
+[2023-10-01 09:50:20] User sdfsf strike cell  with result 
+[2023-10-01 09:50:30] User sdfsf strike cell  with result 
+[2023-10-01 09:54:38] User sdfsf stand in Queue with status 1
+[2023-10-01 09:54:38] User sdfsf gets 536 on randomizer
+[2023-10-01 09:54:38] User sdfsf create new game with id = 49
+[2023-10-01 09:54:39] User sdf stand in Queue with status 1
+[2023-10-01 09:54:39] User sdf gets 713 on randomizer
+[2023-10-01 09:54:39] User sdf connect to game with id = 49
+[2023-10-01 09:54:39] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 09:55:10] User sdf strike cell  with result 
+[2023-10-01 09:59:26] User sdfsf stand in Queue with status 1
+[2023-10-01 09:59:26] User sdfsf gets 290 on randomizer
+[2023-10-01 09:59:26] User sdfsf create new game with id = 50
+[2023-10-01 09:59:27] User sdf stand in Queue with status 1
+[2023-10-01 09:59:27] User sdf gets 99 on randomizer
+[2023-10-01 09:59:27] User sdf connect to game with id = 50
+[2023-10-01 09:59:27] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 09:59:59] User sdfsf strike cell  with result 
+[2023-10-01 10:05:28] User sdfsf stand in Queue with status 1
+[2023-10-01 10:05:28] User sdfsf gets 607 on randomizer
+[2023-10-01 10:05:28] User sdfsf create new game with id = 51
+[2023-10-01 10:05:29] User sdf stand in Queue with status 1
+[2023-10-01 10:05:29] User sdf gets 616 on randomizer
+[2023-10-01 10:05:29] User sdf connect to game with id = 51
+[2023-10-01 10:05:29] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 10:06:00] User sdf strike cell  with result 
+[2023-10-01 10:06:56] User sdf stand in Queue with status 1
+[2023-10-01 10:06:56] User sdf gets 464 on randomizer
+[2023-10-01 10:06:56] User sdf create new game with id = 52
+[2023-10-01 10:06:57] User sdfsf stand in Queue with status 1
+[2023-10-01 10:06:57] User sdfsf gets 846 on randomizer
+[2023-10-01 10:06:57] User sdfsf connect to game with id = 52
+[2023-10-01 10:06:57] User sdf find opponent with name sdfsf. User turn second
+[2023-10-01 10:07:29] User sdfsf strike cell  with result 
+[2023-10-01 10:09:09] User sdf stand in Queue with status 1
+[2023-10-01 10:09:09] User sdf gets 527 on randomizer
+[2023-10-01 10:09:09] User sdf create new game with id = 53
+[2023-10-01 10:09:12] User sdfsf stand in Queue with status 1
+[2023-10-01 10:09:12] User sdfsf gets 109 on randomizer
+[2023-10-01 10:09:12] User sdfsf connect to game with id = 53
+[2023-10-01 10:09:13] User sdf find opponent with name sdfsf. User turn second
+[2023-10-01 10:09:43] User sdf strike cell  with result 
+[2023-10-01 10:10:50] User sdf stand in Queue with status 1
+[2023-10-01 10:10:50] User sdf gets 393 on randomizer
+[2023-10-01 10:10:50] User sdf create new game with id = 54
+[2023-10-01 10:10:51] User sdfsf stand in Queue with status 1
+[2023-10-01 10:10:51] User sdfsf gets 362 on randomizer
+[2023-10-01 10:10:51] User sdfsf connect to game with id = 54
+[2023-10-01 10:10:52] User sdf find opponent with name sdfsf. User turn second
+[2023-10-01 10:11:23] User sdf strike cell  with result 
+[2023-10-01 10:12:04] User sdfsf stand in Queue with status 1
+[2023-10-01 10:12:04] User sdfsf gets 593 on randomizer
+[2023-10-01 10:12:04] User sdfsf create new game with id = 55
+[2023-10-01 10:12:05] User sdf stand in Queue with status 1
+[2023-10-01 10:12:05] User sdf gets 601 on randomizer
+[2023-10-01 10:12:05] User sdf connect to game with id = 55
+[2023-10-01 10:12:06] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 10:12:37] User sdf strike cell  with result 
+[2023-10-01 10:13:27] User sdfsf stand in Queue with status 1
+[2023-10-01 10:13:27] User sdfsf gets 801 on randomizer
+[2023-10-01 10:13:27] User sdfsf create new game with id = 56
+[2023-10-01 10:13:28] User sdf stand in Queue with status 1
+[2023-10-01 10:13:28] User sdf gets 657 on randomizer
+[2023-10-01 10:13:28] User sdf connect to game with id = 56
+[2023-10-01 10:13:28] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 10:13:59] User sdfsf strike cell  with result 
+[2023-10-01 10:15:19] User sdfsf stand in Queue with status 1
+[2023-10-01 10:15:19] User sdfsf gets 80 on randomizer
+[2023-10-01 10:15:19] User sdfsf create new game with id = 57
+[2023-10-01 10:15:23] User sdf stand in Queue with status 1
+[2023-10-01 10:15:23] User sdf gets 663 on randomizer
+[2023-10-01 10:15:23] User sdf connect to game with id = 57
+[2023-10-01 10:15:23] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 10:15:54] User sdf strike cell  with result 
+[2023-10-01 10:16:10] User sdfsf stand in Queue with status 1
+[2023-10-01 10:16:10] User sdfsf gets 675 on randomizer
+[2023-10-01 10:16:10] User sdfsf create new game with id = 58
+[2023-10-01 10:16:12] User sdf stand in Queue with status 1
+[2023-10-01 10:16:12] User sdf gets 146 on randomizer
+[2023-10-01 10:16:12] User sdf connect to game with id = 58
+[2023-10-01 10:16:13] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 10:16:44] User sdfsf strike cell  with result 
+[2023-10-01 10:23:25] User sdfsf stand in Queue with status 1
+[2023-10-01 10:23:25] User sdfsf gets 70 on randomizer
+[2023-10-01 10:23:25] User sdfsf create new game with id = 59
+[2023-10-01 10:23:26] User sdf stand in Queue with status 1
+[2023-10-01 10:23:26] User sdf gets 973 on randomizer
+[2023-10-01 10:23:26] User sdf connect to game with id = 59
+[2023-10-01 10:23:26] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 10:23:57] User sdf strike cell  with result 
+[2023-10-01 10:25:35] User sdfsf stand in Queue with status 1
+[2023-10-01 10:25:35] User sdfsf gets 156 on randomizer
+[2023-10-01 10:25:35] User sdfsf create new game with id = 60
+[2023-10-01 10:25:36] User sdf stand in Queue with status 1
+[2023-10-01 10:25:36] User sdf gets 872 on randomizer
+[2023-10-01 10:25:36] User sdf connect to game with id = 60
+[2023-10-01 10:25:36] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 10:26:36] User sdfsf stand in Queue with status 1
+[2023-10-01 10:26:36] User sdfsf gets 139 on randomizer
+[2023-10-01 10:26:36] User sdfsf create new game with id = 61
+[2023-10-01 10:26:37] User sdf stand in Queue with status 1
+[2023-10-01 10:26:37] User sdf gets 534 on randomizer
+[2023-10-01 10:26:37] User sdf connect to game with id = 61
+[2023-10-01 10:26:37] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 10:32:14] User sdfsf stand in Queue with status 1
+[2023-10-01 10:32:14] User sdfsf gets 171 on randomizer
+[2023-10-01 10:32:14] User sdfsf create new game with id = 62
+[2023-10-01 10:32:16] User sdf stand in Queue with status 1
+[2023-10-01 10:32:16] User sdf gets 525 on randomizer
+[2023-10-01 10:32:16] User sdf connect to game with id = 62
+[2023-10-01 10:32:16] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 10:32:45] User sdf strike cell afk with result 0
+[2023-10-01 10:32:45] User sdf strike cell afk with result 0
+[2023-10-01 10:33:16] User sdfsf strike cell  with result 
+[2023-10-01 10:33:32] User sdfsf strike cell afk with result 0
+[2023-10-01 10:33:33] User sdfsf strike cell afk with result 0
+[2023-10-01 10:33:48] User sdf strike cell c5 with result 0
+[2023-10-01 10:33:49] User sdf strike cell c5 with result 0
+[2023-10-01 10:34:18] User sdfsf strike cell afk with result 0
+[2023-10-01 10:34:18] User sdfsf strike cell afk with result 0
+[2023-10-01 10:34:18] User sdf get info from private table
+[2023-10-01 10:34:18] User sdfsf get info from private table
+[2023-10-01 10:34:48] User sdf strike cell  with result 
+[2023-10-01 10:40:54] User sdf get info from private table
+[2023-10-01 10:52:35] User sdfsf stand in Queue with status 1
+[2023-10-01 10:52:35] User sdfsf gets 741 on randomizer
+[2023-10-01 10:52:35] User sdfsf create new game with id = 63
+[2023-10-01 10:52:36] User sdf stand in Queue with status 1
+[2023-10-01 10:52:36] User sdf gets 93 on randomizer
+[2023-10-01 10:52:36] User sdf connect to game with id = 63
+[2023-10-01 10:52:36] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 10:53:06] User sdfsf strike cell afk with result 0
+[2023-10-01 10:53:06] User sdfsf strike cell afk with result 0
+[2023-10-01 10:53:09] User sdf strike cell d4 with result 0
+[2023-10-01 10:53:09] User sdf strike cell d4 with result 0
+[2023-10-01 10:53:40] User sdfsf strike cell  with result 
+[2023-10-01 10:54:14] User sdf strike cell afk with result 
+[2023-10-01 10:54:45] User sdfsf strike cell  with result 
+[2023-10-01 10:55:07] User sdf stand in Queue with status 1
+[2023-10-01 10:55:07] User sdf gets 709 on randomizer
+[2023-10-01 10:55:07] User sdf create new game with id = 64
+[2023-10-01 10:55:08] User sdfsf stand in Queue with status 1
+[2023-10-01 10:55:08] User sdfsf gets 599 on randomizer
+[2023-10-01 10:55:08] User sdfsf connect to game with id = 64
+[2023-10-01 10:55:09] User sdf find opponent with name sdfsf. User turn second
+[2023-10-01 10:55:39] User sdf strike cell afk with result 0
+[2023-10-01 10:55:39] User sdf strike cell afk with result 0
+[2023-10-01 10:55:46] User sdfsf strike cell b4 with result 1
+[2023-10-01 10:55:46] User sdfsf strike cell b4 with result 1
+[2023-10-01 10:55:48] User sdfsf strike cell c4 with result 1
+[2023-10-01 10:55:48] User sdfsf strike cell c4 with result 1
+[2023-10-01 10:55:49] User sdfsf strike cell d4 with result 1
+[2023-10-01 10:55:49] User sdfsf strike cell d4 with result 1
+[2023-10-01 10:55:50] User sdfsf strike cell e4 with result 0
+[2023-10-01 10:55:50] User sdfsf strike cell e4 with result 0
+[2023-10-01 10:56:21] User sdf strike cell  with result 
+[2023-10-01 10:58:10] User sdfsf stand in Queue with status 1
+[2023-10-01 10:58:10] User sdfsf gets 44 on randomizer
+[2023-10-01 10:58:10] User sdfsf create new game with id = 65
+[2023-10-01 10:58:11] User sdf stand in Queue with status 1
+[2023-10-01 10:58:11] User sdf gets 920 on randomizer
+[2023-10-01 10:58:11] User sdf connect to game with id = 65
+[2023-10-01 10:58:11] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 10:58:41] User sdf strike cell afk with result 0
+[2023-10-01 10:58:41] User sdf strike cell afk with result 0
+[2023-10-01 10:58:46] User sdfsf strike cell c6 with result 0
+[2023-10-01 10:58:46] User sdfsf strike cell c6 with result 0
+[2023-10-01 10:58:48] User sdf strike cell d4 with result 0
+[2023-10-01 10:58:48] User sdf strike cell d4 with result 0
+[2023-10-01 10:58:49] User sdfsf strike cell c3 with result 0
+[2023-10-01 10:58:49] User sdfsf strike cell c3 with result 0
+[2023-10-01 10:58:51] User sdf strike cell d2 with result 0
+[2023-10-01 10:58:51] User sdf strike cell d2 with result 0
+[2023-10-01 10:58:52] User sdfsf strike cell e9 with result 1
+[2023-10-01 10:58:52] User sdfsf strike cell e9 with result 1
+[2023-10-01 10:58:54] User sdfsf strike cell d9 with result 1
+[2023-10-01 10:58:54] User sdfsf strike cell d9 with result 1
+[2023-10-01 10:58:55] User sdfsf strike cell f9 with result 0
+[2023-10-01 10:58:55] User sdfsf strike cell f9 with result 0
+[2023-10-01 10:58:57] User sdf strike cell c8 with result 0
+[2023-10-01 10:58:57] User sdf strike cell c8 with result 0
+[2023-10-01 10:58:59] User sdfsf strike cell c9 with result 21
+[2023-10-01 10:58:59] User sdfsf strike cell c9 with result 21
+[2023-10-01 10:59:01] User sdfsf strike cell e7 with result 0
+[2023-10-01 10:59:01] User sdfsf strike cell e7 with result 0
+[2023-10-01 10:59:03] User sdf strike cell e9 with result 0
+[2023-10-01 10:59:03] User sdf strike cell e9 with result 0
+[2023-10-01 10:59:04] User sdfsf strike cell e5 with result 0
+[2023-10-01 10:59:04] User sdfsf strike cell e5 with result 0
+[2023-10-01 10:59:06] User sdf strike cell c6 with result 0
+[2023-10-01 10:59:06] User sdf strike cell c6 with result 0
+[2023-10-01 10:59:08] User sdfsf strike cell c5 with result 0
+[2023-10-01 10:59:08] User sdfsf strike cell c5 with result 0
+[2023-10-01 10:59:09] User sdf strike cell e6 with result 0
+[2023-10-01 10:59:09] User sdf strike cell e6 with result 0
+[2023-10-01 10:59:16] User sdfsf strike cell e3 with result 0
+[2023-10-01 10:59:16] User sdfsf strike cell e3 with result 0
+[2023-10-01 10:59:16] User sdfsf strike cell e3 with result 0
+[2023-10-01 10:59:18] User sdf strike cell b3 with result 1
+[2023-10-01 10:59:18] User sdf strike cell b3 with result 1
+[2023-10-01 10:59:19] User sdf strike cell b4 with result 0
+[2023-10-01 10:59:19] User sdf strike cell b4 with result 0
+[2023-10-01 10:59:21] User sdfsf strike cell b2 with result 0
+[2023-10-01 10:59:22] User sdfsf strike cell b2 with result 0
+[2023-10-01 10:59:23] User sdf strike cell b2 with result 0
+[2023-10-01 10:59:23] User sdf strike cell b2 with result 0
+[2023-10-01 10:59:25] User sdfsf strike cell e2 with result 0
+[2023-10-01 10:59:25] User sdfsf strike cell e2 with result 0
+[2023-10-01 10:59:27] User sdf strike cell c3 with result 1
+[2023-10-01 10:59:27] User sdf strike cell c3 with result 1
+[2023-10-01 10:59:28] User sdf strike cell a3 with result 0
+[2023-10-01 10:59:28] User sdf strike cell a3 with result 0
+[2023-10-01 10:59:30] User sdfsf strike cell b4 with result 0
+[2023-10-01 10:59:30] User sdfsf strike cell b4 with result 0
+[2023-10-01 10:59:31] User sdf strike cell d3 with result 21
+[2023-10-01 10:59:31] User sdf strike cell d3 with result 21
+[2023-10-01 11:00:02] User sdf strike cell  with result 
+[2023-10-01 11:00:36] User sdfsf strike cell afk with result 
+[2023-10-01 11:00:44] User sdf strike cell afk with result 
+[2023-10-01 11:00:44] User sdfsf strike cell afk with result 0
+[2023-10-01 11:00:44] User sdfsf get info from private table
+[2023-10-01 11:01:07] User sdf strike cell  with result 
+[2023-10-01 11:01:41] User sdf get info from private table
+[2023-10-01 14:44:32] User sdfsf stand in Queue with status 1
+[2023-10-01 14:44:32] User sdfsf gets 165 on randomizer
+[2023-10-01 14:44:32] User sdfsf create new game with id = 66
+[2023-10-01 14:44:33] User sdf stand in Queue with status 1
+[2023-10-01 14:44:33] User sdf gets 468 on randomizer
+[2023-10-01 14:44:33] User sdf connect to game with id = 66
+[2023-10-01 14:44:34] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 14:45:05] User sdf strike cell  with result 
+[2023-10-01 14:46:14] User sdfsf stand in Queue with status 1
+[2023-10-01 14:46:14] User sdfsf gets 391 on randomizer
+[2023-10-01 14:46:14] User sdfsf create new game with id = 67
+[2023-10-01 14:46:15] User sdf stand in Queue with status 1
+[2023-10-01 14:46:15] User sdf gets 145 on randomizer
+[2023-10-01 14:46:15] User sdf connect to game with id = 67
+[2023-10-01 14:46:16] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 14:46:45] User sdfsf strike cell afk with result 0
+[2023-10-01 14:46:45] User sdfsf strike cell afk with result 0
+[2023-10-01 14:47:16] User sdf strike cell  with result 
+[2023-10-01 14:47:24] User sdfsf strike cell  with result 
+[2023-10-01 14:51:43] User sdfsf stand in Queue with status 1
+[2023-10-01 14:51:43] User sdfsf gets 311 on randomizer
+[2023-10-01 14:51:43] User sdfsf create new game with id = 68
+[2023-10-01 14:51:44] User sdf stand in Queue with status 1
+[2023-10-01 14:51:44] User sdf gets 598 on randomizer
+[2023-10-01 14:51:44] User sdf connect to game with id = 68
+[2023-10-01 14:51:44] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 14:52:16] User sdf strike cell  with result 
+[2023-10-01 14:52:34] User sdf strike cell afk with result 
+[2023-10-01 14:53:05] User sdfsf strike cell  with result 
+[2023-10-01 15:00:11] User sdfsf stand in Queue with status 1
+[2023-10-01 15:00:11] User sdfsf gets 913 on randomizer
+[2023-10-01 15:00:11] User sdfsf create new game with id = 69
+[2023-10-01 15:00:12] User sdf stand in Queue with status 1
+[2023-10-01 15:00:12] User sdf gets 500 on randomizer
+[2023-10-01 15:00:12] User sdf connect to game with id = 69
+[2023-10-01 15:00:13] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 15:00:42] User sdfsf strike cell afk with result 0
+[2023-10-01 15:02:13] User sdfsf strike cell afk with result 
+[2023-10-01 15:02:13] User sdf get info from private table
+[2023-10-01 15:02:31] User sdfsf strike cell afk with result 0
+[2023-10-01 15:02:31] User sdfsf get info from private table
+[2023-10-01 15:02:44] User sdfsf strike cell afk with result 
+[2023-10-01 15:02:44] User sdf strike cell  with result 
+[2023-10-01 15:03:08] User sdfsf stand in Queue with status 1
+[2023-10-01 15:03:08] User sdfsf gets 29 on randomizer
+[2023-10-01 15:03:08] User sdfsf create new game with id = 70
+[2023-10-01 15:03:10] User sdf stand in Queue with status 1
+[2023-10-01 15:03:10] User sdf gets 307 on randomizer
+[2023-10-01 15:03:10] User sdf connect to game with id = 70
+[2023-10-01 15:03:10] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 15:03:12] User sdfsf strike cell afk with result 0
+[2023-10-01 15:03:40] User sdf strike cell afk with result 0
+[2023-10-01 15:03:40] User sdf strike cell afk with result 0
+[2023-10-01 15:04:11] User sdfsf strike cell  with result 
+[2023-10-01 15:04:33] User sdfsf stand in Queue with status 1
+[2023-10-01 15:04:33] User sdfsf gets 677 on randomizer
+[2023-10-01 15:04:33] User sdfsf create new game with id = 71
+[2023-10-01 15:04:35] User sdf stand in Queue with status 1
+[2023-10-01 15:04:35] User sdf gets 417 on randomizer
+[2023-10-01 15:04:35] User sdf connect to game with id = 71
+[2023-10-01 15:04:35] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 15:05:05] User sdfsf strike cell afk with result 0
+[2023-10-01 15:05:05] User sdfsf strike cell afk with result 0
+[2023-10-01 15:05:11] User sdf strike cell c2 with result 1
+[2023-10-01 15:05:11] User sdf strike cell c2 with result 1
+[2023-10-01 15:05:13] User sdf strike cell d2 with result 0
+[2023-10-01 15:05:13] User sdf strike cell d2 with result 0
+[2023-10-01 15:05:16] User sdfsf strike cell d5 with result 0
+[2023-10-01 15:05:16] User sdfsf strike cell d5 with result 0
+[2023-10-01 15:05:18] User sdf strike cell c3 with result 1
+[2023-10-01 15:05:18] User sdf strike cell c3 with result 1
+[2023-10-01 15:05:21] User sdf strike cell c1 with result 22
+[2023-10-01 15:05:21] User sdf strike cell c1 with result 22
+[2023-10-01 15:05:23] User sdf strike cell e7 with result 0
+[2023-10-01 15:05:23] User sdf strike cell e7 with result 0
+[2023-10-01 15:05:26] User sdfsf strike cell g3 with result 0
+[2023-10-01 15:05:26] User sdfsf strike cell g3 with result 0
+[2023-10-01 15:05:28] User sdf strike cell g5 with result 0
+[2023-10-01 15:05:28] User sdf strike cell g5 with result 0
+[2023-10-01 15:05:31] User sdfsf strike cell g7 with result 0
+[2023-10-01 15:05:31] User sdfsf strike cell g7 with result 0
+[2023-10-01 15:05:35] User sdf strike cell c9 with result 0
+[2023-10-01 15:05:36] User sdf strike cell c9 with result 0
+[2023-10-01 15:05:40] User sdfsf strike cell e9 with result 22
+[2023-10-01 15:05:40] User sdfsf strike cell e9 with result 22
+[2023-10-01 15:05:43] User sdfsf strike cell i5 with result 0
+[2023-10-01 15:05:43] User sdfsf strike cell i5 with result 0
+[2023-10-01 15:05:46] User sdf strike cell g9 with result 1
+[2023-10-01 15:05:46] User sdf strike cell g9 with result 1
+[2023-10-01 15:05:48] User sdf strike cell h9 with result 0
+[2023-10-01 15:05:48] User sdf strike cell h9 with result 0
+[2023-10-01 15:05:52] User sdfsf strike cell h9 with result 0
+[2023-10-01 15:05:52] User sdfsf strike cell h9 with result 0
+[2023-10-01 15:06:23] User sdf strike cell  with result 
+[2023-10-01 15:09:01] User sdfsf stand in Queue with status 1
+[2023-10-01 15:09:01] User sdfsf gets 473 on randomizer
+[2023-10-01 15:09:01] User sdfsf create new game with id = 72
+[2023-10-01 15:09:02] User sdf stand in Queue with status 1
+[2023-10-01 15:09:02] User sdf gets 722 on randomizer
+[2023-10-01 15:09:02] User sdf connect to game with id = 72
+[2023-10-01 15:09:03] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 15:09:34] User sdf strike cell  with result 
+[2023-10-01 15:09:58] User sdfsf stand in Queue with status 1
+[2023-10-01 15:09:58] User sdfsf gets 276 on randomizer
+[2023-10-01 15:09:58] User sdfsf create new game with id = 73
+[2023-10-01 15:09:59] User sdf stand in Queue with status 1
+[2023-10-01 15:09:59] User sdf gets 165 on randomizer
+[2023-10-01 15:09:59] User sdf connect to game with id = 73
+[2023-10-01 15:09:59] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 15:10:08] User sdfsf strike cell d3 with result 0
+[2023-10-01 15:10:09] User sdfsf strike cell d3 with result 0
+[2023-10-01 15:10:14] User sdf strike cell d4 with result 1
+[2023-10-01 15:10:14] User sdf strike cell d4 with result 1
+[2023-10-01 15:10:16] User sdf strike cell e4 with result 21
+[2023-10-01 15:10:16] User sdf strike cell e4 with result 21
+[2023-10-01 15:10:19] User sdf strike cell b2 with result 1
+[2023-10-01 15:10:19] User sdf strike cell b2 with result 1
+[2023-10-01 15:10:21] User sdf strike cell b3 with result 1
+[2023-10-01 15:10:21] User sdf strike cell b3 with result 1
+[2023-10-01 15:10:22] User sdf strike cell b4 with result 22
+[2023-10-01 15:10:22] User sdf strike cell b4 with result 22
+[2023-10-01 15:10:53] User sdf strike cell  with result 
+[2023-10-01 15:11:06] User sdf strike cell b4 with result 
+[2023-10-01 15:11:09] User sdf strike cell b1 with result 
+[2023-10-01 15:11:11] User sdf strike cell d8 with result 
+[2023-10-01 15:11:32] User sdfsf stand in Queue with status 1
+[2023-10-01 15:11:32] User sdfsf gets 975 on randomizer
+[2023-10-01 15:11:32] User sdfsf create new game with id = 74
+[2023-10-01 15:11:35] User sdf stand in Queue with status 1
+[2023-10-01 15:11:35] User sdf gets 194 on randomizer
+[2023-10-01 15:11:35] User sdf connect to game with id = 74
+[2023-10-01 15:11:35] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 15:11:38] User sdfsf strike cell  with result 
+[2023-10-01 15:11:40] User sdfsf strike cell  with result 
+[2023-10-01 15:11:42] User sdfsf strike cell  with result 
+[2023-10-01 15:12:05] User sdfsf strike cell afk with result 0
+[2023-10-01 15:12:05] User sdfsf strike cell afk with result 0
+[2023-10-01 15:12:31] User sdfsf stand in Queue with status 1
+[2023-10-01 15:12:31] User sdfsf gets 189 on randomizer
+[2023-10-01 15:12:31] User sdfsf create new game with id = 75
+[2023-10-01 15:12:33] User sdf stand in Queue with status 1
+[2023-10-01 15:12:33] User sdf gets 921 on randomizer
+[2023-10-01 15:12:33] User sdf connect to game with id = 75
+[2023-10-01 15:12:33] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 15:12:36] User sdf strike cell  with result 
+[2023-10-01 15:13:05] User sdf strike cell  with result 
+[2023-10-01 15:19:29] User sdfsf stand in Queue with status 1
+[2023-10-01 15:19:29] User sdfsf gets 507 on randomizer
+[2023-10-01 15:19:29] User sdfsf create new game with id = 76
+[2023-10-01 15:19:30] User sdf stand in Queue with status 1
+[2023-10-01 15:19:30] User sdf gets 830 on randomizer
+[2023-10-01 15:19:30] User sdf connect to game with id = 76
+[2023-10-01 15:19:30] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 15:20:02] User sdf strike cell  with result 
+[2023-10-01 15:22:06] User sdfsf strike cell afk with result 
+[2023-10-01 15:36:36] User sdf stand in Queue with status 1
+[2023-10-01 15:36:36] User sdf gets 360 on randomizer
+[2023-10-01 15:36:36] User sdf create new game with id = 77
+[2023-10-01 15:36:37] User sdfsf stand in Queue with status 1
+[2023-10-01 15:36:37] User sdfsf gets 409 on randomizer
+[2023-10-01 15:36:37] User sdfsf connect to game with id = 77
+[2023-10-01 15:36:37] User sdf find opponent with name sdfsf. User turn second
+[2023-10-01 15:37:08] User sdfsf strike cell  with result 
+[2023-10-01 15:40:10] User sdfsf strike cell afk with result 0
+[2023-10-01 15:40:10] User sdfsf get info from private table
+[2023-10-01 15:40:13] User sdfsf strike cell afk with result 
+[2023-10-01 15:40:22] User sdfsf stand in Queue with status 1
+[2023-10-01 15:40:22] User sdfsf gets 430 on randomizer
+[2023-10-01 15:40:22] User sdfsf create new game with id = 78
+[2023-10-01 15:40:23] User sdf stand in Queue with status 1
+[2023-10-01 15:40:23] User sdf gets 211 on randomizer
+[2023-10-01 15:40:23] User sdf connect to game with id = 78
+[2023-10-01 15:40:23] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 15:40:54] User sdfsf strike cell  with result 
+[2023-10-01 15:44:01] User sdfsf strike cell afk with result 
+[2023-10-01 15:44:01] User sdf get info from private table
+[2023-10-01 15:44:07] User sdfsf strike cell afk with result 0
+[2023-10-01 15:44:07] User sdfsf get info from private table
+[2023-10-01 15:44:15] User sdfsf stand in Queue with status 1
+[2023-10-01 15:44:15] User sdfsf gets 458 on randomizer
+[2023-10-01 15:44:15] User sdfsf create new game with id = 79
+[2023-10-01 15:44:15] User sdf stand in Queue with status 1
+[2023-10-01 15:44:15] User sdf gets 162 on randomizer
+[2023-10-01 15:44:15] User sdf connect to game with id = 79
+[2023-10-01 15:44:16] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 15:44:17] User sdfsf strike cell afk with result 0
+[2023-10-01 15:44:31] User sdf strike cell  with result 
+[2023-10-01 15:44:47] User sdfsf strike cell  with result 
+[2023-10-01 15:46:47] User sdfsf strike cell  with result 
+[2023-10-01 15:48:49] User sdfsf stand in Queue with status 1
+[2023-10-01 15:48:49] User sdfsf gets 143 on randomizer
+[2023-10-01 15:48:49] User sdfsf create new game with id = 80
+[2023-10-01 15:48:50] User sdf stand in Queue with status 1
+[2023-10-01 15:48:50] User sdf gets 859 on randomizer
+[2023-10-01 15:48:50] User sdf connect to game with id = 80
+[2023-10-01 15:48:50] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 15:49:21] User sdf strike cell  with result 
+[2023-10-01 15:49:22] User sdf get info from private table
+[2023-10-01 15:50:21] User sdfsf stand in Queue with status 1
+[2023-10-01 15:50:21] User sdfsf gets 12 on randomizer
+[2023-10-01 15:50:21] User sdfsf create new game with id = 81
+[2023-10-01 15:50:22] User sdf stand in Queue with status 1
+[2023-10-01 15:50:22] User sdf gets 764 on randomizer
+[2023-10-01 15:50:22] User sdf connect to game with id = 81
+[2023-10-01 15:50:22] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 15:50:33] User sdf strike cell d2 with result 0
+[2023-10-01 15:50:33] User sdf strike cell d2 with result 0
+[2023-10-01 15:50:34] User sdfsf strike cell g6 with result 1
+[2023-10-01 15:50:34] User sdfsf strike cell g6 with result 1
+[2023-10-01 15:50:36] User sdfsf strike cell h6 with result 0
+[2023-10-01 15:50:37] User sdfsf strike cell h6 with result 0
+[2023-10-01 15:50:38] User sdf strike cell e5 with result 0
+[2023-10-01 15:50:38] User sdf strike cell e5 with result 0
+[2023-10-01 15:50:40] User sdfsf strike cell f6 with result 1
+[2023-10-01 15:50:40] User sdfsf strike cell f6 with result 1
+[2023-10-01 15:50:41] User sdfsf strike cell e6 with result 1
+[2023-10-01 15:50:41] User sdfsf strike cell e6 with result 1
+[2023-10-01 15:50:42] User sdfsf strike cell d6 with result 21
+[2023-10-01 15:50:42] User sdfsf strike cell d6 with result 21
+[2023-10-01 15:51:13] User sdfsf strike cell  with result 
+[2023-10-01 15:51:26] User sdfsf strike cell afk with result 0
+[2023-10-01 15:51:26] User sdfsf strike cell afk with result 0
+[2023-10-01 15:51:28] User sdf strike cell g4 with result 0
+[2023-10-01 15:51:29] User sdf strike cell g4 with result 0
+[2023-10-01 15:51:30] User sdfsf strike cell e3 with result 0
+[2023-10-01 15:51:30] User sdfsf strike cell e3 with result 0
+[2023-10-01 15:51:31] User sdf strike cell e8 with result 0
+[2023-10-01 15:51:31] User sdf strike cell e8 with result 0
+[2023-10-01 15:51:33] User sdfsf strike cell h3 with result 0
+[2023-10-01 15:51:33] User sdfsf strike cell h3 with result 0
+[2023-10-01 15:51:34] User sdf strike cell h8 with result 0
+[2023-10-01 15:51:35] User sdf strike cell h8 with result 0
+[2023-10-01 15:51:37] User sdfsf strike cell e10 with result 0
+[2023-10-01 15:51:37] User sdfsf strike cell e10 with result 0
+[2023-10-01 15:51:38] User sdf strike cell c7 with result 0
+[2023-10-01 15:51:39] User sdf strike cell c7 with result 0
+[2023-10-01 15:52:10] User sdfsf strike cell  with result 
+[2023-10-01 15:53:53] User sdfsf strike cell e9 with result 0
+[2023-10-01 15:53:53] User sdfsf get info from private table
+[2023-10-01 15:54:57] User sdfsf strike cell e9 with result 
+[2023-10-01 15:54:59] User sdfsf strike cell c9 with result 
+[2023-10-01 15:55:00] User sdfsf strike cell b8 with result 
+[2023-10-01 15:55:01] User sdfsf strike cell e8 with result 
+[2023-10-01 15:55:02] User sdfsf strike cell i2 with result 
+[2023-10-01 15:55:02] User sdfsf strike cell i2 with result 
+[2023-10-01 15:55:05] User sdfsf stand in Queue with status 1
+[2023-10-01 15:55:05] User sdfsf gets 939 on randomizer
+[2023-10-01 15:55:05] User sdfsf create new game with id = 82
+[2023-10-01 15:55:06] User sdf stand in Queue with status 1
+[2023-10-01 15:55:06] User sdf gets 696 on randomizer
+[2023-10-01 15:55:06] User sdf connect to game with id = 82
+[2023-10-01 15:55:06] User sdfsf find opponent with name sdf. User turn second
+[2023-10-01 15:55:37] User sdfsf strike cell  with result 
+[2023-10-01 15:56:40] User sdf get info from private table
+[2023-10-01 15:57:33] User sdfsf get info from private table
+[2023-10-01 15:58:02] User sdfsf strike cell  with result 
+[2023-10-01 16:29:45] User sdfsf validate login in server with result: На жаль, помилка - данний нікнейм вже зайнятий, спробуйте інший.<br>
+[2023-10-01 16:29:45] User sdfsf check if he reconnects to game. Now user status in Queue is: 2
+[2023-10-01 16:29:46] User sdf get info from private table
+[2023-10-01 17:13:13] User sdf validate login in server with result: На жаль, помилка - данний нікнейм вже зайнятий, спробуйте інший.<br>
+[2023-10-01 17:13:13] User sdf check if he reconnects to game. Now user status in Queue is: 2
+[2023-10-01 17:13:14] User sdfsf validate login in server with result: На жаль, помилка - данний нікнейм вже зайнятий, спробуйте інший.<br>
+[2023-10-01 17:13:14] User sdfsf check if he reconnects to game. Now user status in Queue is: 2
+[2023-10-01 17:13:15] User sdfsf get info from private table
+[2023-10-01 17:13:16] User sdf get info from private table
+[2023-10-01 17:13:44] User sdfsf strike cell  with result 
+[2023-10-01 18:13:07] User sdfsf validate login in server with result: На жаль, помилка - данний нікнейм вже зайнятий, спробуйте інший.<br>
+[2023-10-01 18:13:07] User sdfsf check if he reconnects to game. Now user status in Queue is: 2
+[2023-10-01 18:13:09] User sdf get info from private table
+[2023-10-01 18:13:51] User sdfsf validate login in server with result: На жаль, помилка - данний нікнейм вже зайнятий, спробуйте інший.<br>
+[2023-10-01 18:13:51] User sdfsf check if he reconnects to game. Now user status in Queue is: 2
+[2023-10-01 18:13:53] User sdf get info from private table
+[2023-10-01 18:14:08] User sdfsf1 validate login in server with result: 
+[2023-10-01 18:14:08] User sdfsf1 check if he reconnects to game. Now user status in Queue is: 0
+[2023-10-01 18:14:53] User sdfsf1 stand in Queue with status 1
+[2023-10-01 18:14:53] User sdfsf1 gets 19 on randomizer
+[2023-10-01 18:14:54] User sdfsf1 create new game with id = 83
+[2023-10-01 18:15:07] User sdfs validate login in server with result: 
+[2023-10-01 18:15:07] User sdfs check if he reconnects to game. Now user status in Queue is: 0
+[2023-10-01 18:15:14] User sdfs stand in Queue with status 1
+[2023-10-01 18:15:14] User sdfs gets 818 on randomizer
+[2023-10-01 18:15:14] User sdfs connect to game with id = 83
+[2023-10-01 18:15:14] User sdfsf1 find opponent with name sdfs. User turn second
+[2023-10-01 18:15:19] User sdfs strike cell b2 with result 0
+[2023-10-01 18:15:19] User sdfs strike cell b2 with result 0
+[2023-10-01 18:15:21] User sdfsf1 strike cell g4 with result 0
+[2023-10-01 18:15:21] User sdfsf1 strike cell g4 with result 0
+[2023-10-01 18:15:22] User sdfs strike cell e3 with result 1
+[2023-10-01 18:15:22] User sdfs strike cell e3 with result 1
+[2023-10-01 18:15:24] User sdfs strike cell d3 with result 21
+[2023-10-01 18:15:24] User sdfs strike cell d3 with result 21
+[2023-10-01 18:15:26] User sdfs strike cell d1 with result 0
+[2023-10-01 18:15:26] User sdfs strike cell d1 with result 0
+[2023-10-01 18:15:28] User sdfsf1 strike cell c5 with result 0
+[2023-10-01 18:15:29] User sdfsf1 strike cell c5 with result 0
+[2023-10-01 18:15:38] User sdfs strike cell g6 with result 0
+[2023-10-01 18:15:38] User sdfs strike cell g6 with result 0
+[2023-10-01 18:15:42] User sdfsf1 strike cell e3 with result 0
+[2023-10-01 18:15:42] User sdfsf1 strike cell e3 with result 0
+[2023-10-01 18:15:43] User sdfs strike cell f9 with result 0
+[2023-10-01 18:15:43] User sdfs strike cell f9 with result 0
+[2023-10-01 18:15:44] User sdfsf1 strike cell f7 with result 0
+[2023-10-01 18:15:44] User sdfsf1 strike cell f7 with result 0
+[2023-10-01 18:15:45] User sdfs strike cell d7 with result 0
+[2023-10-01 18:15:46] User sdfs strike cell d7 with result 0
+[2023-10-01 18:15:47] User sdfsf1 strike cell i9 with result 0
+[2023-10-01 18:15:47] User sdfsf1 strike cell i9 with result 0
+[2023-10-01 18:15:48] User sdfs strike cell c9 with result 0
+[2023-10-01 18:15:48] User sdfs strike cell c9 with result 0
+[2023-10-01 18:15:50] User sdfsf1 strike cell i6 with result 1
+[2023-10-01 18:15:50] User sdfsf1 strike cell i6 with result 1
+[2023-10-01 18:15:51] User sdfsf1 strike cell i5 with result 1
+[2023-10-01 18:15:52] User sdfsf1 strike cell i5 with result 1
+[2023-10-01 18:15:53] User sdfsf1 strike cell i7 with result 1
+[2023-10-01 18:15:53] User sdfsf1 strike cell i7 with result 1
+[2023-10-01 18:15:53] User sdfsf1 strike cell i8 with result 22
+[2023-10-01 18:15:54] User sdfsf1 strike cell i8 with result 22
+[2023-10-01 18:15:56] User sdfsf1 strike cell a1 with result 1
+[2023-10-01 18:15:56] User sdfsf1 strike cell a1 with result 1
+[2023-10-01 18:15:57] User sdfsf1 strike cell a2 with result 1
+[2023-10-01 18:15:57] User sdfsf1 strike cell a2 with result 1
+[2023-10-01 18:15:58] User sdfsf1 strike cell a3 with result 22
+[2023-10-01 18:15:58] User sdfsf1 strike cell a3 with result 22
+[2023-10-01 18:16:01] User sdfsf1 strike cell f2 with result 1
+[2023-10-01 18:16:01] User sdfsf1 strike cell f2 with result 1
+[2023-10-01 18:16:02] User sdfsf1 strike cell g2 with result 21
+[2023-10-01 18:16:02] User sdfsf1 strike cell g2 with result 21
+[2023-10-01 18:16:03] User sdfsf1 strike cell i1 with result 1
+[2023-10-01 18:16:03] User sdfsf1 strike cell i1 with result 1
+[2023-10-01 18:16:04] User sdfsf1 strike cell i2 with result 22
+[2023-10-01 18:16:05] User sdfsf1 strike cell i2 with result 22
+[2023-10-01 18:16:20] User sdfsf1 strike cell d8 with result 1
+[2023-10-01 18:16:20] User sdfsf1 strike cell d8 with result 1
+[2023-10-01 18:16:20] User sdfsf1 strike cell d8 with result 1
+[2023-10-01 18:16:22] User sdfsf1 strike cell c8 with result 1
+[2023-10-01 18:16:22] User sdfsf1 strike cell c8 with result 1
+[2023-10-01 18:16:23] User sdfsf1 strike cell e8 with result 21
+[2023-10-01 18:16:23] User sdfsf1 strike cell e8 with result 21
+[2023-10-01 18:16:24] User sdfsf1 strike cell d5 with result 0
+[2023-10-01 18:16:24] User sdfsf1 strike cell d5 with result 0
+[2023-10-01 18:16:26] User sdfs strike cell e6 with result 1
+[2023-10-01 18:16:26] User sdfs strike cell e6 with result 1
+[2023-10-01 18:16:28] User sdfs strike cell d6 with result 0
+[2023-10-01 18:16:28] User sdfs strike cell d6 with result 0
+[2023-10-01 18:16:48] User sdfsf1 strike cell d4 with result 0
+[2023-10-01 18:16:48] User sdfsf1 strike cell d4 with result 0
+[2023-10-01 18:17:09] User sdfs validate login in server with result: На жаль, помилка - данний нікнейм вже зайнятий, спробуйте інший.<br>
+[2023-10-01 18:17:09] User sdfs check if he reconnects to game. Now user status in Queue is: 2
+[2023-10-01 18:17:19] User sdfs strike cell h4 with result 0
+[2023-10-01 18:17:19] User sdfs strike cell h4 with result 0
+[2023-10-01 18:17:20] User sdfsf1 strike cell d6 with result 0
+[2023-10-01 18:17:20] User sdfsf1 strike cell d6 with result 0
+[2023-10-01 18:17:22] User sdfs strike cell f6 with result 0
+[2023-10-01 18:17:22] User sdfs strike cell f6 with result 0
+[2023-10-01 18:17:24] User sdfsf1 strike cell f6 with result 0
+[2023-10-01 18:17:24] User sdfsf1 strike cell f6 with result 0
+[2023-10-01 18:17:25] User sdfs strike cell e5 with result 0
+[2023-10-01 18:17:25] User sdfs strike cell e5 with result 0
+[2023-10-01 18:17:27] User sdfsf1 strike cell f5 with result 0
+[2023-10-01 18:17:27] User sdfsf1 strike cell f5 with result 0
+[2023-10-01 18:17:28] User sdfs strike cell e7 with result 22
+[2023-10-01 18:17:28] User sdfs strike cell e7 with result 22
+[2023-10-01 18:17:59] User sdfs strike cell  with result 
+[2023-10-01 18:18:17] User sdfs strike cell  with result 
+[2023-10-01 18:20:56] User sdfs stand in Queue with status 1
+[2023-10-01 18:20:56] User sdfs gets 655 on randomizer
+[2023-10-01 18:20:56] User sdfs create new game with id = 84
+[2023-10-01 18:20:57] User sdfsf1 stand in Queue with status 1
+[2023-10-01 18:20:57] User sdfsf1 gets 770 on randomizer
+[2023-10-01 18:20:57] User sdfsf1 connect to game with id = 84
+[2023-10-01 18:20:57] User sdfs find opponent with name sdfsf1. User turn second
+[2023-10-01 18:20:58] User sdfsf1 get info from private table
+[2023-10-01 18:20:59] User sdfs get info from private table
+[2023-10-01 18:21:25] User sdfs stand in Queue with status 1
+[2023-10-01 18:21:25] User sdfs gets 200 on randomizer
+[2023-10-01 18:21:25] User sdfs create new game with id = 85
+[2023-10-01 18:21:26] User sdfsf1 stand in Queue with status 1
+[2023-10-01 18:21:26] User sdfsf1 gets 697 on randomizer
+[2023-10-01 18:21:26] User sdfsf1 connect to game with id = 85
+[2023-10-01 18:21:27] User sdfs find opponent with name sdfsf1. User turn second
+[2023-10-01 18:21:28] User sdfsf1 strike cell  with result 
+[2023-10-01 18:21:34] User sdfsf1 strike cell a1 with result 0
+[2023-10-01 18:21:34] User sdfsf1 strike cell a1 with result 0
+[2023-10-01 18:21:35] User sdfs strike cell e5 with result 0
+[2023-10-01 18:21:35] User sdfs strike cell e5 with result 0
+[2023-10-01 18:21:37] User sdfsf1 strike cell d5 with result 0
+[2023-10-01 18:21:37] User sdfsf1 strike cell d5 with result 0
+[2023-10-01 18:21:38] User sdfs strike cell h4 with result 0
+[2023-10-01 18:21:38] User sdfs strike cell h4 with result 0
+[2023-10-01 18:21:39] User sdfsf1 strike cell g7 with result 1
+[2023-10-01 18:21:40] User sdfsf1 strike cell g7 with result 1
+[2023-10-01 18:21:42] User sdfsf1 strike cell g6 with result 1
+[2023-10-01 18:21:42] User sdfsf1 strike cell g6 with result 1
+[2023-10-01 18:21:42] User sdfsf1 strike cell g5 with result 1
+[2023-10-01 18:21:42] User sdfsf1 strike cell g5 with result 1
+[2023-10-01 18:21:43] User sdfsf1 strike cell g8 with result 22
+[2023-10-01 18:21:43] User sdfsf1 strike cell g8 with result 22
+[2023-10-01 18:21:44] User sdfsf1 strike cell i8 with result 1
+[2023-10-01 18:21:44] User sdfsf1 strike cell i8 with result 1
+[2023-10-01 18:21:45] User sdfsf1 strike cell i9 with result 1
+[2023-10-01 18:21:45] User sdfsf1 strike cell i9 with result 1
+[2023-10-01 18:21:46] User sdfsf1 strike cell i7 with result 22
+[2023-10-01 18:21:46] User sdfsf1 strike cell i7 with result 22
+[2023-10-01 18:21:47] User sdfsf1 strike cell j3 with result 21
+[2023-10-01 18:21:48] User sdfsf1 strike cell j3 with result 21
+[2023-10-01 18:21:49] User sdfsf1 strike cell h2 with result 1
+[2023-10-01 18:21:49] User sdfsf1 strike cell h2 with result 1
+[2023-10-01 18:21:50] User sdfsf1 strike cell h1 with result 22
+[2023-10-01 18:21:50] User sdfsf1 strike cell h1 with result 22
+[2023-10-01 18:21:51] User sdfsf1 strike cell f2 with result 1
+[2023-10-01 18:21:51] User sdfsf1 strike cell f2 with result 1
+[2023-10-01 18:21:52] User sdfsf1 strike cell e2 with result 21
+[2023-10-01 18:21:52] User sdfsf1 strike cell e2 with result 21
+[2023-10-01 18:21:54] User sdfsf1 strike cell b2 with result 1
+[2023-10-01 18:21:54] User sdfsf1 strike cell b2 with result 1
+[2023-10-01 18:21:54] User sdfsf1 strike cell b3 with result 22
+[2023-10-01 18:21:55] User sdfsf1 strike cell b3 with result 22
+[2023-10-01 18:21:57] User sdfsf1 strike cell c5 with result 22
+[2023-10-01 18:21:57] User sdfsf1 strike cell c5 with result 22
+[2023-10-01 18:21:58] User sdfsf1 strike cell c7 with result 1
+[2023-10-01 18:21:58] User sdfsf1 strike cell c7 with result 1
+[2023-10-01 18:21:59] User sdfsf1 strike cell e7 with result 1
+[2023-10-01 18:21:59] User sdfsf1 strike cell e7 with result 1
+[2023-10-01 18:22:00] User sdfsf1 strike cell d7 with result 21
+[2023-10-01 18:22:00] User sdfsf1 strike cell d7 with result 21
+[2023-10-01 18:22:02] User sdfsf1 strike cell a8 with result 21
+[2023-10-01 18:22:02] User sdfsf1 strike cell a8 with result 21
+[2023-10-01 18:22:04] User sdfsf1 strike cell g10 with result 22
+[2023-10-01 18:22:04] User sdfsf1 strike cell g10 with result 22
+[2023-10-01 18:22:04] User sdfsf1 get info from private table
+[2023-10-01 18:22:04] User sdfs get info from private table
+[2023-10-01 18:22:28] User sdfs get info from private table
+[2023-10-01 18:22:34] User sdfsf1 get info from private table
+[2023-10-01 18:22:34] User sdfsf1 strike cell  with result 

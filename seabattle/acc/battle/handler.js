@@ -1,15 +1,59 @@
-import {requestToDB} from "../prepareConnection.js";
+import {requestToDB, startTimer} from "../prepareConnection.js";
 
 window.onload = () => {
     setInterval(
-        function (){requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php",
-            {
-                messageId: 20,
-                messageType: "lastUpdate",
-                createDate: new Date(),
-                login: localStorage.getItem("login"),
-            }).then(data => {
-        })},
+        //ToDo:
+        function () {
+            requestToDB("http://localhost/alpha-battle/",
+                {
+                    messageId: 20,
+                    messageType: "lastUpdate",
+                    createDate: new Date(),
+                    login: localStorage.getItem("login"),
+                    opponent: JSON.parse(localStorage.getItem("gameInfo")).opponent_login,
+                }).then(data => {
+                console.log(data.userOnline)
+                if (data.userOnline >= 3 && data.userOnline < 90) {
+                    document.querySelector(".opponent-lose-control").style.visibility = "visible";
+                    localStorage.setItem("initialTimeInSeconds", 30);
+                } else if (data.userOnline >= 90) {
+                    requestToDB("http://localhost/alpha-battle/",
+                        {
+                            messageId: 21,
+                            messageType: "updateWinner",
+                            createDate: new Date(),
+                            login: localStorage.getItem("login"),
+                            gameId: JSON.parse(localStorage.getItem("gameInfo")).game_id,
+                        }).then(data => {
+                    });
+                } else {
+                    document.querySelector(".opponent-lose-control").style.visibility = "hidden";
+                }
+            })
+        },
+        1000);
+
+    setInterval(
+        //ToDo:
+        function () {
+            requestToDB("http://localhost/alpha-battle/",
+                {
+                    messageId: 22,
+                    messageType: "getWinner",
+                    createDate: new Date(),
+                    gameId: JSON.parse(localStorage.getItem("gameInfo")).game_id,
+                    login: localStorage.getItem("login"),
+                    opponent: JSON.parse(localStorage.getItem("gameInfo")).opponent_login,
+                }).then(data => {
+                console.log(data.winner)
+                if (data.winner !== "") {
+                    localStorage.setItem("isWinner", JSON.stringify(data.winner === localStorage.getItem("login")));
+                    localStorage.setItem("mine-field", JSON.stringify(document.querySelector(".mine-field .ships").innerHTML));
+                    localStorage.setItem("opponent-field", JSON.stringify(document.querySelector(".opponent-field .ships").innerHTML));
+                    window.location.href = "http://localhost/alpha-battle/seabattle/acc/result-battle/";
+                }
+            })
+        },
         1000);
 
     if (localStorage.getItem("login") === null) {
@@ -23,7 +67,8 @@ window.onload = () => {
     function exitFromBattlePage() {
         const gameInfo = JSON.parse(localStorage.getItem("gameInfo"));
 
-        requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php",
+        //ToDO:
+        requestToDB("http://localhost/alpha-battle/",
             {
                 messageId: 9,
                 messageType: "userCancelPage",
@@ -40,7 +85,8 @@ window.onload = () => {
     function previousPage() {
         const gameInfo = JSON.parse(localStorage.getItem("gameInfo"));
         history.back();
-        requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php",
+        //ToDo:
+        requestToDB("http://localhost/alpha-battle/",
             {
                 messageId: 9,
                 messageType: "userEnterPreviousPage",
@@ -72,4 +118,8 @@ window.onload = () => {
     });
 
     document.querySelector(".previous-page").addEventListener("click", previousPage);
+}
+
+window.onbeforeunload = () => {
+    localStorage.setItem("reload", true);
 }

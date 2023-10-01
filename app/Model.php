@@ -315,13 +315,13 @@ class Model
 
         if (!is_null($startCoord)) {
             $ships = $this->generateShipCoordinates($startCoord, intval($fetchedData["response"]) % 20, $length);
-        }
 
-        sort($ships);
+            sort($ships);
 
-        if (preg_match('/^\w{1}10$/', $ships[0]) === 1 && preg_match('/^\w{1}10$/', $ships[1]) !== 1) {
-            $firstCoordinate = array_shift($ships);
-            $ships[] = $firstCoordinate;
+            if (preg_match('/^\w{1}10$/', $ships[0]) === 1 && preg_match('/^\w{1}10$/', $ships[1]) !== 1) {
+                $firstCoordinate = array_shift($ships);
+                $ships[] = $firstCoordinate;
+            }
         }
 
         return [$fetchedData["response"], $ships];
@@ -359,7 +359,7 @@ class Model
     /**
      * @throws Exception
      */
-    public function getUserOnlineStatusFromUsers(int $opponentId): bool
+    public function getUserOnlineStatusFromUsers(int $opponentId): int
     {
         $connection = $this->db->getConnection();
         $statement = $connection->prepare(

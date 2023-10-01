@@ -1,6 +1,8 @@
 <?php
 
 namespace app;
+use Exception;
+
 require_once __DIR__ . "/Model.php";
 
 class Controller
@@ -135,7 +137,10 @@ class Controller
         }
     }
 
-    public function userOnline(int $opponentId): bool
+    /**
+     * @throws Exception
+     */
+    public function userOnline(int $opponentId): int
     {
         return $this->model->getUserOnlineStatusFromUsers($opponentId);
     }
@@ -185,5 +190,10 @@ class Controller
     public function updateLastTime($login)
     {
         $this->model->updateTimeInUsers($login);
+    }
+
+    public function getWinner($gameId, $login, $opponent)
+    {
+        return $this->model->getWinnerFromGamesIfGameIsEnd($gameId, $login, $opponent);
     }
 }

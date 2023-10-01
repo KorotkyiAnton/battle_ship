@@ -10,7 +10,8 @@ window.onload = () => {
 
     function exitFromPreparePage() {
         window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/seabattle/";
-        requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php",
+        //ToDO:
+        requestToDB("http://localhost/alpha-battle/",
             {
                 messageId: 9,
                 messageType: "exitFromPage",
@@ -28,4 +29,5 @@ window.onload = () => {
 window.onbeforeunload = () => {
     localStorage.removeItem("mine-field");
     localStorage.removeItem("opponent-field");
+    localStorage.setItem("reload", false);
 }

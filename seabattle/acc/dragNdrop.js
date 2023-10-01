@@ -83,12 +83,129 @@ class Field {
         }
 
         const obj = {x, y, kx, ky}
-        const result = this.checkLocationShip(obj, decks);
+        const result = this.checkLocationShip(obj, decks, 0);
         if (!result) return this.getCoordsDecks(decks);
         return obj;
     }
 
-    checkLocationShip(obj, decks) {
+    fillSurroundingWithTwo(matrix) {
+        const numRows = matrix.length;
+        const numCols = matrix[0].length;
+
+        // Создаем копию матрицы для хранения результата
+        const resultMatrix = [];
+        for (let i = 0; i < numRows; i++) {
+            resultMatrix[i] = matrix[i].slice(); // Создаем копию строки матрицы
+        }
+
+        // Перебираем элементы матрицы
+        for (let row = 0; row < numRows; row++) {
+            for (let col = 0; col < numCols; col++) {
+                if (matrix[row][col] === 1) {
+                    // Проверяем соседние ячейки на выход за границы
+                    for (let dx = -1; dx <= 1; dx++) {
+                        for (let dy = -1; dy <= 1; dy++) {
+                            const newRow = row + dx;
+                            const newCol = col + dy;
+
+                            // Проверяем, что новые координаты находятся в пределах матрицы
+                            if (newRow >= 0 && newRow < numRows && newCol >= 0 && newCol < numCols) {
+                                // Заполняем соседнюю ячейку значением 2
+                                resultMatrix[newRow][newCol] = 2;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return resultMatrix;
+    }
+
+    addAndRemoveRedCellsWithDelay(topLeft, bottomRight, matrix) {
+        const letters = 'abcdefghij'; // буквы на доске
+        const startX = letters.indexOf(topLeft[0]);
+        const endX = letters.indexOf(bottomRight[0]);
+        const startY = parseInt(topLeft.slice(1));
+        const endY = parseInt(bottomRight.slice(1));
+
+        const parentElement = document.querySelector('.mine-field .ships');
+
+        let x = startX;
+        let y = startY;
+        matrix = this.fillSurroundingWithTwo(matrix);
+
+        function addRedCell() {
+            if (matrix[y][x] === 2) {
+                const newChildElement = document.createElement('div');
+                newChildElement.classList.add("red-cell");
+                newChildElement.style.top = (y * 25).toString() + "px";
+                newChildElement.style.left = (x * 25).toString() + "px";
+                parentElement.appendChild(newChildElement);
+                setTimeout(removeRedCell, 200, newChildElement); // Удаление с задержкой в 1 секунду
+            }
+            if (x <= endX) {
+                x++;
+
+                if (x > endX) {
+                    x = startX;
+                    y++;
+                }
+
+                if (y <= endY) {
+                    addRedCell();
+                }
+            }
+        }
+
+        function removeRedCell(element) {
+            parentElement.removeChild(element);
+        }
+
+        addRedCell();
+    }
+
+    addAndRemoveGreenCellsWithDelay(topLeft, bottomRight) {
+        const letters = 'abcdefghij'; // буквы на доске
+        const startX = letters.indexOf(topLeft[0]);
+        const endX = letters.indexOf(bottomRight[0]);
+        const startY = parseInt(topLeft.slice(1));
+        const endY = parseInt(bottomRight.slice(1));
+
+        const parentElement = document.querySelector('.mine-field .ships');
+
+        let x = startX;
+        let y = startY;
+
+        function addGreenCell() {
+            if (x <= endX) {
+                const newChildElement = document.createElement('div');
+                newChildElement.classList.add("green-cell");
+                newChildElement.style.top = (y * 25).toString() + "px";
+                newChildElement.style.left = (x * 25).toString() + "px";
+                parentElement.appendChild(newChildElement);
+                x++;
+
+                if (x > endX) {
+                    x = startX;
+                    y++;
+                }
+
+                if (y <= endY) {
+                    addGreenCell();
+                }
+                setTimeout(removeGreenCell, 200, newChildElement); // Удаление с задержкой в 1 секунду
+            }
+        }
+
+        function removeGreenCell(element) {
+            parentElement.removeChild(element);
+        }
+
+        addGreenCell();
+    }
+
+    checkLocationShip(obj, decks, random = 1) {
         let {x, y, kx, ky, fromX, toX, fromY, toY} = obj;
         kx = Math.abs(kx);
         ky = Math.abs(ky);
@@ -106,6 +223,14 @@ class Field {
         else if (y < 9 && ky === 0) toY = y + 2;
 
         if (toX === undefined || toY === undefined || fromX < 0 || fromY < 0) return false;
+
+        if (random) {
+            if (this.matrix.slice(fromX, toX).filter(arr => arr.slice(fromY, toY).includes(1)).length <= 0) {
+                this.addAndRemoveGreenCellsWithDelay(String.fromCharCode(fromY + 97) + (fromX), String.fromCharCode(toY + 96) + (toX - 1));
+            } else {
+                this.addAndRemoveRedCellsWithDelay(String.fromCharCode(fromY + 97) + (fromX), String.fromCharCode(toY + 96) + (toX - 1), this.matrix);
+            }
+        }
 
         return this.matrix.slice(fromX, toX)
             .filter(arr => arr.slice(fromY, toY).includes(1))

@@ -3,24 +3,26 @@ import {requestToDB} from "../prepareConnection.js";
 const opponentField = document.querySelector(".opponent-field > .ships");
 // Получаем элемент таймера по его id
 const timerElement = document.getElementById('timer');
-let initialTimeInSeconds = 30;
+//let initialTimeInSeconds = 30;
 let timerInterval; // Переменная для хранения интервала таймера
 
 // Функция для обновления таймера
 function updateTimer() {
-    if (initialTimeInSeconds <= 0) {
+    if (parseInt(localStorage.getItem("initialTimeInSeconds")) <= 0) {
         clearInterval(timerInterval);
         timerElement.textContent = 'Час вийшов!';
         startTimer(false);
     } else {
-        initialTimeInSeconds--;
+        localStorage.setItem("initialTimeInSeconds", localStorage.getItem("initialTimeInSeconds") - 1);
         const gameInfo = JSON.parse(localStorage.getItem("gameInfo"));
-        const yourTurn = localStorage.getItem("yourTurn");
-        if (initialTimeInSeconds === 1 && yourTurn === "1") {
+        const yourTurn = JSON.parse(localStorage.getItem("yourTurn"));
+        console.log(typeof yourTurn)
+        if (localStorage.getItem("initialTimeInSeconds") === "1" && yourTurn === true) {
+            console.log("afk")
             handlerOfYourTurn(null, null, "afk", gameInfo);
         }
 
-        const seconds = initialTimeInSeconds % 60;
+        const seconds = localStorage.getItem("initialTimeInSeconds") % 60;
         timerElement.textContent = seconds + ' сек';
     }
 }
@@ -40,7 +42,9 @@ function startTimer(yourTurn) {
         document.querySelector(".mine-nick").classList.remove("highlight");
         document.querySelector(".game-search-spinner").style.visibility = "visible";
     }
-    initialTimeInSeconds = 30; // Устанавливаем начальное время
+    if(!(JSON.parse(localStorage.getItem("reload")))) {
+        localStorage.setItem("initialTimeInSeconds", 30); // Устанавливаем начальное время
+    }
     clearInterval(timerInterval); // Очищаем предыдущий интервал, если он существует
     timerInterval = setInterval(updateTimer, 1000); // Запускаем таймер с интервалом 1 секунда
 }
@@ -66,13 +70,13 @@ function getSurroundingCoordinates(coords, shotResponse, selector) {
     shipElement.style.top = ((parseInt(coords[0].slice(1)) - 1) * 25).toString() + "px";
     shipElement.style.left = (((coords[0][0]).charCodeAt(0) - 97) * 25).toString() + "px";
 
-    if (shotResponse === "21") {
+    if (shotResponse === 21) {
         shipElement.classList.add('right');
-    } else if (shotResponse === "22") {
+    } else if (shotResponse === 22) {
         shipElement.classList.add('down');
-    } else if (shotResponse === "23") {
+    } else if (shotResponse === 23) {
         shipElement.classList.add('left');
-    } else if (shotResponse === "24") {
+    } else if (shotResponse === 24) {
         shipElement.classList.add('up');
         shipElement.style.top = ((parseInt(coords[0].slice(1)) - 2 + coords.length) * 25).toString() + "px";
     }
@@ -80,7 +84,6 @@ function getSurroundingCoordinates(coords, shotResponse, selector) {
     for (const coord of coords) {
         const col = coord[0];
         const row = coord.slice(1);
-        console.log(col, row);
         const colCode = col.charCodeAt(0);
         const rowNumber = parseInt(row);
 
@@ -113,19 +116,17 @@ function getSurroundingCoordinates(coords, shotResponse, selector) {
 opponentField.addEventListener("click", clickOnField);
 
 const gameInfo = JSON.parse(localStorage.getItem("gameInfo"));
-if(localStorage.getItem("mine-field") && localStorage.getItem("opponent-field")) {
+const yourTurn = JSON.parse(localStorage.getItem("yourTurn"));
+if (localStorage.getItem("mine-field") && localStorage.getItem("opponent-field")) {
     document.querySelector(".mine-field .ships").innerHTML = JSON.parse(localStorage.getItem("mine-field"));
     document.querySelector(".opponent-field .ships").innerHTML = JSON.parse(localStorage.getItem("opponent-field"));
 }
 
-console.log(gameInfo.your_turn)
-if (gameInfo.your_turn === true) {
+console.log(typeof yourTurn)
+if (yourTurn === true) {
     startTimer(true);
-    localStorage.setItem("yourTurn", "1");
-} else if (gameInfo.your_turn === false) {
-    console.log(gameInfo.your_turn)
+} else if (yourTurn === false) {
     startTimer(false);
-    localStorage.setItem("yourTurn", "0");
     handlerOfOpponentTurn(gameInfo);
 }
 
@@ -148,8 +149,12 @@ function clickOnField(e) {
 
 function handlerOfOpponentTurn(gameInfo) {
     const login = localStorage.getItem("login");
+    localStorage.setItem("reload", false);
+    localStorage.setItem("mine-field", JSON.stringify(document.querySelector(".mine-field .ships").innerHTML));
+    localStorage.setItem("opponent-field", JSON.stringify(document.querySelector(".opponent-field .ships").innerHTML));
 
-    requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php",
+    //ToDo:
+    requestToDB("http://localhost/alpha-battle/",
         {
             messageId: 15,
             messageType: "shotResponseCoords",
@@ -158,14 +163,17 @@ function handlerOfOpponentTurn(gameInfo) {
             login: login,
             opponent: gameInfo.opponent_login
         }).then(data => {
-        localStorage.setItem("mine-field", JSON.stringify(document.querySelector(".mine-field .ships").innerHTML));
-        localStorage.setItem("opponent-field", JSON.stringify(document.querySelector(".opponent-field .ships").innerHTML));
+        if (data.winner !== "") {
+            localStorage.setItem("isWinner", JSON.stringify(data.winner === localStorage.getItem("login")));
+            localStorage.setItem("mine-field", JSON.stringify(document.querySelector(".mine-field .ships").innerHTML));
+            localStorage.setItem("opponent-field", JSON.stringify(document.querySelector(".opponent-field .ships").innerHTML));
+            window.location.href = "http://localhost/alpha-battle/seabattle/acc/result-battle/";
+        }
         if (data.messageType === "shotResponseCoords" && data.yourTurn === 1) {
-            localStorage.setItem("yourTurn", "1");
+            localStorage.setItem("yourTurn", true);
             if (data.shotCoords !== "afk") {
                 const newChildElement = document.createElement('div');
                 newChildElement.classList.add("miss");
-                console.log(data.shotCoords)
                 newChildElement.style.top = ((parseInt(data.shotCoords.slice(1)) - 1) * 25).toString() + "px";
                 newChildElement.style.left = (((data.shotCoords[0]).charCodeAt(0) - 97) * 25).toString() + "px";
                 const parentElement = document.querySelector('.mine-field .ships');
@@ -174,14 +182,12 @@ function handlerOfOpponentTurn(gameInfo) {
                 const opponentSkip = document.querySelector(".opponent-skip");
                 opponentSkip.innerHTML = (parseInt(opponentSkip.innerText) - 1).toString();
             }
-            console.log("handlerOfOpponentTurn -> yourTurn = 1");
             startTimer(true);
         } else if (data.messageType === "shotResponseCoords" && data.yourTurn === 0) {
-            localStorage.setItem("yourTurn", "0");
+            localStorage.setItem("yourTurn", false);
             const newChildElement = document.createElement('div');
             newChildElement.classList.add("hit");
             newChildElement.style.top = ((parseInt(data.shotCoords.slice(1)) - 1) * 25).toString() + "px";
-            console.log(newChildElement.style.top)
             newChildElement.style.left = (((data.shotCoords[0]).charCodeAt(0) - 97) * 25).toString() + "px";
             const parentElement = document.querySelector('.mine-field .ships');
             parentElement.appendChild(newChildElement);
@@ -193,14 +199,7 @@ function handlerOfOpponentTurn(gameInfo) {
                 const parentElement = document.querySelector('.mine-field .ships');
                 parentElement.appendChild(newChildElement);
                 getSurroundingCoordinates(data.ships, data.shotResponse, '.mine-field .ships');
-                if (data.winner !== "") {
-                    localStorage.setItem("isWinner", JSON.stringify(data.winner === localStorage.getItem("login")));
-                    localStorage.setItem("mine-field", JSON.stringify(document.querySelector(".mine-field .ships").innerHTML));
-                    localStorage.setItem("opponent-field", JSON.stringify(document.querySelector(".opponent-field .ships").innerHTML));
-                    window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/seabattle/acc/result-battle/";
-                }
             }
-            console.log("handlerOfOpponentTurn -> yourTurn = 0");
             startTimer(false);
             handlerOfOpponentTurn(gameInfo);
         }
@@ -208,11 +207,13 @@ function handlerOfOpponentTurn(gameInfo) {
 }
 
 function handlerOfYourTurn(cellY, cellX, coordinate, gameInfo) {
-    const login = localStorage.getItem("login");
+    localStorage.setItem("reload", false);
     localStorage.setItem("mine-field", JSON.stringify(document.querySelector(".mine-field .ships").innerHTML));
     localStorage.setItem("opponent-field", JSON.stringify(document.querySelector(".opponent-field .ships").innerHTML));
+    const login = localStorage.getItem("login");
 
-    requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php",
+    //ToDO:
+    requestToDB("http://localhost/alpha-battle/",
         {
             messageId: 13,
             messageType: "shotRequestCoords",
@@ -222,10 +223,14 @@ function handlerOfYourTurn(cellY, cellX, coordinate, gameInfo) {
             login: login,
             opponent: gameInfo.opponent_login
         }).then(data => {
-        console.log(data)
+        if (data.winner !== "") {
+            localStorage.setItem("isWinner", JSON.stringify(data.winner === localStorage.getItem("login")));
+            localStorage.setItem("mine-field", JSON.stringify(document.querySelector(".mine-field .ships").innerHTML));
+            localStorage.setItem("opponent-field", JSON.stringify(document.querySelector(".opponent-field .ships").innerHTML));
+            window.location.href = "http://localhost/alpha-battle/seabattle/acc/result-battle/";
+        }
         if (data.messageType === "shotResponseCoords" && data.yourTurn === 1) {
-            localStorage.setItem("yourTurn", "1");
-            console.log(data.ships)
+            localStorage.setItem("yourTurn", true);
             const newChildElement = document.createElement('div');
             newChildElement.classList.add("hit");
             newChildElement.style.top = (cellY * 25).toString() + "px";
@@ -239,18 +244,12 @@ function handlerOfYourTurn(cellY, cellX, coordinate, gameInfo) {
                 newChildElement.style.left = (cellX * 25).toString() + "px";
                 const parentElement = document.querySelector('.opponent-field .ships');
                 parentElement.appendChild(newChildElement);
+                console.log(data.ships, data.shotResponse);
                 getSurroundingCoordinates(data.ships, data.shotResponse, '.opponent-field .ships');
-                if (data.winner !== "") {
-                    localStorage.setItem("isWinner", JSON.stringify(data.winner === localStorage.getItem("login")));
-                    localStorage.setItem("mine-field", JSON.stringify(document.querySelector(".mine-field .ships").innerHTML));
-                    localStorage.setItem("opponent-field", JSON.stringify(document.querySelector(".opponent-field .ships").innerHTML));
-                    window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/seabattle/acc/result-battle/";
-                }
             }
-            console.log("handlerOfYourTurn -> yourTurn = 1");
             startTimer(true);
         } else if (data.messageType === "shotResponseCoords" && data.yourTurn === 0) {
-            localStorage.setItem("yourTurn", "0");
+            localStorage.setItem("yourTurn", false);
             const newChildElement = document.createElement('div');
             newChildElement.classList.add("miss");
             newChildElement.style.top = (cellY * 25).toString() + "px";
@@ -262,7 +261,6 @@ function handlerOfYourTurn(cellY, cellX, coordinate, gameInfo) {
                 const mineSkip = document.querySelector(".mine-skip");
                 mineSkip.innerHTML = (parseInt(mineSkip.innerText) - 1).toString();
             }
-            console.log("handlerOfYourTurn -> yourTurn = 0");
             startTimer(false);
             handlerOfOpponentTurn(gameInfo);
         }
