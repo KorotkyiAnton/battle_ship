@@ -16,7 +16,7 @@ function checkLoginUnique(login) {
     // Создаем объект с данными для запроса
     const requestData = {
         messageId: 1,
-        messageType: "isLoginUnique",
+        messageType: "addLoginToDBIfUnique",
         createDate: new Date(),
         login: login
     };
@@ -81,7 +81,7 @@ function validateLogin(login) {
         isError = true;
     }
 
-    if (!/^[0-9А-яA-Za-zЁёЇїІіЄєҐґ\-'_]+$/.test(login)) {
+    if (!/^[0-9А-яA-Za-zЁёЇїІіЄєҐґ\-'_ ]+$/.test(login)) {
         showStatus("block", "none", "none");
         textStatus.innerHTML += "На жаль, помилка - нікнейм може містити літери (zZ-яЯ),цифри (0-9), спецсимволи (Word space, -, ', _);<br>";
         popupErr.innerHTML += "На жаль, помилка - нікнейм може містити літери (zZ-яЯ),цифри (0-9), спецсимволи (Word space, -, ', _);<br>";

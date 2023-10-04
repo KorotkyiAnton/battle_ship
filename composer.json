@@ -3,5 +3,13 @@
         "vlucas/phpdotenv": "^5.5",
         "ext-pdo": "*",
         "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "app\\": "app/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.3"
     }
 }
