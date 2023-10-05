@@ -24,7 +24,7 @@ function checkLoginUnique(login) {
     const requestBody = JSON.stringify(requestData);
 
     //ToDo: https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php
-    const url = "http://localhost/alpha-battle/";
+    const url = "https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php";
 
     const requestOptions = {
         method: "POST",
@@ -42,6 +42,7 @@ function checkLoginUnique(login) {
             return response.json();
         })
         .then(data => {
+            console.log(data)
             if (!(localStorage.getItem("login") === null) && localStorage.getItem("login") === data.login) {
                 if(data.status === 0 || data.status=== 1) {
                     window.location.href = "acc";
@@ -111,6 +112,10 @@ function validateLogin(login) {
 }
 
 window.onload = function () {
+    if (window.innerWidth < 1024 || window.innerHeight < 768) {
+        alert("Використання пристрою з непідтримуваною роздільною здатністю екрану. Рекомендована роздільна здатність – 1024x768")
+    }
+
     const startButton = document.querySelector(".big-purple-button");
     startButton.setAttribute('disabled', '');
     const nicknameInput = document.querySelector(".login-field");

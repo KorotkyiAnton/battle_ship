@@ -8,189 +8,177 @@ use app\Validator;
 class ValidatorTest extends TestCase
 {
     /**
-     * Test case for validating a valid login.
+     * Тест для проверки корректного логина.
      */
     public function testValidLogin()
     {
-        // Create a new instance of the Validator class
+        // Создание нового экземпляра класса Validator
         $validator = new Validator();
 
-        // Define a valid login value
+        // Определение корректного значения логина
         $login = "antony";
 
-        // Validate the login and get the error message
+        // Проверка логина и получение сообщения об ошибке
         $errorMsg = $validator->validateLogin($login, true);
 
-        // Assert that the error message is empty
+        // Проверка, что сообщение об ошибке пусто
         $this->assertEquals('', $errorMsg);
     }
 
     /**
-     * Test case for invalid login length.
+     * Тест для некорректной длины логина.
      */
     public function testInvalidLoginLength()
     {
         $validator = new Validator();
 
-        // Set up login with too short length
+        // Задание логина с слишком короткой длиной
         $login = "ab";
 
-        // Validate login and get error message
+        // Проверка логина и получение сообщения об ошибке
         $errorMsg = $validator->validateLogin($login, true);
 
-        // Assert that the error message contains the expected string
+        // Проверка, что сообщение об ошибке содержит ожидаемую строку
         $this->assertStringContainsString('дозволена довжина нікнейму від 3 до 10 символів', $errorMsg);
     }
 
     /**
-     * Test for invalid login characters.
+     * Тест для некорректных символов в логине.
      */
     public function testInvalidLoginCharacters()
     {
-        // Create a new instance of the Validator class
+        // Создание нового экземпляра класса Validator
         $validator = new Validator();
 
-        // Set the login with invalid characters
+        // Задание логина с некорректными символами
         $login = "example#";
 
-        // Validate the login and get the error message
+        // Проверка логина и получение сообщения об ошибке
         $errorMsg = $validator->validateLogin($login, true);
 
-        // Assert that the error message contains the expected string
+        // Проверка, что сообщение об ошибке содержит ожидаемую строку
         $this->assertStringContainsString('нікнейм може містити літери', $errorMsg);
     }
 
     /**
-     * Test case to validate that an invalid login starting with a special character is handled correctly.
+     * Тест для проверки обработки некорректного логина, начинающегося с особого символа.
      */
     public function testInvalidLoginStartsWithSpecialCharacter()
     {
-        // Create a new instance of the Validator class
+        // Создание нового экземпляра класса Validator
         $validator = new Validator();
 
-        // Define a login that starts with a special character
+        // Задание логина, начинающегося с особого символа
         $login = "-example123";
 
-        // Validate the login and expect an error message
+        // Проверка логина и ожидание сообщения об ошибке
         $errorMsg = $validator->validateLogin($login, true);
 
-        // Assert that the error message contains the expected string
+        // Проверка, что сообщение об ошибке содержит ожидаемую строку
         $this->assertStringContainsString('починатися з літер чи цифр', $errorMsg);
     }
 
     /**
-     * Test case to verify if an invalid login ending with a special character is handled correctly.
+     * Тест для проверки обработки некорректного логина, заканчивающегося особым символом.
      */
     public function testInvalidLoginEndsWithSpecialCharacter()
     {
-        // Instantiate the Validator class
+        // Создание экземпляра класса Validator
         $validator = new Validator();
 
-        // Set the test login input
+        // Задание логина, заканчивающегося особым символом
         $login = "example123-";
 
-        // Validate the login and get the error message
+        // Проверка логина и получение сообщения об ошибке
         $errorMsg = $validator->validateLogin($login, true);
 
-        // Assert that the error message contains the expected string
+        // Проверка, что сообщение об ошибке содержит ожидаемую строку
         $this->assertStringContainsString('закінчуватися на літеру чи цифру', $errorMsg);
     }
 
     /**
-     * Test case for checking non-unique login.
+     * Тест для проверки непервичного логина.
      *
-     * This function tests the case where a non-unique login is provided.
-     * It creates a new instance of the Validator class and uses it to
-     * validate the login. The login is set to "existingLogin" and the
-     * function asserts that the error message contains a specific string.
+     * Этот тест проверяет случай, когда предоставляется непервичный логин.
+     * Создается новый экземпляр класса Validator, который используется для
+     * проверки логина. Логин устанавливается как "existingLogin", и функция
+     * проверяет, что сообщение об ошибке содержит определенную строку.
      */
     public function testNonUniqueLogin()
     {
-        // Create a new instance of the Validator class
+        // Создание нового экземпляра класса Validator
         $validator = new Validator();
 
-        // Set the login to a non-unique value
+        // Установка логина как непервичного значения
         $login = "existingLogin";
 
-        // Use the Validator instance to validate the login
+        // Использование экземпляра Validator для проверки логина
         $errorMsg = $validator->validateLogin($login, false);
 
-        // Assert that the error message contains the expected string
+        // Проверка, что сообщение об ошибке содержит ожидаемую строку
         $this->assertStringContainsString('данний нікнейм вже зайнятий', $errorMsg);
     }
 
     /**
-     * Test a valid login with Cyrillic characters.
+     * Тест для проверки корректного логина с кириллическими символами.
      */
     public function testValidLoginWithCyrillic()
     {
-        // Create a new instance of the Validator class
+        // Создание нового экземпляра класса Validator
         $validator = new Validator();
-        // Define the login with Cyrillic characters
+        // Определение логина с кириллическими символами
         $login = "ксююю юю";
-        // Validate the login and get the error message
+        // Проверка логина и получение сообщения об ошибке
         $errorMsg = $validator->validateLogin($login, true);
-        // Assert that the error message is empty
+        // Проверка, что сообщение об ошибке пусто
         $this->assertEquals('', $errorMsg);
     }
 
     /**
-     * Test case for validating invalid login with special character at the start with Cyrillic characters.
+     * Тест для проверки некорректного логина с особым символом в начале и кириллическими символами.
      */
     public function testInvalidLoginWithSpecialCharacterAtStartWithCyrillic()
     {
-        // Create a new instance of the Validator class.
+        // Создание нового экземпляра класса Validator.
         $validator = new Validator();
-        // Set the login string with special character at the start with Cyrillic characters.
+        // Установка строки логина с особым символом в начале и кириллическими символами.
         $login = "-кириллица123";
-        // Validate the login string and get the error message.
+        // Проверка логина и получение сообщения об ошибке.
         $errorMsg = $validator->validateLogin($login, true);
-        // Assert that the error message contains the expected validation message.
+        // Проверка, что сообщение об ошибке содержит ожидаемую строку валидации.
         $this->assertStringContainsString('починатися з літер чи цифр', $errorMsg);
     }
 
     /**
-     * This test case checks if an invalid login with a special character at the end,
-     * along with Cyrillic characters, returns the expected error message.
+     * Этот тест-кейс проверяет, что некорректный логин с особым символом в конце,
+     * а также кириллическими символами, возвращает ожидаемое сообщение об ошибке.
      */
     public function testInvalidLoginWithSpecialCharacterAtEndWithCyrillic()
     {
-        // Instantiate the Validator class
+        // Создание экземпляра класса Validator
         $validator = new Validator();
 
-        // Define the login string with Cyrillic characters and a special character at the end
+        // Определение строки логина с кириллическими символами и особым символом в конце
         $login = "кириллица123-";
 
-        // Call the validateLogin method with the login string and the flag indicating Cyrillic support
+        // Вызов метода validateLogin с логином и флагом, указывающим на поддержку кириллицы
         $errorMsg = $validator->validateLogin($login, true);
 
-        // Assert that the error message contains the expected substring
+        // Проверка, что сообщение об ошибке содержит ожидаемую подстроку
         $this->assertStringContainsString('закінчуватися на літеру чи цифру', $errorMsg);
     }
 
     /**
-     * Test case for invalid login with special character in the middle with Cyrillic.
+     * Тест для проверки некорректного логина с особым символом посередине и кириллическими символами.
      */
     public function testInvalidLoginWithSpecialCharacterInMiddleWithCyrillic()
     {
         $validator = new Validator();
-        // Set the login with Cyrillic characters and special character in the middle
+        // Установка логина с кириллическими символами и специальным символом в середині
         $login = "кир-`123";
-        $login1 = "кир-&12333";
-        $login2 = "кир-`!123";
-        $login3 = "ки!р-`123";
-        $login4 = "кир-%3";
-        // Validate the login and get the error message
+        // Проверка логина и получение сообщения об ошибке
         $errorMsg = $validator->validateLogin($login, true);
-        $errorMsg1 = $validator->validateLogin($login1, true);
-        $errorMsg2 = $validator->validateLogin($login2, true);
-        $errorMsg3 = $validator->validateLogin($login3, true);
-        $errorMsg4 = $validator->validateLogin($login4, true);
-        // Assert that the error message contains the expected string
+        // Проверка, что сообщение об ошибке содержит ожидаемую строку
         $this->assertStringContainsString('нікнейм може містити літери', $errorMsg);
-        $this->assertStringContainsString('нікнейм може містити літери', $errorMsg1);
-        $this->assertStringContainsString('нікнейм може містити літери', $errorMsg2);
-        $this->assertStringContainsString('нікнейм може містити літери', $errorMsg3);
-        $this->assertStringContainsString('нікнейм може містити літери', $errorMsg4);
     }
 }

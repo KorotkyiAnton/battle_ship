@@ -2,6 +2,7 @@
 
 namespace app;
 
+use Exception;
 use PDO;
 use PDOException;
 
@@ -10,8 +11,11 @@ class SingletonDB
     private static ?SingletonDB $instance = null;
     private PDO $pdo;
 
-    // Private constructor to prevent direct instantiation
+    /**
+     * Приватный конструктор, чтобы предотвратить прямое создание экземпляра
+     */
     private function __construct() {
+        // Получаем конфигурацию базы данных из переменных окружения
         $host = $_ENV['DB_HOST'];
         $db = $_ENV['DB_NAME'];
         $user = $_ENV['DB_USER'];
@@ -19,33 +23,63 @@ class SingletonDB
         $charset = $_ENV['DB_CHARSET'];
 
         try {
+            // Создаем строку DSN для подключения PDO
             $dsn = "mysql:host={$host};dbname={$db};charset={$charset}";
+
+            // Создаем новый экземпляр PDO с информацией о подключении к базе данных
             $this->pdo = new PDO($dsn, $user, $pass);
+
+            // Устанавливаем режим обработки ошибок PDO на выброс исключений
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            // Handle database connection error here
-            die(json_encode("Database connection failed: " . $e->getMessage()));
+            // Обрабатываем ошибку подключения к базе данных здесь
+            die(json_encode("Ошибка подключения к базе данных: " . $e->getMessage()));
         }
     }
 
-    // Get the singleton instance of the Database class
+    /**
+     * Получить единственный экземпляр класса Database.
+     *
+     * @return SingletonDB|null Единственный экземпляр класса Database.
+     */
     public static function getInstance(): ?SingletonDB
     {
+        // Проверяем, что экземпляр еще не создан
         if (!self::$instance) {
+            // Создаем новый экземпляр, если он еще не существует
             self::$instance = new SingletonDB();
         }
+        // Возвращаем единственный экземпляр
         return self::$instance;
     }
 
-    // Get the PDO connection
+    /**
+     * Получить соединение PDO.
+     *
+     * @return PDO Соединение PDO.
+     */
     public function getConnection(): PDO
     {
         return $this->pdo;
     }
 
-    // Prevent cloning of the object
-    private function __clone() {}
+    /**
+     * Запрещает клонирование объекта.
+     *
+     * @throws Exception При попытке клонирования.
+     */
+    private function __clone()
+    {
+        throw new Exception("Клонирование запрещено.");
+    }
 
-    // Prevent serialization of the object
-    public function __wakeup() {}
+    /**
+     * Запрещает сериализацию объекта.
+     *
+     * @return void
+     */
+    public function __wakeup()
+    {
+        // Не требуется дополнительных действий для предотвращения сериализации.
+    }
 }

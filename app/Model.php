@@ -13,110 +13,110 @@ class Model
     private ?SingletonDB $db;
 
     /**
-     * Initializes a new instance of the class.
+     * Инициализирует новый экземпляр класса.
      */
     public function __construct()
     {
-        // Get the instance of SingletonDB
+        // Получить экземпляр SingletonDB
         $this->db = SingletonDB::getInstance();
     }
 
     /**
-     * Get the user ID from login
+     * Получить идентификатор пользователя по логину.
      *
-     * @param string $login The login of the user
-     * @return int The user ID
+     * @param string $login Логин пользователя.
+     * @return int Идентификатор пользователя.
      */
     public function getUserIdFromLogin(string $login): int
     {
-        // Get the database connection
+        // Получить соединение с базой данных
         $connection = $this->db->getConnection();
-        // Prepare the SQL statement
-        $statement = $connection->prepare("SELECT id  FROM Users  WHERE LOWER(login) = LOWER(?)");
-        // Execute the statement with the login parameter
+        // Подготовить SQL-запрос
+        $statement = $connection->prepare("SELECT id FROM Users WHERE LOWER(login) = LOWER(?)");
+        // Выполнить запрос с параметром логина
         $statement->execute([$login]);
 
-        // Fetch the result and return the user ID as an integer
+        // Извлечь результат и вернуть идентификатор пользователя в виде целого числа
         return intval($statement->fetch(PDO::FETCH_ASSOC)["id"] ?? "");
     }
 
     /**
-     * Check if the given login parameter is unique.
+     * Проверить, уникален ли заданный логин.
      *
-     * @param string $login The login to check.
-     * @return bool True if the login is unique, false otherwise.
+     * @param string $login Логин для проверки.
+     * @return bool true, если логин уникален, иначе false.
      */
     public function isLoginUnique(string $login): bool
     {
-        // Get the database connection
+        // Получить соединение с базой данных
         $connection = $this->db->getConnection();
-        // Prepare the SQL statement
+        // Подготовить SQL-запрос
         $statement = $connection->prepare(
             "SELECT COUNT(LOWER(login)) AS login_count FROM Users WHERE login = LOWER(?)"
         );
-        // Execute the statement with the login parameter
+        // Выполнить запрос с параметром логина
         $statement->execute([$login]);
-        // Fetch the data and get the login count
+        // Извлечь данные и получить количество логинов
         $fetchData = $statement->fetchAll()[0];
-        $loginCount = $fetchData["login_count"];
+        $loginCount = intval($fetchData["login_count"] ?? 0);
 
-        // Return true if the login count is 0 (i.e., unique login), false otherwise
+        // Вернуть true, если количество логинов равно 0 (т.е. логин уникален), иначе false
         return ($loginCount === 0);
     }
 
     /**
-     * Add a login to the database.
+     * Добавить логин в базу данных.
      *
-     * @param string $login The login to add.
+     * @param string $login Логин для добавления.
      *
-     * @return bool True if the login was successfully added, false otherwise.
+     * @return bool true, если логин успешно добавлен, иначе false.
      */
     public function addLoginToDB(string $login): bool
     {
-        // Get the current date and time.
+        // Получить текущую дату и время.
         $lastUpdate = new \DateTime();
         $lastUpdate = $lastUpdate->format('Y-m-d H:i:s');
-        // Get the database connection.
+        // Получить соединение с базой данных.
         $connection = $this->db->getConnection();
-        // Prepare the SQL statement.
+        // Подготовить SQL-запрос.
         $statement = $connection->prepare("INSERT INTO Users (login, is_online, last_update) VALUES (?, ?, ?)");
 
-        // Execute the statement with the login, online status, and last update values.
+        // Выполнить запрос с параметрами логина, статуса онлайн и последнего обновления
         return $statement->execute([$login, true, $lastUpdate]);
     }
 
     /**
-     * Retrieves the status of a user from the queues.
+     * Получить статус пользователя из очередей.
      *
-     * @param string $login The login of the user.
-     * @return int The user status.
+     * @param string $login Логин пользователя.
+     * @return int Статус пользователя.
      */
     public function getUserStatusFromQueues(string $login): int
     {
-        // Get the database connection
+        // Получить соединение с базой данных
         $connection = $this->db->getConnection();
-        // Prepare and execute the query to retrieve the user status from the queues
+        // Подготовить и выполнить запрос для получения статуса пользователя из очередей
         $statement = $connection->prepare(
             "SELECT status FROM Queues WHERE user_id = ?"
         );
         $statement->execute([$this->getUserIdFromLogin($login)]);
         $userStatus = $statement->fetchAll()[0]["status"] ?? null;
 
-        // Return the user status as an integer
+        // Вернуть статус пользователя в виде целого числа
         return intval($userStatus);
     }
 
     /**
-     * Update the online status of a user.
+     * Обновить статус онлайн пользователя.
      *
-     * @param string $login The login of the user.
+     * @param string $login Логин пользователя.
      * @return void
      */
     public function updateOnlineStatus(string $login): void
     {
-        // Get the database connection
+        // Получить соединение с базой данных
         $connection = $this->db->getConnection();
-        // Update the online status of the user in the Users table
+        // Обновить статус онлайн пользователя в таблице Users
         $updateStatement = $connection->prepare("UPDATE Users SET is_online=1 WHERE login = LOWER(?)");
         $updateStatement->execute([$login]);
     }

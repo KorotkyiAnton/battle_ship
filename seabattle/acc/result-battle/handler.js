@@ -2,6 +2,10 @@ import {requestToDB} from "../prepareConnection.js";
 import {placeShipsOnField} from "../battle/battle.js";
 
 window.onload = () => {
+    if(localStorage.getItem("login")===null) {
+        window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/403.html";
+    }
+
     const nicks = document.querySelectorAll(".loc-nick");
     const nick = localStorage.getItem("login");
     for (let i = 0; i < nicks.length; i++) {
@@ -23,7 +27,7 @@ window.onload = () => {
 
     console.log(JSON.parse(localStorage.getItem("gameInfo")).opponent_login)
     //ToDO:
-    requestToDB("http://localhost/alpha-battle/",
+    requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php",
         {
             messageId: 11,
             messageType: "localShipStoreEmpty",
@@ -49,4 +53,13 @@ window.onload = () => {
     document.querySelector(".exit-after-game").addEventListener("click", exitFromPreparePage);
     document.querySelector(".previous-page").addEventListener("click", playAgain);
     document.querySelector(".play-again").addEventListener("click", playAgain);
+}
+
+window.onbeforeunload = () => {
+    localStorage.removeItem("mine-field");
+    localStorage.removeItem("opponent-field");
+    localStorage.removeItem("isWinner");
+    localStorage.removeItem("reload");
+    localStorage.removeItem("gameInfo");
+    localStorage.removeItem("yourTurn");
 }

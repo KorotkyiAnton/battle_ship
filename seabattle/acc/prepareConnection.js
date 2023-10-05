@@ -39,9 +39,9 @@ export function startTimer(timerElement, otherElementsToDisable, readyButton, sq
     console.log(JSON.parse(localStorage.getItem("shipCoords")));
 
     //ToDo: https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php
-    requestToDB("http://localhost/alpha-battle/",
+    requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php",
         {
-            messageId: 9,
+            messageId: 3,
             messageType: "requestIsUsersInQueue",
             createDate: new Date(),
             login: localStorage.getItem("login"),
@@ -75,16 +75,16 @@ export function stopTimer(timerElement, otherElementsToDisable, readyButton) {
     clearInterval(countdownTimer);
     isTimerRunning = false;
     //ToDo:
-    requestToDB("http://localhost/alpha-battle/",
+    requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php",
         {
-            messageId: 9,
+            messageId: 3,
             messageType: "requestIsUsersInQueue",
             createDate: new Date(),
             login: localStorage.getItem("login"),
             continueSearch: false,
             shipCoordinates: JSON.parse(localStorage.getItem("shipCoords"))
         }).then(data => {
-            console.log(data)
+        console.log(data)
     });
     timerSeconds = 90;
     timerElement.textContent = `${timerSeconds} сек`;
@@ -123,6 +123,12 @@ export async function requestToDB(url, requestData, recursion = false) {
             return response.json();
         })
         .catch(error => {
-            throw error;
+            const elementToHide = document.querySelector(".you-lose-control");
+
+            const delayInMilliseconds = 1000;
+
+            setTimeout(function () {
+                elementToHide.style.visibility = "hidden";
+            }, delayInMilliseconds);
         });
 }

@@ -13,9 +13,9 @@ class Controller
     private Validator $validator;
 
     /**
-     * Constructor for the class.
+     * Конструктор класса.
      *
-     * Initializes the model and validator objects.
+     * Инициализирует объекты модели и валидатора.
      */
     public function __construct()
     {
@@ -24,30 +24,44 @@ class Controller
     }
 
     /**
-     * Adds the login to the database if it is unique and meets the validation criteria.
+     * Добавляет логин в базу данных, если он уникален.
      *
-     * @param array $postData The array containing the post data.
-     * @return array The array containing the message ID, message type, create date, write to DB flag,
-     * error message, login, and status in the queue.
+     * @param array $postData JSON-данные с фронт-энда, содержащие логин.
+     * @return array Результат добавления логина в базу данных.
      */
     public function addLoginToDBIfUnique(array $postData): array
     {
-        // Get the login from the post data
         $login = $postData["login"] ?? "";
-        // Check if the login is unique
-        $loginUnique = $this->checkUnique($login);
-        // Validate the login
+        $loginUnique = $this->model->isLoginUnique($login);
         $validationResult = $this->validator->validateLogin($login, $loginUnique);
-        // Update the online status for the login
-        $this->updateOnlineStatus($login);
-        // Check the user status on the queue
-        $status = $this->checkUserStatusOnQueue($login);
-        // If the validation is successful and the login is unique, add it to the database
+        $this->model->updateOnlineStatus($login);
+        $status = $this->model->getUserStatusFromQueues($login);
+
+        return $this->addLoginToDB($login, $loginUnique, $validationResult, $status);
+    }
+
+    /**
+     * Добавляет логин в базу данных и возвращает массив с соответствующей информацией.
+     *
+     * @param string $login Логин, который нужно добавить в базу данных.
+     * @param bool $loginUnique Определяет, уникален ли логин или нет.
+     * @param string $validationResult Результат процесса валидации.
+     * @param int $status Состояние логина.
+     * @return array Массив со следующими ключами:
+     *               - 'messageId': Идентификатор сообщения.
+     *               - 'messageType': Тип сообщения.
+     *               - 'createDate': Дата создания сообщения.
+     *               - 'isWriteToDB': Указывает, был ли логин записан в базу данных.
+     *               - 'errMsg': Сообщение об ошибке, если оно есть.
+     *               - 'login': Значение логина.
+     *               - 'status': Состояние логина.
+     */
+    public function addLoginToDB(string $login, bool $loginUnique, string $validationResult, int $status): array
+    {
         if ($validationResult === "" && $loginUnique) {
-            $this->addLoginToDB($login);
+            $this->model->addLoginToDB($login);
         }
 
-        // Create and return the response array
         return [
             'messageId' => 5,
             'messageType' => 'loginRegisteredInDB',
@@ -57,48 +71,6 @@ class Controller
             'login' => $login,
             'status' => $status
         ];
-    }
-
-    /**
-     * Checks if the given login is unique.
-     *
-     * @param string $login The login to check.
-     * @return bool Returns true if the login is unique, false otherwise.
-     */
-    private function checkUnique(string $login): bool
-    {
-        return $this->model->isLoginUnique($login);
-    }
-
-    /**
-     * Retrieves the status of a user on the queue.
-     *
-     * @param string $login The login of the user.
-     * @return int The status of the user on the queue.
-     */
-    private function checkUserStatusOnQueue(string $login): int
-    {
-        return $this->model->getUserStatusFromQueues($login);
-    }
-
-    /**
-     * Update the online status for a given login.
-     *
-     * @param string $login The login of the user.
-     */
-    private function updateOnlineStatus(string $login)
-    {
-        $this->model->updateOnlineStatus($login);
-    }
-
-    /**
-     * Adds a login to the database.
-     *
-     * @param string $login The login to be added.
-     */
-    private function addLoginToDB(string $login)
-    {
-        $this->model->addLoginToDB($login);
     }
 
 //    public function updateUserStatusInQueues($login, $status): bool

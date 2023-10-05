@@ -5,112 +5,110 @@ namespace app;
 class Validator
 {
     /**
-     * Validates the login.
+     * Проверяет логин на валидность.
      *
-     * @param string $login The login to validate.
-     * @param bool $loginUnique Whether the login should be unique.
-     * @return string The error message is empty if the login is valid; otherwise, returns an error message.
+     * @param string $login Логин для проверки.
+     * @param bool $loginUnique Флаг, указывающий, должен ли логин быть уникальным.
+     * @return string Если логин действителен, возвращает пустую строку; в противном случае возвращает сообщение об ошибке.
      */
     public function validateLogin(string $login, bool $loginUnique): string
     {
+        //ToDo: собирать в словарь и пулить в json
         $errorMsg = '';
-        // Check if login length is between 3 and 10 characters
-        $errorMsg .= $this->checkIsLoginLengthFRom3To10($login);
-        // Check if login consists of only alphanumeric characters
+        // Проверяем длину логина от 3 до 10 символов
+        $errorMsg .= $this->checkIsLoginLengthFrom3To10($login);
+        // Проверяем, состоит ли логин только из букв и цифр
         $errorMsg .= $this->checkIsLoginConsistSpecialSymbols($login);
-        // Check if login starts with a letter
+        // Проверяем, начинается ли логин с буквы
         $errorMsg .= $this->checkFirstLetterInLogin($login);
-        // Check if login ends with a letter
+        // Проверяем, заканчивается ли логин буквой
         $errorMsg .= $this->checkLastLetterInLogin($login);
-        // Check if login is unique
+        // Проверяем, является ли логин уникальным
         $errorMsg .= $this->checkIsLoginUnique($loginUnique);
 
         return $errorMsg;
     }
 
     /**
-     * Checks if the length of the login is between 3 and 10 characters.
+     * Проверяет, находится ли длина логина в диапазоне от 3 до 10 символов.
      *
-     * @param string $login The login to be checked.
-     * @return string Returns an error message if the login length is not between 3 and 10 characters; otherwise, returns an empty string.
+     * @param string $login Логин для проверки.
+     * @return string Возвращает сообщение об ошибке, если длина логина не находится в диапазоне от 3 до 10 символов, иначе возвращает пустую строку.
      */
     private function checkIsLoginLengthFrom3To10(string $login): string
     {
-        // Use regular expression to match the login length between 3 and 10 characters
-        if (!preg_match("/^(.{3,10})$/u", $login)) {
-            // Return an error message if the login length is not between 3 and 10 characters
+        $regExp = preg_match("/^(.{3,10})$/u", $login);
+
+        if (false === $regExp) {
             return "Нажаль, помилка - дозволена довжина нікнейму від 3 до 10 символів;<br>";
-        } else {
-            // Return an empty string if the login length is between 3 and 10 characters
-            return "";
         }
+
+        return "";
     }
 
     /**
-     * Checks if the login string contains special symbols.
+     * Проверяет, содержит ли строка логина специальные символы.
      *
-     * @param string $login The login string to check.
-     * @return string An error message if the login contains invalid characters, otherwise an empty string.
+     * @param string $login Строка логина для проверки.
+     * @return string Сообщение об ошибке, если логин содержит недопустимые символы, в противном случае возвращает пустую строку.
      */
     private function checkIsLoginConsistSpecialSymbols(string $login): string
     {
-        // Regex pattern that allows letters, numbers, spaces, dashes, apostrophes, and underscores
-        $pattern = "/^[0-9А-яA-Za-zЁёЇїІіЄєҐґ\-'_ ]+$/u";
+        $regExp = preg_match("/^[0-9А-яA-Za-zЁёЇїІіЄєҐґ\-'_ ]+$/u", $login);
 
-        if (!preg_match($pattern, $login)) {
-            // Return an error message if the login contains invalid characters
+        if (false === $regExp) {
             return "На жаль, помилка - нікнейм може містити літери (zZ-яЯ), цифри (0-9), спецсимволи (Word space, -, ', _);<br>";
-        } else {
-            // Return an empty string if the login is valid
-            return "";
         }
+
+        return "";
     }
 
     /**
-     * Checks if the first letter of the login is a letter or a digit.
+     * Проверяет, начинается ли первая буква логина с буквы или цифры.
      *
-     * @param string $login The login to check.
-     * @return string Returns an error message if the first letter is not a letter or digit, otherwise returns an empty string.
+     * @param string $login Логин для проверки.
+     * @return string Возвращает сообщение об ошибке, если первая буква не является буквой или цифрой, иначе возвращает пустую строку.
      */
     private function checkFirstLetterInLogin(string $login): string
     {
-        // Use regular expression to check if the first letter is a letter or digit
-        if (!preg_match("/^[0-9А-яA-Za-zЁёЇїІіЄєҐґ]/u", $login)) {
+        $regExp = preg_match("/^[А-яA-Za-zЁёЇїІіЄєҐґ]/u", $login);
+
+        if (false === $regExp) {
             return "Нікнейм повинен починатися з літер чи цифр;";
-        } else {
-            return "";
         }
+
+        return "";
     }
 
     /**
-     * Checks if the last character of the given login is a letter or digit.
+     * Проверяет, заканчивается ли данная строка логина буквой или цифрой.
      *
-     * @param string $login The login to be checked.
-     * @return string Returns an error message if the login does not end with a letter or digit, or an empty string otherwise.
+     * @param string $login Логин для проверки.
+     * @return string Возвращает сообщение об ошибке, если логин не заканчивается буквой или цифрой, иначе возвращает пустую строку.
      */
     private function checkLastLetterInLogin(string $login): string
     {
-        // Use regex to match any letter or digit at the end of the login
-        if (!preg_match("/[0-9А-яA-Za-zЁёЇїІіЄєҐґ]$/u", $login)) {
+        $regExp = preg_match("/[0-9А-яA-Za-zЁёЇїІіЄєҐґ]$/u", $login);
+
+        if (false === $regExp) {
             return "Нікнейм повинен закінчуватися на літеру чи цифру;<br>";
-        } else {
-            return "";
         }
+
+        return "";
     }
 
     /**
-     * Check if the login is unique and return an error message if it is not.
+     * Проверяет, является ли логин уникальным, и возвращает сообщение об ошибке, если он не уникален.
      *
-     * @param bool $loginUnique Whether the login is unique or not
-     * @return string Error message if the login is not unique, empty string otherwise
+     * @param bool $loginUnique Флаг, указывающий, является ли логин уникальным.
+     * @return string Сообщение об ошибке, если логин не уникален, иначе возвращает пустую строку.
      */
     private function checkIsLoginUnique(bool $loginUnique): string
     {
-        // Return error message if the login is not unique
         if (!$loginUnique) {
             return "На жаль, помилка - данний нікнейм вже зайнятий, спробуйте інший.<br>";
-        } else {
-            return "";
         }
+
+        return "";
     }
 }

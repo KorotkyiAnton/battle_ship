@@ -2,7 +2,7 @@ import {requestToDB} from "./prepareConnection.js";
 
 window.onload = () => {
     if(localStorage.getItem("login")===null) {
-        window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/seabattle/";
+        window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/403.html";
     } else {
         document.querySelector(".nickname").innerHTML = "";
         document.querySelector(".nickname").innerHTML = localStorage.getItem("login");
@@ -11,7 +11,7 @@ window.onload = () => {
     function exitFromPreparePage() {
         window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/seabattle/";
         //ToDO:
-        requestToDB("http://localhost/alpha-battle/",
+        requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php",
             {
                 messageId: 9,
                 messageType: "exitFromPage",

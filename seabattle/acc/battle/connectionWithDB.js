@@ -53,6 +53,7 @@ function getSurroundingCoordinates(coords, shotResponse, selector) {
     let surroundingCoords = [];
 
     let shipElement = document.createElement('div');
+    shotResponse = parseInt(shotResponse);
     const parentElement = document.querySelector(selector);
     shipElement.className = 'ship';
 
@@ -154,7 +155,7 @@ function handlerOfOpponentTurn(gameInfo) {
     localStorage.setItem("opponent-field", JSON.stringify(document.querySelector(".opponent-field .ships").innerHTML));
 
     //ToDo:
-    requestToDB("http://localhost/alpha-battle/",
+    requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php",
         {
             messageId: 15,
             messageType: "shotResponseCoords",
@@ -167,7 +168,7 @@ function handlerOfOpponentTurn(gameInfo) {
             localStorage.setItem("isWinner", JSON.stringify(data.winner === localStorage.getItem("login")));
             localStorage.setItem("mine-field", JSON.stringify(document.querySelector(".mine-field .ships").innerHTML));
             localStorage.setItem("opponent-field", JSON.stringify(document.querySelector(".opponent-field .ships").innerHTML));
-            window.location.href = "http://localhost/alpha-battle/seabattle/acc/result-battle/";
+            window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/seabattle/acc/result-battle/";
         }
         if (data.messageType === "shotResponseCoords" && data.yourTurn === 1) {
             localStorage.setItem("yourTurn", true);
@@ -213,7 +214,7 @@ function handlerOfYourTurn(cellY, cellX, coordinate, gameInfo) {
     const login = localStorage.getItem("login");
 
     //ToDO:
-    requestToDB("http://localhost/alpha-battle/",
+    requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php",
         {
             messageId: 13,
             messageType: "shotRequestCoords",
@@ -227,7 +228,7 @@ function handlerOfYourTurn(cellY, cellX, coordinate, gameInfo) {
             localStorage.setItem("isWinner", JSON.stringify(data.winner === localStorage.getItem("login")));
             localStorage.setItem("mine-field", JSON.stringify(document.querySelector(".mine-field .ships").innerHTML));
             localStorage.setItem("opponent-field", JSON.stringify(document.querySelector(".opponent-field .ships").innerHTML));
-            window.location.href = "http://localhost/alpha-battle/seabattle/acc/result-battle/";
+            window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/seabattle/acc/result-battle/";
         }
         if (data.messageType === "shotResponseCoords" && data.yourTurn === 1) {
             localStorage.setItem("yourTurn", true);

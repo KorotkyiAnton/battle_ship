@@ -4,7 +4,7 @@ window.onload = () => {
     setInterval(
         //ToDo:
         function () {
-            requestToDB("http://localhost/alpha-battle/",
+            requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php",
                 {
                     messageId: 20,
                     messageType: "lastUpdate",
@@ -13,11 +13,12 @@ window.onload = () => {
                     opponent: JSON.parse(localStorage.getItem("gameInfo")).opponent_login,
                 }).then(data => {
                 console.log(data.userOnline)
+                document.querySelector(".s-wait-opponent").innerHTML = 90-data.userOnline + " cек";
                 if (data.userOnline >= 3 && data.userOnline < 90) {
                     document.querySelector(".opponent-lose-control").style.visibility = "visible";
                     localStorage.setItem("initialTimeInSeconds", 30);
                 } else if (data.userOnline >= 90) {
-                    requestToDB("http://localhost/alpha-battle/",
+                    requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php",
                         {
                             messageId: 21,
                             messageType: "updateWinner",
@@ -36,7 +37,7 @@ window.onload = () => {
     setInterval(
         //ToDo:
         function () {
-            requestToDB("http://localhost/alpha-battle/",
+            requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php",
                 {
                     messageId: 22,
                     messageType: "getWinner",
@@ -50,14 +51,14 @@ window.onload = () => {
                     localStorage.setItem("isWinner", JSON.stringify(data.winner === localStorage.getItem("login")));
                     localStorage.setItem("mine-field", JSON.stringify(document.querySelector(".mine-field .ships").innerHTML));
                     localStorage.setItem("opponent-field", JSON.stringify(document.querySelector(".opponent-field .ships").innerHTML));
-                    window.location.href = "http://localhost/alpha-battle/seabattle/acc/result-battle/";
+                    window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/seabattle/acc/result-battle/";
                 }
             })
         },
         1000);
 
     if (localStorage.getItem("login") === null) {
-        window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/seabattle/";
+        window.location.href = "https://fmc2.avmg.com.ua/study/korotkyi/warship/403.html";
     } else {
         document.querySelector(".mine-nick").innerHTML = "";
         document.querySelector(".mine-nick").innerHTML = localStorage.getItem("login");
@@ -65,15 +66,17 @@ window.onload = () => {
     }
 
     function exitFromBattlePage() {
+        const login = localStorage.getItem("login");
         const gameInfo = JSON.parse(localStorage.getItem("gameInfo"));
 
         //ToDO:
-        requestToDB("http://localhost/alpha-battle/",
+        requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php",
             {
                 messageId: 9,
                 messageType: "userCancelPage",
                 createDate: new Date(),
-                login: gameInfo.opponent_login,
+                login: login,
+                opponent: gameInfo.opponent_login,
                 gameId: gameInfo.game_id
             }).then(data => {
         });
@@ -86,7 +89,7 @@ window.onload = () => {
         const gameInfo = JSON.parse(localStorage.getItem("gameInfo"));
         history.back();
         //ToDo:
-        requestToDB("http://localhost/alpha-battle/",
+        requestToDB("https://fmc2.avmg.com.ua/study/korotkyi/warship/index.php",
             {
                 messageId: 9,
                 messageType: "userEnterPreviousPage",
